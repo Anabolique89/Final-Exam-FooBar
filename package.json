@@ -1,0 +1,30 @@
+{
+  "name": "Miserables",
+  "version": "1.0.0",
+  "main": "dashboard.js",
+  "scripts": {
+    "start": "parcel dashboard.html --open",
+    "build": "parcel *.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "gsap": "^3.2.6",
+    "parcel-plugin-static-files-copy": "^2.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anabolique89/Final-Exam-FooBar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Anabolique89/Final-Exam-FooBar/issues"
+  },
+  "homepage": "https://github.com/Anabolique89/Final-Exam-FooBar#readme",
+  "description": ""
+}
