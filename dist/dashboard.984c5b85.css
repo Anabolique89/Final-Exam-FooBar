@@ -1,2 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@900&display=swap");
+@font-face {
+  font-family: "avenir";
+  src: url("/AvenirLTStd-Book.dd936d82.otf") format("opentype");
+}
+* {
+  color: white;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
+  background-image: url(/background.4a130ea9.jpg);
+  margin: 0;
+}
+
+#dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+header {
+  width: 300px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.beerName {
+  font-size: 20px;
+}
+
+#logo {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  place-self: center;
+}
+
+#beerLevel {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1/2;
+  grid-row: 2/3;
+  justify-content: space-around;
+  align-items: center;
+}
+#beerLevel img {
+  width: 40px;
+}
+
+#beerName {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+main > p {
+  font-size: 40px;
+  margin: 0;
+  margin-left: 2vw;
+  text-shadow: 2px 2px black;
+}
+
+#squareContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.square {
+  width: 24vw;
+  height: 24vw;
+  background-image: url(/whiteFoam.c7f4bba1.jpg);
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.square p {
+  text-align: center;
+  margin: 0;
+  color: #4A3B25;
+}
+.square p:nth-child(1), .square p:nth-child(3) {
+  font-size: 3vw;
+}
+.square p:nth-child(2) {
+  font-size: 5vw;
+}
+
+#glassBubbles {
+  width: 95%;
+  height: 40vh;
+  background-color: white;
+  align-self: center;
+}
+
+#bartenders {
+  display: flex;
+  flex-direction: column;
+}
+
+#bartenders > p:nth-child(1) {
+  font-size: 40px;
+  text-align: center;
+}
+
+.bartender {
+  width: 12vw;
+  height: 12vw;
+  border-radius: 50%;
+  border: 5px solid #F0A92A;
+  background-size: cover;
+}
+
+#bartender1 {
+  background-image: url(/jonas.17c6abcf.jpg);
+}
+
+#bartender2 {
+  background-image: url(/dannie.8c98be7a.jpg);
+}
+
+#bartender3 {
+  background-image: url(/peter.452b64e1.jpg);
+}
+
+#bartenderPics {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#bartenderNames {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.bartenderName {
+  font-size: 40px;
+  color: #F0A92A;
+  text-transform: uppercase;
+  text-shadow: 2px 2px black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.firstColumn {
+  text-transform: uppercase;
+  border-right: 3px solid white;
+}
+
+th {
+  font-size: 30px;
+  border-bottom: 3px solid white;
+  padding: 20px;
+}
+
+#tapsInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+#tapsInfo > img {
+  width: 15vw;
+  align-self: center;
+}
+
+.beerImage {
+  width: 7vw;
+}
 
 /*# sourceMappingURL=/dashboard.984c5b85.css.map */
