@@ -13,6 +13,7 @@
 body{
     background-image: url(design/background.jpg);
     margin: 0;
+    background-size: contain;
 }
 
 #dashboard{
@@ -26,10 +27,52 @@ header{
     width: 300px;
     height: 100%;
     background-color: rgb(0,0,0,0.7);
-    //opacity: 70%;
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#beerLevelSection{
+    width: 100%;
+    //background-color: rgb(0,0,0,0.7);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.navIcon{
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    left: 30px;
+    display: none;
+}
+
+.navIcon:hover{
+    color: #F0A92A;
+}
+
+.navIconTransform{
+    z-index: 2;
+    left: -50px;
+    animation: navIconMove 1s forwards;
+}
+
+@keyframes navIconMove{
+    to{
+        left: 230px;
+    }
+}
+
+.navOpen{
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn{
+    to{
+        left: 0; 
+    }
 }
 
 .beerName{
@@ -41,14 +84,11 @@ header{
 #logo{
     grid-column: 1/3;
     grid-row: 1/2;
-    place-self: center;
 }
 
 #beerLevel{
     display: flex;
     flex-direction: column;
-    grid-column: 1/2;
-    grid-row: 2/3;
     justify-content: space-around;
     align-items: center;
 
@@ -58,8 +98,6 @@ header{
 }
 
 #beerName{
-    grid-column: 2/3;
-    grid-row: 2/3;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -67,6 +105,7 @@ header{
 
 main{
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -118,13 +157,167 @@ main > p{
     align-self: center;
 }
 
+@media only screen and (max-width: 970px) {
+
+    .navIcon{
+        display: block;
+    }
+
+    #dashboard{
+        flex-direction: column;
+    }
+
+    header{
+        width: 100%;
+        height: 10vh;
+        background-color: rgb(0,0,0,0.7);
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #beerLevelSection{
+        position: absolute;
+        top: 0;
+        left: -270px;
+        width: 250px;
+        height: 100%;
+        background-color: rgb(0,0,0,0.7);
+        justify-content: flex-start;
+        padding-left: 18px;
+    }
+
+    #beerName{
+        margin-left: 18px;
+        padding-top: 40px;
+    }
+
+    #beerLevel{
+        padding-top: 40px;
+    }
+
+    main > p{
+        font-size: 5vw;
+    }
+
+    .square{
+        width: 28vw;
+        height: 28vw;
+        background-image: url(design/whiteFoam.jpg);
+        background-size: cover;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    
+        p{
+            text-align: center;
+            margin: 0;
+            color: #4A3B25;
+            }
+    
+            p:nth-child(1), p:nth-child(3){
+                font-size: 3vw;
+            }
+    
+            p:nth-child(2){
+                font-size: 6vw;
+            }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    #logo{
+        width: 40vw;
+    }
+
+    #dashboard{
+        flex-direction: column;
+        height: auto;
+    }
+
+    main > p{
+        font-size: 8vw;
+        margin-top: 3vh;
+    }
+
+    #squareContainer{
+        flex-wrap: wrap;
+    }
+    
+    .square{
+        width: 45vw;
+        height: 45vw;
+        justify-content: center;
+        margin-top: 3vh;
+    
+        p{
+            margin: 10px;
+            }
+    
+            p:nth-child(1), p:nth-child(3){
+                font-size: 6vw;
+            }
+    
+            p:nth-child(2){
+                font-size: 8vw;
+            }
+    }
+
+    #glassBubbles{
+        display: none;
+    }
+
+    #beerLevelSection{
+        left: -510px;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+        padding-top: 6vh;
+        padding-bottom: 100vh;
+    }
+
+    .beerName{
+        font-size: 24px;
+    }
+    
+    #beerLevel{
+    
+        img{
+            width: 48px;
+        }
+    }
+
+    #logo{
+        z-index: 2;
+    }
+
+    @keyframes navIconMove{
+        to{
+            position: fixed;
+            left: 90%;
+        }
+    }
+}
+
+@media only screen and (min-height: 900px) {
+
+    header{
+        justify-content: flex-start;
+    }
+
+    #beerLevelSection, #logo{
+        margin-top: 2vh;
+    }
+}
+
 #bartenders{
     display: flex;
     flex-direction: column;
 }
 
 #bartenders > p:nth-child(1){
-    font-size: 40px;
+    font-size: 4vw;
     text-align: center;
 }
 
@@ -161,7 +354,7 @@ main > p{
 }
 
 .bartenderName{
-    font-size: 40px;
+    font-size: 4vw;
     color: #F0A92A;
     text-transform: uppercase;
     text-shadow: 2px 2px black;
@@ -171,28 +364,186 @@ table{
     border-collapse: collapse;
 }
 
-.firstColumn{
-    text-transform: uppercase;
-    border-right: 3px solid white;
-    
-}
-
 th{
-    font-size: 30px;
-    border-bottom: 3px solid white;
-    padding: 20px;
+    text-transform: uppercase;
 }
 
-#tapsInfo{
+th, td{
+    font-size: 2vw;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+    padding: 20px;
+    text-align: center;
+}
+
+td:nth-child(1){
+    display: none;
+}
+
+tr:last-child > td{
+    border-bottom: 0;
+}
+
+.beerStats{
     display: flex;
     flex-direction: column;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
-#tapsInfo > img{
+.beerStats > img{
     width: 15vw;
     align-self: center;
 }
 
 .beerImage{
-    width: 7vw;
+    width: 8vw;
+    clip-path: circle(45%);
+    grid-column: 1/3;
+    grid-row: 1/2;
+    z-index: 1;
+    position: relative;
+    right: 3vw;
+}
+
+.beerLeft{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.cell{
+    display: flex;
+    flex-direction: column;
+
+    p{
+        font-size: 3vw;
+        text-align: center;
+        margin: 0;
+        text-shadow: 2px 2px black;
+    }
+}
+
+.cell > div:nth-of-type(1){
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+
+    div{
+        grid-row: 1/2;
+        grid-column: 2/3;
+        display: flex;
+        //flex-direction: row;
+        width: 26vw;
+        height: 6vw;
+        background-color: rgb(0,0,0,0.7);
+        clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+        justify-content: center;
+        align-items: center;
+    
+        p{
+            font-size: 4vw;
+            text-shadow: none;
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 760px) {
+
+    #bartenders > p:nth-child(1){
+        font-size: 8vw;
+    }
+
+    #bartendersTable{
+        display: block;
+
+        .bartenderName{
+            font-size: 7vw;
+        }
+
+        .bartender{
+            width: 15vw;
+            height: 15vw;
+        }
+
+        thead, tbody, th, td, tr {
+            display: block;
+        }
+
+        tr:nth-child(1) {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+      
+        tr {
+            margin: 0 0 3vh 0;
+        }
+      
+        td {
+            position: relative;
+            padding-left: 50%;
+            font-size: 4vw;
+        }
+      
+        td:nth-child(1){
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+      
+        td:before {
+            position: absolute;
+            top: 0;
+            left: 6px;
+            width: 45%;
+            white-space: nowrap;
+        }
+      
+        tr:last-child > td{
+          border-bottom: 3px solid white;
+      }
+      
+        td:nth-of-type(2):before { content: "NAME"; margin-top: 20px;}
+        td:nth-of-type(3):before { content: "STATUS"; margin-top: 20px;}
+        td:nth-of-type(4):before { content: "TASK"; margin-top: 20px;}
+        td:nth-of-type(5):before { content: "USING TAP"; margin-top: 20px;}
+        td:nth-of-type(6):before { content: "SERVING CUSTOMER"; margin-top: 20px;}
+    }
+
+  #bartenderPics, #bartenderNames{
+      display: none;
+  }
+
+  .beerStats > img{
+    width: 20vw;
+}
+
+.beerImage{
+    width: 12vw;
+}
+
+.cell{
+
+    p{
+        font-size: 5vw;
+    }
+}
+
+.cell > div:nth-of-type(1){
+
+    div{
+        width: 34vw;
+        height: 8vw;
+    
+        p{
+            font-size: 6vw;
+        }
+    }
+}
 }

@@ -12,32 +12,37 @@
 
     <div id="dashboard">
         <header>
+            <span class="navIcon">&#9776;</span>
             <img id="logo" src="/logoFoo.fbaa5f86.png" alt="">
 
-            <div id="beerLevel">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-                <img src="/barrel_medium.effe451d.png" alt="">
-            </div>
 
-            <div id="beerName">
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
-                <p class="beerName">Ruined Childhood</p>
+            <div id="beerLevelSection">
+
+                <div id="beerLevel">
+                    <!-- <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt="">
+                    <img src="design/barrel/barrel_medium.png" alt=""> -->
+                </div>
+
+                <div id="beerName">
+                    <!-- <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p>
+                    <p class="beerName">Ruined Childhood</p> -->
+                </div>
             </div>
         </header>
 
@@ -47,22 +52,30 @@
             <div id="squareContainer">
                 <div class="square">
                     <p>Orders in line</p>
-                    <p class="number">5</p>
+                    <p id="ordersInLine" class="number"></p>
                 </div>
                 <div class="square">
                     <p>Estimated waiting time</p>
-                    <p class="number">10</p>
+                    <p id="estimatedTime" class="number"></p>
                     <p>minutes</p>
                 </div>
                 <div class="square">
                     <p>Today that many people got a sip of heaven</p>
-                    <p class="number">112</p>
+                    <p id="peopleAll" class="number"></p>
                 </div>
             </div>
 
             <div id="glassBubbles"></div>
         </main>
     </div>
+
+    <template id="bartenderTemplate">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </template>
 
     <div id="bartenders">
         <p>Bartenders</p>
@@ -78,97 +91,293 @@
             <p class="bartenderName">Peter</p>
         </div>
 
-        <table>
-            <tr id="status">
-                <th class="firstColumn">Status</th>
-                <th>Ready</th>
-                <th>Working</th>
-                <th>Working</th>
+        <table id="bartendersTable">
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Task</th>
+                <th>Using tap</th>
+                <th>Serving Customer</th>
             </tr>
-            <tr id="task">
-                <th class="firstColumn">Task</th>
-                <th>Pouring beer</th>
-                <th>Replacing keg</th>
-                <th>Receiving payment</th>
+            <tr>
+                <td>
+                    <div id="bartender1" class="bartender"></div>
+                    <p class="bartenderName">Jonas</p>
+                </td>
+                <!-- <td>Jonas</td>
+                <td>Ready</td>
+                <td>Pouring beer</td>
+                <td>4</td>
+                <td>25</td> -->
             </tr>
-            <tr id="usingTap">
-                <th class="firstColumn">Using tap</th>
-                <th>4</th>
-                <th>null</th>
-                <th>null</th>
+
+            <tr>
+                <td>
+                    <div id="bartender2" class="bartender"></div>
+                    <p class="bartenderName">Dannie</p>
+                </td>
+                <!-- <td>Dannie</td>
+                <td>Working</td>
+                <td>Replacing keg</td>
+                <td>null</td>
+                <td>24</td> -->
             </tr>
-            <tr id="servingCustomer">
-                <th class="firstColumn">Serving Customer</th>
-                <th>25</th>
-                <th>24</th>
-                <th>26</th>
+
+            <tr>
+                <td>
+                    <div id="bartender3" class="bartender"></div>
+                    <p class="bartenderName">Peter</p>
+                </td>
+                <!-- <td>Peter</td>
+                <td>Working</td>
+                <td>Receiving payment</td>
+                <td>null</td>
+                <td>26</td> -->
             </tr>
         </table>
     </div>
 
-    <div id="tapsInfo">
+    <template id="tapsTemplate">
+
+        <div class="cell">
+            <p>Fairytale</p>
+            <div>
+                <img class="beerImage" src="">
+                <div>
+                    <p><span></span> L</p>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <div id="tapsInfo" class="beerStats">
         <img src="/tap.9d2b8799.png" alt="">
 
-        <table>
-            <tr>
-                <th>
-                    <img class="beerImage" src="/elhefe.3142d012.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/fairytaleale.a251f517.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/githop.a62b017c.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/hollaback.99926c13.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/hoppilyeverafter.2dc47dc6.png">
-                    <p>Fairytale</p>
-                </th>
-            </tr>
-            <tr>
-                <th>6 L</th>
-                <th>13 L</th>
-                <th>15 L</th>
-                <th>17 L</th>
-                <th>25 L</th>
-            </tr>
-            <tr>
-                <th>
-                    <img class="beerImage" src="/mowintime.1e2d8699.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/row26.40ac3ce5.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/ruinedchildhood.0cffc148.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/sleighride.340f7e6a.png">
-                    <p>Fairytale</p>
-                </th>
-                <th>
-                    <img class="beerImage" src="/steampunk.504dfc8e.png">
-                    <p>Fairytale</p>
-                </th>
-            </tr>
-            <tr>
-                <th>15 L</th>
-                <th>5 L</th>
-                <th>4 L</th>
-                <th>25 L</th>
-                <th>17 L</th>
-            </tr>
-        </table>
+        <div id="beerLeftTaps" class="beerLeft">
+
+            <!-- <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/elhefe.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/fairytaleale.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/githop.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/hollaback.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/hoppilyeverafter.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/mowintime.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/row26.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/ruinedchildhood.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/sleighride.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/steampunk.png">
+                    <div>
+                        <p>6 L</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <template id="storageTemplate">
+
+        <div class="cell">
+            <p>Fairytale</p>
+            <div>
+                <img class="beerImage" src="">
+                <div>
+                    <p>6</p>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+
+    <div id="storageInfo" class="beerStats">
+        <img src="/storage.5650359d.png" alt="">
+
+        <div id="beerLeftStorage" class="beerLeft">
+
+            <!-- <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/elhefe.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/fairytaleale.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/githop.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/hollaback.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/hoppilyeverafter.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/mowintime.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/row26.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/ruinedchildhood.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/sleighride.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <p>Fairytale</p>
+                <div>
+                    <img class="beerImage" src="beerImages/steampunk.png">
+                    <div>
+                        <p>6</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
     </div>
     <script src="/dashboard.2deb91d7.js"></script>
 </body>
