@@ -189,6 +189,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  z-index: 1;
 }
 
 .navIcon {
