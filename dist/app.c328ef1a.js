@@ -1089,7 +1089,7 @@ var UI = /*#__PURE__*/function () {
       console.log(products);
       var result = "";
       products.forEach(function (product) {
-        result += "\n        <!--product-->\n        <article class=\"product\" data-id=".concat(product.id, ">\n          <div class=\"img-container\">\n          <div class=\"background\">\n\n            <img \n              src=\"images/").concat(product.label, "\"\n              alt=\"product\"\n              class=\"product-img\"\n            />\n            <img class=\"background\" src=\"images/whiteFoam.jpg\" alt=\"foam\">\n            <button class=\"bag-btn\" data-id=").concat(product.id, ">\n              <i class=\"fas fa-shopping-cart\"></i>add to cart\n            </button>\n            <button class=\"description\">About</button>\n          </div></div>\n          <h4 class=\"alc\">Alc.").concat(product.alc, "%</h4>\n          <h3>").concat(product.name, "</h3>\n          <h4>").concat(product.category, "</h4>\n          <h3>dkk").concat(product.price, "</h3>\n        </article>\n        <!--end of single product -->\n        ");
+        result += "\n        <!--product-->\n        <article class=\"product\" data-id=".concat(product.id, ">\n          <div class=\"img-container\">\n          <div class=\"background\">\n\n            <img \n              src=\"static/labels/").concat(product.label, "\"\n              alt=\"product\"\n              class=\"product-img\"\n            />\n            <img class=\"background\" src=\"static/labels/whiteFoam.jpg\" alt=\"foam\">\n            <button class=\"bag-btn\" data-id=").concat(product.id, ">\n              <i class=\"fas fa-shopping-cart\"></i>add to cart\n            </button>\n            <button class=\"description\">About</button>\n          </div></div>\n          <h4 class=\"alc\">Alc.").concat(product.alc, "%</h4>\n          <h3>").concat(product.name, "</h3>\n          <h4>").concat(product.category, "</h4>\n          <h3>dkk").concat(product.price, "</h3>\n        </article>\n        <!--end of single product -->\n        ");
       });
       productsDOM.innerHTML = result;
     }
@@ -1306,7 +1306,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64346" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60511" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
