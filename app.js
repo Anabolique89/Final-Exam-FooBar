@@ -40,11 +40,11 @@ class UI {
           <div class="background">
 
             <img 
-              src="images/labels/${product.label}"
+              src="labels/${product.label}"
               alt="product"
               class="product-img"
             />
-            <img class="background" src="images/labels/whiteFoam.jpg" alt="foam">
+            <img class="background" src="labels/whiteFoam.jpg" alt="foam">
             <button class="bag-btn" data-id=${product.id}>
               <i class="fas fa-shopping-cart"></i>add to cart
             </button>
