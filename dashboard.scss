@@ -154,9 +154,43 @@ main > p{
     //background-color: rgba(48, 38, 7, 0.7);
     border-radius: 10px;
     align-self: center;
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
     
+}
+
+.badge{
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+#svgLine{
+    grid-column: 1/3;
+    grid-row: 1/2;
+    //z-index: 1;
+    //position: absolute;
+    width: 100%;
+    height: 40vh;
+    justify-self: center;
+}
+
+#svgLine svg{
+    width: 100%;
+    height: 40vh;
+}
+
+#lineToFollow{
+    opacity: 0;
+}
+
+@media only screen and (min-width: 1225px) {
+
+    #svgLine svg{
+        transform: translateX(-150px);
+    }
 }
 
 .beerDrops{
@@ -167,7 +201,9 @@ main > p{
     align-items: flex-end;
     flex-wrap: wrap;
     align-content: flex-end;
-    padding-bottom: 3vh;
+    padding-bottom: 6vh;
+    grid-column: 2/3;
+    grid-row: 1/2;
 }
 
 .beerDrop{

@@ -1,4 +1,6 @@
 import { gsap } from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+gsap.registerPlugin(MotionPathPlugin);
 
 const endpoint = "https://miserables.herokuapp.com/";
 let counter = 1;
@@ -13,6 +15,7 @@ function start() {
     //setInterval(animateDataChange, 4800);
     setInterval(getBeerData, 5000);
     setInterval(checkDropDataForAnimation, 5000);
+    getSVG();
 }
 
 function navIcon() {
@@ -207,10 +210,32 @@ function checkDropDataForAnimation() {
         }
 
         if (queueCurrent.some(checkQueue) == false) {
-            el.remove();
+
+            gsap.to(el, {
+                duration: 5,
+                ease: "power1.inOut",
+                motionPath: {
+                    path: "#lineToFollow",
+                    align: "#lineToFollow",
+                    autoRotate: true,
+                    alignOrigin: [0.5, 0.5]
+                },
+                onComplete: function () {
+                    el.remove();
+                }
+            });
         }
     })
 
     queueCurrent = [];
 
+}
+
+async function getSVG() {
+
+    let response = await fetch("motionPath.svg");
+
+    let mySvgData = await response.text();
+
+    document.querySelector("#svgLine").innerHTML = mySvgData;
 }
