@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foobar App</title>
+    <!--font awesome-->
+    <link
+      rel="stylesheet"
+      href="./font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Place your kit's code here -->
+    <script
+      src="https://kit.fontawesome.com/f70deb80b4.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- custom css -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="AppStyle.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar" id="navigation">
+      <div class="navbar-center">
+        <!--button-->
+        <span class="nav-icon">
+          <a href=""><button class="yellowB">Queue Status</button></a>
+        </span>
+        <!--button-->
+        <a href="index.html">
+          <img src="./images/logoFooSmall.png" alt="foobar logo"
+        /></a>
+        <div class="cart-btn">
+          <span class="nav-icon">
+            <img src="./images/shopping-cart-icon.png" alt="cart" />
+          </span>
+          <div class="cart-items">0</div>
+        </div>
+      </div>
+    </nav>
+    <!-- end of navbar -->
+    <!--products-->
+    <section class="products">
+      <!-- <div class="section-title"></div> -->
+      <div class="products-center"></div>
+      <aside class="side-text">
+        <p>
+          Welcome to the paradise of beer! We specialise in brewing the best
+          homemade beers and we have a wide variety of types you can choose
+          from. Have fun & stay safe!
+        </p>
+      </aside>
+    </section>
+    <!-- end of products -->
+    <footer>
+      <a href="app.html"><button class="yellowB">Main</button></a>
+    </footer>
+    <!-- shopping cart -->
+    <div class="cart-overlay">
+      <div class="cart">
+        <span class="close-cart">
+          <i class="fas fa-window-close"></i>
+        </span>
+        <h2>your cart</h2>
+        <div class="cart-content">
+          <!--cart item-->
+          <!-- <div class="cart-item">
+       
+          </div> -->
+          <!--end of cart item-->
+        </div>
+        <div class="cart-footer">
+          <h3>your total : dkk <span class="cart-total">0</span></h3>
+          <button class="clear-cart banner-btn">Clear Cart</button> <br />
+          <button class="yellowB mobile-pay">Mobile Pay</button> <br />
+          <button class="yellowB credit-card">Credit Card</button> <br />
+        </div>
+      </div>
+    </div>
+
+    <!-- shopping cart end -->
+
+    <!-- queue status-->
+
+    <script src="app.js"></script>
+  </body>
+</html>
