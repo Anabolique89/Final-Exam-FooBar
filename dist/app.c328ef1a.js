@@ -1193,7 +1193,19 @@ var UI = /*#__PURE__*/function () {
       // clear cart button
       clearCartBtn.addEventListener("click", function () {
         _this3.clearCart();
-      }); //cart functionality
+      }); //cart functionality Delete
+
+      cartContent.addEventListener("click", function (event) {
+        console.log(event.target);
+
+        if (event.target.classList.contains("remove-item")) {
+          var removeItem = event.target;
+          var id = removeItem.dataset.id;
+          cartContent.removeChild(removeItem.parentElement.parentElement);
+
+          _this3.removeItem(id);
+        }
+      });
     }
   }, {
     key: "clearCart",
@@ -1206,6 +1218,12 @@ var UI = /*#__PURE__*/function () {
       cartItems.forEach(function (id) {
         return _this4.removeItem(id);
       });
+
+      while (cartContent.children.length > 0) {
+        cartContent.removeChild(cartContent.children[0]);
+      }
+
+      this.hideCart();
     }
   }, {
     key: "removeItem",
@@ -1306,7 +1324,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50443" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55314" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

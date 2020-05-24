@@ -139,11 +139,26 @@ class UI {
     clearCartBtn.addEventListener("click", () => {
       this.clearCart();
     });
-    //cart functionality
+    //cart functionality Delete
+    cartContent.addEventListener("click", (event) => {
+      console.log(event.target);
+      if (event.target.classList.contains("remove-item")) {
+        let removeItem = event.target;
+        let id = removeItem.dataset.id;
+        cartContent.removeChild(removeItem.parentElement.parentElement);
+
+        this.removeItem(id);
+      }
+    });
   }
   clearCart() {
     let cartItems = cart.map((item) => item.id);
     cartItems.forEach((id) => this.removeItem(id));
+
+    while (cartContent.children.length > 0) {
+      cartContent.removeChild(cartContent.children[0]);
+    }
+    this.hideCart();
   }
   removeItem(id) {
     //remove cart item if the id is not equal to this
