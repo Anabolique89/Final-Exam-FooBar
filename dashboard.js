@@ -1,11 +1,18 @@
+import { gsap } from "gsap";
+
 const endpoint = "https://miserables.herokuapp.com/";
 let counter = 1;
+let queue = [];
+let queueCurrent = [];
 
 window.addEventListener("DOMContentLoaded", start);
 
 function start() {
     navIcon();
     getBeerData();
+    //setInterval(animateDataChange, 4800);
+    setInterval(getBeerData, 5000);
+    setInterval(checkDropDataForAnimation, 5000);
 }
 
 function navIcon() {
@@ -26,21 +33,46 @@ function navIcon() {
     })
 }
 
+function animateDataChange() {
+    gsap.to("#beerLevel, #beerLeftTaps", 1, {
+        opacity: 0,
+        y: 10
+    })
+
+    gsap.to("#beerLevel, #beerLeftTaps", 1, {
+        opacity: 1,
+        delay: 0.5,
+        y: 0
+    })
+}
+
 async function getBeerData() {
     fetch(endpoint)
         .then((response) => {
             return response.json();
         })
         .then((data) => {
+
+
+
+            document.querySelector("#beerName").innerHTML = "";
+            document.querySelector("#beerLevel").innerHTML = "";
+            document.querySelector("#beerLeftTaps").innerHTML = "";
+            document.querySelector("#beerLeftStorage").innerHTML = "";
+
+
             console.log(data)
             data.taps.forEach(beersLevel);
             squareInfo(data);
             data.bartenders.forEach(bartenderInfo);
             data.storage.forEach(storageInfo);
+            data.queue.forEach(beerDrops);
         });
 }
 
 function beersLevel(data) {
+
+
 
 
 
@@ -103,6 +135,13 @@ function bartenderInfo(data) {
 
     counter++;
 
+    if (counter > 4) {
+        counter = 2;
+        document.querySelectorAll(".dynamicRow").forEach(el => {
+            el.remove();
+        })
+    }
+
     const status = data.status;
     const statusChanged = status.charAt(0) + status.slice(1).toLowerCase();
 
@@ -115,7 +154,9 @@ function bartenderInfo(data) {
     clone.querySelector("td:nth-child(4)").innerHTML = data.usingTap;
     clone.querySelector("td:nth-child(5)").innerHTML = data.servingCustomer;
 
+
     document.querySelector(`#bartendersTable tr:nth-child(${counter})`).appendChild(clone);
+
 
 }
 
@@ -134,3 +175,42 @@ function storageInfo(data) {
 
 }
 
+function beerDrops(data) {
+
+    const template = document.querySelector("#beerDropTemplate").content;
+    const clone = template.cloneNode(true);
+
+    clone.querySelector(".beerDrop").innerHTML = data.id;
+    clone.querySelector(".beerDrop").setAttribute("data-id", data.id);
+
+    function checkLine(number) {
+        return number == data.id;
+    }
+
+    if (queue.some(checkLine) == false) {
+        document.querySelector(".beerDrops").appendChild(clone);
+    }
+
+    queueCurrent.push(data.id);
+
+    queue.push(data.id);
+
+}
+
+function checkDropDataForAnimation() {
+
+    console.log(queueCurrent)
+
+    document.querySelectorAll(".beerDrop").forEach(el => {
+        function checkQueue(number) {
+            return number == el.dataset.id;
+        }
+
+        if (queueCurrent.some(checkQueue) == false) {
+            el.remove();
+        }
+    })
+
+    queueCurrent = [];
+
+}

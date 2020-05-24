@@ -1,0 +1,256 @@
+$background: #f1e1c5;
+$beerL: #ffc200;
+$beerD: #fdac10;
+$foam: #fff9de;
+$mug: #f1ecdb;
+$size-anim: 170px;
+
+/* body {
+  background: $background;
+  cursor: default;
+  height: 100vh;
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.badge {
+  cursor: help;
+  //background: darken($background, 10%);
+  height: $size-anim * 2;
+  width: $size-anim * 2;
+  min-width: $size-anim * 2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
+  transition: 150ms linear;
+  &:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.15));
+  }
+  &:active {
+    &:after {
+      content: 'Prost!';
+      position: absolute;
+      color: #fff;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 3em;
+      letter-spacing: .1em;
+      top: -25%;
+    }
+  }
+  &.anim {
+    height: $size-anim * 2;
+    width: $size-anim * 2; 
+    &:active {
+      &:after {
+        content: 'cheers!';
+      }
+    }  
+  }
+}
+
+.beer-animation-wrapper {
+  position: relative;
+  overflow-y: hidden; 
+  padding: $size-anim * 0.17;
+  padding-right: 0;
+  
+  .beer {  
+    position: relative;
+    height: $size-anim;
+    width: $size-anim * 0.75;
+    min-width: $size-anim * 0.75;
+    margin-top: $size-anim * 0.32;
+    margin-right: $size-anim * 0.27;
+    margin-left: $size-anim * 0.09;
+    z-index: -2;
+    background-image:     
+      /*bottom of mug*/
+      radial-gradient(($size-anim * .65) ($size-anim * .15) at 50% 103%, $mug 40%, transparent 40%),    
+      /*beer*/
+      linear-gradient(to right, $beerL 50%, $beerD 50%); 
+    border-radius: 0 0 15% 15%;
+    /*mug*/
+    border: ($size-anim * .06) solid $mug; 
+    box-sizing: border-box;
+    &:before {
+      content: '';
+      position: absolute;
+      height: 130%;
+      width: 100%;
+      bottom: -5%;
+      z-index: -1;
+      opacity: 1;
+      animation: 3s bubbles linear infinite;
+      background:
+      /*bubbles*/
+      radial-gradient(($size-anim * .06) ($size-anim * .06) at 25% 85%, lighten($beerL, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .04) ($size-anim * .04) at 70% 45%, lighten($beerD, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .05) ($size-anim * .05) at 35% 40%, lighten($beerD, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .03) ($size-anim * .03) at 80% 30%, lighten($beerD, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .04) ($size-anim * .04) at 60% 81%, lighten($beerD, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .03) ($size-anim * .03) at 89% 89%, lighten($beerD, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .05) ($size-anim * .05) at 77% 78%, lighten($beerD, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .03) ($size-anim * .03) at 40% 57%, lighten($beerL, 20%) 80%, transparent 80%),
+       radial-gradient(($size-anim * .02) ($size-anim * .02) at 30% 67%, lighten($beerL, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .02) ($size-anim * .02) at 30% 17%, lighten($beerL, 20%) 80%, transparent 80%),
+      radial-gradient(($size-anim * .03) ($size-anim * .03) at 40% 10%, lighten($beerL, 20%) 80%, transparent 80%),  
+      radial-gradient(($size-anim * .05) ($size-anim * .05) at 62% 24%, lighten($beerL, 20%) 80%, transparent 80%), 
+      radial-gradient(($size-anim * .04) ($size-anim * .04) at 18% 31%, lighten($beerL, 20%) 80%, transparent 80%), 
+      radial-gradient(($size-anim * .06) ($size-anim * .06) at 83% 60%, lighten($beerL, 20%) 80%, transparent 80%)       
+        ;
+    }
+    &:after {
+      /*mug handle*/
+      content: '';
+      position: absolute;
+      border-radius: 0 50% 50% 0;
+      height: ($size-anim * .5);
+      width: ($size-anim * .33);
+      top: ($size-anim * .15);
+      right: ($size-anim * -.33);
+      background-color: transparent;
+      box-sizing: border-box;
+      border: ($size-anim * .08) solid $mug; 
+      border-left: ($size-anim * .06) solid $mug;    
+    }
+  }
+  .foam {
+    position: relative;
+    top: -20%;
+    left: 63%;
+    height: ($size-anim * .10);
+    width: ($size-anim * .10);
+    background: lighten($foam, 5%);
+    border-radius: ($size-anim * .17);
+    box-shadow:
+      /*reflection*/ 
+      ($size-anim * -.35) ($size-anim * .28) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .29) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .30) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .31) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .32) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .33) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .34) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .35) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .36) 0 ($size-anim * -.015) lighten($beerL, 30%), 
+      ($size-anim * -.35) ($size-anim * .37) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .38) 0 ($size-anim * -.015) lighten($beerL, 30%),   
+      ($size-anim * -.35) ($size-anim * .39) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .40) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .41) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .42) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .43) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .44) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .45) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .46) 0 ($size-anim * -.015) lighten($beerL, 30%), 
+      ($size-anim * -.35) ($size-anim * .47) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .48) 0 ($size-anim * -.015) lighten($beerL, 30%),   
+      ($size-anim * -.35) ($size-anim * .49) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .50) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .51) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .52) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .53) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .54) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .55) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .56) 0 ($size-anim * -.015) lighten($beerL, 30%), 
+      ($size-anim * -.35) ($size-anim * .57) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .58) 0 ($size-anim * -.015) lighten($beerL, 30%),   
+      ($size-anim * -.35) ($size-anim * .59) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .60) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .61) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .62) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .63) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .64) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .65) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .66) 0 ($size-anim * -.015) lighten($beerL, 30%), 
+      ($size-anim * -.35) ($size-anim * .67) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .68) 0 ($size-anim * -.015) lighten($beerL, 30%),   
+      ($size-anim * -.35) ($size-anim * .69) 0 ($size-anim * -.015) lighten($beerL, 30%),   
+      ($size-anim * -.35) ($size-anim * .70) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .71) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .72) 0 ($size-anim * -.015) lighten($beerL, 30%),
+      ($size-anim * -.35) ($size-anim * .73) 0 ($size-anim * -.015) lighten($beerL, 30%),    
+      /*foam*/ 
+      0 ($size-anim * .11) 0 ($size-anim * .07) $foam,
+      0 ($size-anim * .07) 0 ($size-anim * .07) lighten($foam, 5%),
+      ($size-anim * -.27) ($size-anim * .07) 0 ($size-anim * .04) $foam,
+      ($size-anim * -.39) ($size-anim * .06) 0 ($size-anim * .06) lighten($foam, 5%),
+      ($size-anim * -.18) ($size-anim * .12) 0 ($size-anim * .04) $foam,
+      ($size-anim * -.5) ($size-anim * .08) 0 ($size-anim * .04) $foam,
+      ($size-anim * -.15) 0 0 ($size-anim * .06) lighten($foam, 5%),
+      ($size-anim * .14) ($size-anim * .07) 0 ($size-anim * .06) lighten($foam, 5%),
+      ($size-anim * -.32) ($size-anim * -.08) 0 ($size-anim * .05) lighten($foam, 5%),
+      ($size-anim * -.18) ($size-anim * -.14) 0 ($size-anim * .05) $foam,
+      ($size-anim * -.05) ($size-anim * -.07) 0 ($size-anim * .05) $foam,
+      ($size-anim * .07) ($size-anim * -.05) 0 ($size-anim * .01) lighten($foam, 5%),
+      ($size-anim * .09) ($size-anim * -.07) 0 ($size-anim * .01) $foam,
+      ($size-anim * .25) ($size-anim * .07) 0 ($size-anim * .01) $foam;
+    &:before, &:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      top: 200%;
+      width: ($size-anim * .10);  
+      border-radius: ($size-anim * .17);
+      background: $foam;
+      background: (linear-gradient(to right, $foam 75%, lighten($foam, 5%) 75%));
+    }
+    &:after {
+      left: 100%;
+      height: ($size-anim * 0);
+      animation: drip1 2s ease-out forwards;
+    }
+    &:before {
+      right: 25%;
+      height: ($size-anim * 0);
+      animation: drip2 5s ease-out forwards;
+    }
+  }
+}
+
+@keyframes drip2 {
+  0% {
+    height: ($size-anim * 0);
+  }
+  50% {
+    height: ($size-anim * .30);
+  }
+  75% {
+    height: ($size-anim * .30);
+  }
+  80% {
+    height: ($size-anim * .30);
+  }
+  100% {
+    height: ($size-anim * .35);
+  }
+}
+
+@keyframes drip1 {
+  0% {
+    height: ($size-anim * 0);
+  }
+  100% {
+    height: ($size-anim * .50);
+  }
+}
+
+@keyframes bubbles {
+  0% {
+    transform: translatey(0%);
+  }
+  99% {
+    transform: translatey(-50%);
+  }
+  100% {
+    opacity: 0;
+  }
+}

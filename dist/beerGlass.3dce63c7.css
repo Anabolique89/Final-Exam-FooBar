@@ -1,0 +1,160 @@
+/* body {
+  background: $background;
+  cursor: default;
+  height: 100vh;
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+.badge {
+  cursor: help;
+  height: 340px;
+  width: 340px;
+  min-width: 340px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+  transition: 150ms linear;
+}
+.badge:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.15));
+}
+.badge:active:after {
+  content: "Prost!";
+  position: absolute;
+  color: #fff;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 3em;
+  letter-spacing: 0.1em;
+  top: -25%;
+}
+.badge.anim {
+  height: 340px;
+  width: 340px;
+}
+.badge.anim:active:after {
+  content: "cheers!";
+}
+
+.beer-animation-wrapper {
+  position: relative;
+  overflow-y: hidden;
+  padding: 28.9px;
+  padding-right: 0;
+}
+.beer-animation-wrapper .beer {
+  position: relative;
+  height: 170px;
+  width: 127.5px;
+  min-width: 127.5px;
+  margin-top: 54.4px;
+  margin-right: 45.9px;
+  margin-left: 15.3px;
+  z-index: -2;
+  background-image: radial-gradient(110.5px 25.5px at 50% 103%, #f1ecdb 40%, transparent 40%), linear-gradient(to right, #ffc200 50%, #fdac10 50%);
+  border-radius: 0 0 15% 15%;
+  /*mug*/
+  border: 10.2px solid #f1ecdb;
+  box-sizing: border-box;
+}
+.beer-animation-wrapper .beer:before {
+  content: "";
+  position: absolute;
+  height: 130%;
+  width: 100%;
+  bottom: -5%;
+  z-index: -1;
+  opacity: 1;
+  animation: 3s bubbles linear infinite;
+  background: radial-gradient(10.2px 10.2px at 25% 85%, #ffda66 80%, transparent 80%), radial-gradient(6.8px 6.8px at 70% 45%, #fecf75 80%, transparent 80%), radial-gradient(8.5px 8.5px at 35% 40%, #fecf75 80%, transparent 80%), radial-gradient(5.1px 5.1px at 80% 30%, #fecf75 80%, transparent 80%), radial-gradient(6.8px 6.8px at 60% 81%, #fecf75 80%, transparent 80%), radial-gradient(5.1px 5.1px at 89% 89%, #fecf75 80%, transparent 80%), radial-gradient(8.5px 8.5px at 77% 78%, #fecf75 80%, transparent 80%), radial-gradient(5.1px 5.1px at 40% 57%, #ffda66 80%, transparent 80%), radial-gradient(3.4px 3.4px at 30% 67%, #ffda66 80%, transparent 80%), radial-gradient(3.4px 3.4px at 30% 17%, #ffda66 80%, transparent 80%), radial-gradient(5.1px 5.1px at 40% 10%, #ffda66 80%, transparent 80%), radial-gradient(8.5px 8.5px at 62% 24%, #ffda66 80%, transparent 80%), radial-gradient(6.8px 6.8px at 18% 31%, #ffda66 80%, transparent 80%), radial-gradient(10.2px 10.2px at 83% 60%, #ffda66 80%, transparent 80%);
+}
+.beer-animation-wrapper .beer:after {
+  /*mug handle*/
+  content: "";
+  position: absolute;
+  border-radius: 0 50% 50% 0;
+  height: 85px;
+  width: 56.1px;
+  top: 25.5px;
+  right: -56.1px;
+  background-color: transparent;
+  box-sizing: border-box;
+  border: 13.6px solid #f1ecdb;
+  border-left: 10.2px solid #f1ecdb;
+}
+.beer-animation-wrapper .foam {
+  position: relative;
+  top: -20%;
+  left: 63%;
+  height: 17px;
+  width: 17px;
+  background: #fffef8;
+  border-radius: 28.9px;
+  box-shadow: -59.5px 47.6px 0 -2.55px #ffe799, -59.5px 49.3px 0 -2.55px #ffe799, -59.5px 51px 0 -2.55px #ffe799, -59.5px 52.7px 0 -2.55px #ffe799, -59.5px 54.4px 0 -2.55px #ffe799, -59.5px 56.1px 0 -2.55px #ffe799, -59.5px 57.8px 0 -2.55px #ffe799, -59.5px 59.5px 0 -2.55px #ffe799, -59.5px 61.2px 0 -2.55px #ffe799, -59.5px 62.9px 0 -2.55px #ffe799, -59.5px 64.6px 0 -2.55px #ffe799, -59.5px 66.3px 0 -2.55px #ffe799, -59.5px 68px 0 -2.55px #ffe799, -59.5px 69.7px 0 -2.55px #ffe799, -59.5px 71.4px 0 -2.55px #ffe799, -59.5px 73.1px 0 -2.55px #ffe799, -59.5px 74.8px 0 -2.55px #ffe799, -59.5px 76.5px 0 -2.55px #ffe799, -59.5px 78.2px 0 -2.55px #ffe799, -59.5px 79.9px 0 -2.55px #ffe799, -59.5px 81.6px 0 -2.55px #ffe799, -59.5px 83.3px 0 -2.55px #ffe799, -59.5px 85px 0 -2.55px #ffe799, -59.5px 86.7px 0 -2.55px #ffe799, -59.5px 88.4px 0 -2.55px #ffe799, -59.5px 90.1px 0 -2.55px #ffe799, -59.5px 91.8px 0 -2.55px #ffe799, -59.5px 93.5px 0 -2.55px #ffe799, -59.5px 95.2px 0 -2.55px #ffe799, -59.5px 96.9px 0 -2.55px #ffe799, -59.5px 98.6px 0 -2.55px #ffe799, -59.5px 100.3px 0 -2.55px #ffe799, -59.5px 102px 0 -2.55px #ffe799, -59.5px 103.7px 0 -2.55px #ffe799, -59.5px 105.4px 0 -2.55px #ffe799, -59.5px 107.1px 0 -2.55px #ffe799, -59.5px 108.8px 0 -2.55px #ffe799, -59.5px 110.5px 0 -2.55px #ffe799, -59.5px 112.2px 0 -2.55px #ffe799, -59.5px 113.9px 0 -2.55px #ffe799, -59.5px 115.6px 0 -2.55px #ffe799, -59.5px 117.3px 0 -2.55px #ffe799, -59.5px 119px 0 -2.55px #ffe799, -59.5px 120.7px 0 -2.55px #ffe799, -59.5px 122.4px 0 -2.55px #ffe799, -59.5px 124.1px 0 -2.55px #ffe799, 0 18.7px 0 11.9px #fff9de, 0 11.9px 0 11.9px #fffef8, -45.9px 11.9px 0 6.8px #fff9de, -66.3px 10.2px 0 10.2px #fffef8, -30.6px 20.4px 0 6.8px #fff9de, -85px 13.6px 0 6.8px #fff9de, -25.5px 0 0 10.2px #fffef8, 23.8px 11.9px 0 10.2px #fffef8, -54.4px -13.6px 0 8.5px #fffef8, -30.6px -23.8px 0 8.5px #fff9de, -8.5px -11.9px 0 8.5px #fff9de, 11.9px -8.5px 0 1.7px #fffef8, 15.3px -11.9px 0 1.7px #fff9de, 42.5px 11.9px 0 1.7px #fff9de;
+}
+.beer-animation-wrapper .foam:before, .beer-animation-wrapper .foam:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  top: 200%;
+  width: 17px;
+  border-radius: 28.9px;
+  background: #fff9de;
+  background: linear-gradient(to right, #fff9de 75%, #fffef8 75%);
+}
+.beer-animation-wrapper .foam:after {
+  left: 100%;
+  height: 0px;
+  animation: drip1 2s ease-out forwards;
+}
+.beer-animation-wrapper .foam:before {
+  right: 25%;
+  height: 0px;
+  animation: drip2 5s ease-out forwards;
+}
+
+@keyframes drip2 {
+  0% {
+    height: 0px;
+  }
+  50% {
+    height: 51px;
+  }
+  75% {
+    height: 51px;
+  }
+  80% {
+    height: 51px;
+  }
+  100% {
+    height: 59.5px;
+  }
+}
+@keyframes drip1 {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 85px;
+  }
+}
+@keyframes bubbles {
+  0% {
+    transform: translatey(0%);
+  }
+  99% {
+    transform: translatey(-50%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*# sourceMappingURL=/beerGlass.3dce63c7.css.map */

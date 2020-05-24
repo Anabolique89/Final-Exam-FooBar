@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="dashboard.scss">
+    <!-- <link rel="stylesheet" href="beerGlass.scss"> -->
 </head>
 
 <body>
@@ -46,6 +47,10 @@
             </div>
         </header>
 
+        <template id="beerDropTemplate">
+            <div class="beerDrop"></div>
+        </template>
+
         <main>
             <p>Welcome to FooBar! Let the fun flow…</p>
 
@@ -65,16 +70,31 @@
                 </div>
             </div>
 
-            <div id="glassBubbles"></div>
+            <div id="glassBubbles">
+                <div class="badge anim">
+                    <div class="beer-animation-wrapper">
+                        <div class="beer">
+                            <div class="foam"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="beerDrops">
+                    <!-- <div class="beerDrop">1</div>
+                    <div class="beerDrop"></div>
+                    <div class="beerDrop"></div>
+                    <div class="beerDrop"></div>
+                    <div class="beerDrop"></div> -->
+                </div>
+            </div>
         </main>
     </div>
 
     <template id="bartenderTemplate">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="dynamicRow"></td>
+        <td class="dynamicRow"></td>
+        <td class="dynamicRow"></td>
+        <td class="dynamicRow"></td>
+        <td class="dynamicRow"></td>
     </template>
 
     <div id="bartenders">
@@ -86,13 +106,13 @@
         </div>
 
         <div id="bartenderNames">
+            <p class="bartenderName">Peter</p>
             <p class="bartenderName">Jonas</p>
             <p class="bartenderName">Dannie</p>
-            <p class="bartenderName">Peter</p>
         </div>
 
         <table id="bartendersTable">
-            <tr>
+            <tr class="theader">
                 <th>Name</th>
                 <th>Status</th>
                 <th>Task</th>
@@ -102,7 +122,7 @@
             <tr>
                 <td>
                     <div id="bartender1" class="bartender"></div>
-                    <p class="bartenderName">Jonas</p>
+                    <p class="bartenderName">Peter</p>
                 </td>
                 <!-- <td>Jonas</td>
                 <td>Ready</td>
@@ -114,7 +134,7 @@
             <tr>
                 <td>
                     <div id="bartender2" class="bartender"></div>
-                    <p class="bartenderName">Dannie</p>
+                    <p class="bartenderName">Jonas</p>
                 </td>
                 <!-- <td>Dannie</td>
                 <td>Working</td>
@@ -126,7 +146,7 @@
             <tr>
                 <td>
                     <div id="bartender3" class="bartender"></div>
-                    <p class="bartenderName">Peter</p>
+                    <p class="bartenderName">Dannie</p>
                 </td>
                 <!-- <td>Peter</td>
                 <td>Working</td>
