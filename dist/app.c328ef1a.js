@@ -1022,6 +1022,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ui.displayProducts(products);
     Storage.saveProducts(products);
   }).then(function () {
+    // setTimeout(ui.getBagButtons, 1000);
     ui.getBagButtons();
     ui.cartLogic();
   });
@@ -1342,7 +1343,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55018" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53861" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

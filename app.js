@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Storage.saveProducts(products);
     })
     .then(() => {
+      // setTimeout(ui.getBagButtons, 1000);
       ui.getBagButtons();
       ui.cartLogic();
     });
@@ -216,14 +217,11 @@ function navIcon() {
     const leftInfo = document.querySelector("#statusLeft");
     leftInfo.classList.toggle("statusLeftAnim");
 
-
     navIcon.classList.toggle("statusLeftAnim");
     if (navIcon.classList.contains("statusLeftAnim")) {
       navIcon.innerHTML = "&times;";
-
     } else {
       navIcon.innerHTML = "&#9776;";
     }
-
-  })
+  });
 }
