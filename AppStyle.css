@@ -180,21 +180,118 @@ aside.side-text {
   text-shadow: 2px 2px var(--mainBlack);
 }
 .products-center {
-  /* margin: 0 auto;
-  max-width: 1170px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
-  /* grid-template-columns: repeat(4, 1fr);  */
-  /* grid-column-gap: 1.5rem;
-  grid-row-gap: 2rem;
-  padding: 2rem;
-  margin-left: 1rem; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .product{
+  margin: 20px;
+  border-radius: 5px;
+  width: 240px;
+  height: 240px;
+  background-image: url(images/labels/whiteFoam.jpg);
+  background-size: cover;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  color: black;
+  justify-items: center;
+  align-items: center;
+}
+
+.product:hover .beerLabelImg{
+  filter:blur(1px);
+}
+
+.product:hover .beerLabel p{
+  opacity: 1;
+}
+
+.product p{
+  margin: 0;
+  text-align: center;
+}
+
+.beerLabel{
+  grid-column: 1/3;
+  grid-row: 1/4;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.beerLabel p{
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px black;
+  opacity: 0;
+}
+
+.beerLabelImg{
+  width: 80%;
+}
+
+.price{
+  grid-column: 3/4;
+  grid-row: 1/2;
+  font-size: 24px;
+}
+
+.glassType{
+  grid-column: 3/4;
+  grid-row: 2/3;
+  width: 70%;
+}
+
+.alcLevel{
+  grid-column: 3/4;
+  grid-row: 3/4;
+  font-style: italic;
+}
+
+.barrelLevel{
+  grid-column: 1/2;
+  grid-row: 4/6;
+  width: 70%;
+}
+
+.beerName{
+  grid-column: 2/3;
+  grid-row: 4/5;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+  font-size: 20px;
+}
+
+.beerType{
+  grid-column: 2/3;
+  grid-row: 5/6;
+  font-style: italic;
+}
+
+.addToCart{
+  grid-column: 3/4;
+  grid-row: 4/6;
+  color: white;
+  background-color: black;
+  width: 20px;
+  height: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+/* .product{
   width: 20vw;
   height: 20vw;
 }
@@ -272,7 +369,7 @@ img.background {
 }
 div.background {
   height: 260px;
-}
+} */
 /* ---------------End of Products ---------------- */
 
 /* ---------------Footer---------------- */

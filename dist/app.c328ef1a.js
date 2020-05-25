@@ -1102,12 +1102,8 @@ var UI = /*#__PURE__*/function () {
   (0, _createClass2.default)(UI, [{
     key: "displayProducts",
     value: function displayProducts(products) {
-      console.log(products);
       var result = "";
-      products.forEach(function (product) {
-        result += "\n        <!--product-->\n        <article class=\"product\" data-id=".concat(product.id, ">\n          <div class=\"img-container\">\n\n            <img src=\"labels/").concat(product.label, "\" alt=\"product\" class=\"product-img\"/>\n          \n            <button class=\"bag-btn\" data-id=").concat(product.id, "><i class=\"fas fa-shopping-cart\"></i>add to cart</button>\n\n            <button class=\"description\">About</button>\n\n          </div>\n          \n          <h4 class=\"alc\">Alc.").concat(product.alc, "%</h4>\n          <h3>").concat(product.name, "</h3>\n          <h4>").concat(product.category, "</h4>\n          <h3>dkk").concat(product.price, "</h3>\n        </article>\n        <!--end of single product -->\n        ");
-      });
-      productsDOM.innerHTML = result;
+      products.forEach(_displayProducts);
     }
   }, {
     key: "getBagButtons",
@@ -1315,6 +1311,34 @@ function navIcon() {
     }
   });
 }
+
+function _displayProducts(product) {
+  console.log(product);
+  var template = document.querySelector("#productTemplate").content;
+  var clone = template.cloneNode(true);
+
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  clone.querySelector(".beerLabelImg").src = "labels/".concat(product.label);
+  clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
+
+  if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
+    clone.querySelector(".glassType").src = "glass types/pilsner.png";
+  } else if (product.category == "IPA" || product.category == "European Lager" || product.category == "California Common") {
+    clone.querySelector(".glassType").src = "glass types/pint.png";
+  } else if (product.category == "Oktoberfest") {
+    clone.querySelector(".glassType").src = "glass types/mug.png";
+  } else if (product.category == "Stout") {
+    clone.querySelector(".glassType").src = "glass types/goblet.png";
+  }
+
+  clone.querySelector(".alcLevel span").innerHTML = product.alc;
+  clone.querySelector(".beerName").innerHTML = product.name;
+  clone.querySelector(".beerType").innerHTML = product.category;
+  document.querySelector(".products-center").appendChild(clone);
+}
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1343,7 +1367,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53861" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

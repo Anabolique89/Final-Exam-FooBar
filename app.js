@@ -51,32 +51,10 @@ class Products {
 //display products
 class UI {
   displayProducts(products) {
-    console.log(products);
     let result = "";
-    products.forEach((product) => {
-      result += `
-        <!--product-->
-        <article class="product" data-id=${product.id}>
-          <div class="img-container">
-
-            <img src="labels/${product.label}" alt="product" class="product-img"/>
-          
-            <button class="bag-btn" data-id=${product.id}><i class="fas fa-shopping-cart"></i>add to cart</button>
-
-            <button class="description">About</button>
-
-          </div>
-          
-          <h4 class="alc">Alc.${product.alc}%</h4>
-          <h3>${product.name}</h3>
-          <h4>${product.category}</h4>
-          <h3>dkk${product.price}</h3>
-        </article>
-        <!--end of single product -->
-        `;
-    });
-    productsDOM.innerHTML = result;
+    products.forEach(displayProducts);
   }
+
   getBagButtons() {
     const buttons = [...document.querySelectorAll(".bag-btn")];
     buttonsDOM = buttons;
@@ -224,4 +202,34 @@ function navIcon() {
       navIcon.innerHTML = "&#9776;";
     }
   });
+}
+
+function displayProducts(product) {
+  console.log(product)
+  const template = document.querySelector("#productTemplate").content;
+  const clone = template.cloneNode(true);
+
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  clone.querySelector(".beerLabelImg").src = `labels/${product.label}`;
+  clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
+
+  if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
+    clone.querySelector(".glassType").src = "glass types/pilsner.png";
+  } else if (product.category == "IPA" || product.category == "European Lager" || product.category == "California Common") {
+    clone.querySelector(".glassType").src = "glass types/pint.png";
+  } else if (product.category == "Oktoberfest") {
+    clone.querySelector(".glassType").src = "glass types/mug.png";
+  } else if (product.category == "Stout") {
+    clone.querySelector(".glassType").src = "glass types/goblet.png";
+  }
+
+  clone.querySelector(".alcLevel span").innerHTML = product.alc;
+  clone.querySelector(".beerName").innerHTML = product.name;
+  clone.querySelector(".beerType").innerHTML = product.category;
+
+  document.querySelector(".products-center").appendChild(clone);
+
 }
