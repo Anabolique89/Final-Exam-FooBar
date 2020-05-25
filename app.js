@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const ui = new UI();
+  const products = new Products();
+  //setup app
+  ui.setupApp();
+  //get all products
+  products
+    .getProducts()
+    .then((products) => {
+      ui.displayProducts(products);
+      Storage.saveProducts(products);
+    })
+    .then(() => {
+      ui.getBagButtons();
+      ui.cartLogic();
+    });
+
+  navIcon();
+});
+
 //variables
 
 const cartBtn = document.querySelector(".cart-btn");
@@ -37,19 +57,15 @@ class UI {
         <!--product-->
         <article class="product" data-id=${product.id}>
           <div class="img-container">
-          <div class="background">
 
-            <img 
-              src="labels/${product.label}"
-              alt="product"
-              class="product-img"
-            />
-            <img class="background" src="labels/whiteFoam.jpg" alt="foam">
-            <button class="bag-btn" data-id=${product.id}>
-              <i class="fas fa-shopping-cart"></i>add to cart
-            </button>
+            <img src="labels/${product.label}" alt="product" class="product-img"/>
+          
+            <button class="bag-btn" data-id=${product.id}><i class="fas fa-shopping-cart"></i>add to cart</button>
+
             <button class="description">About</button>
-          </div></div>
+
+          </div>
+          
           <h4 class="alc">Alc.${product.alc}%</h4>
           <h3>${product.name}</h3>
           <h4>${product.category}</h4>
@@ -194,20 +210,20 @@ class Storage {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const ui = new UI();
-  const products = new Products();
-  //setup app
-  ui.setupApp();
-  //get all products
-  products
-    .getProducts()
-    .then((products) => {
-      ui.displayProducts(products);
-      Storage.saveProducts(products);
-    })
-    .then(() => {
-      ui.getBagButtons();
-      ui.cartLogic();
-    });
-});
+function navIcon() {
+  const navIcon = document.querySelector(".navIcon");
+  navIcon.addEventListener("click", function () {
+    const leftInfo = document.querySelector("#statusLeft");
+    leftInfo.classList.toggle("statusLeftAnim");
+
+
+    navIcon.classList.toggle("statusLeftAnim");
+    if (navIcon.classList.contains("statusLeftAnim")) {
+      navIcon.innerHTML = "&times;";
+
+    } else {
+      navIcon.innerHTML = "&#9776;";
+    }
+
+  })
+}

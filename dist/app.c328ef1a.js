@@ -1012,7 +1012,22 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-//variables
+document.addEventListener("DOMContentLoaded", function () {
+  var ui = new UI();
+  var products = new Products(); //setup app
+
+  ui.setupApp(); //get all products
+
+  products.getProducts().then(function (products) {
+    ui.displayProducts(products);
+    Storage.saveProducts(products);
+  }).then(function () {
+    ui.getBagButtons();
+    ui.cartLogic();
+  });
+  navIcon();
+}); //variables
+
 var cartBtn = document.querySelector(".cart-btn");
 var closeCartBtn = document.querySelector(".close-cart");
 var clearCartBtn = document.querySelector(".clear-cart");
@@ -1089,7 +1104,7 @@ var UI = /*#__PURE__*/function () {
       console.log(products);
       var result = "";
       products.forEach(function (product) {
-        result += "\n        <!--product-->\n        <article class=\"product\" data-id=".concat(product.id, ">\n          <div class=\"img-container\">\n          <div class=\"background\">\n\n            <img \n              src=\"labels/").concat(product.label, "\"\n              alt=\"product\"\n              class=\"product-img\"\n            />\n            <img class=\"background\" src=\"labels/whiteFoam.jpg\" alt=\"foam\">\n            <button class=\"bag-btn\" data-id=").concat(product.id, ">\n              <i class=\"fas fa-shopping-cart\"></i>add to cart\n            </button>\n            <button class=\"description\">About</button>\n          </div></div>\n          <h4 class=\"alc\">Alc.").concat(product.alc, "%</h4>\n          <h3>").concat(product.name, "</h3>\n          <h4>").concat(product.category, "</h4>\n          <h3>dkk").concat(product.price, "</h3>\n        </article>\n        <!--end of single product -->\n        ");
+        result += "\n        <!--product-->\n        <article class=\"product\" data-id=".concat(product.id, ">\n          <div class=\"img-container\">\n\n            <img src=\"labels/").concat(product.label, "\" alt=\"product\" class=\"product-img\"/>\n          \n            <button class=\"bag-btn\" data-id=").concat(product.id, "><i class=\"fas fa-shopping-cart\"></i>add to cart</button>\n\n            <button class=\"description\">About</button>\n\n          </div>\n          \n          <h4 class=\"alc\">Alc.").concat(product.alc, "%</h4>\n          <h3>").concat(product.name, "</h3>\n          <h4>").concat(product.category, "</h4>\n          <h3>dkk").concat(product.price, "</h3>\n        </article>\n        <!--end of single product -->\n        ");
       });
       productsDOM.innerHTML = result;
     }
@@ -1285,20 +1300,20 @@ var Storage = /*#__PURE__*/function () {
   return Storage;
 }();
 
-document.addEventListener("DOMContentLoaded", function () {
-  var ui = new UI();
-  var products = new Products(); //setup app
+function navIcon() {
+  var navIcon = document.querySelector(".navIcon");
+  navIcon.addEventListener("click", function () {
+    var leftInfo = document.querySelector("#statusLeft");
+    leftInfo.classList.toggle("statusLeftAnim");
+    navIcon.classList.toggle("statusLeftAnim");
 
-  ui.setupApp(); //get all products
-
-  products.getProducts().then(function (products) {
-    ui.displayProducts(products);
-    Storage.saveProducts(products);
-  }).then(function () {
-    ui.getBagButtons();
-    ui.cartLogic();
+    if (navIcon.classList.contains("statusLeftAnim")) {
+      navIcon.innerHTML = "&times;";
+    } else {
+      navIcon.innerHTML = "&#9776;";
+    }
   });
-});
+}
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1327,7 +1342,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56759" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55018" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
