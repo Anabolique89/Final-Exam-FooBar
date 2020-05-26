@@ -1,85 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foobar App</title>
-    <!--font awesome-->
-    <link rel="stylesheet" href="/font-awesome.min.80bdcae2.css">
-    <!-- Place your kit's code here -->
-    <script src="https://kit.fontawesome.com/f70deb80b4.js" crossorigin="anonymous"></script>
 
-    <!-- custom css -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/AppStyle.1e9c2f84.css">
-  <script src="/font-awesome.min.80bdcae2.js"></script><script src="/AppStyle.1e9c2f84.js"></script></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foobar App</title>
+  <!--font awesome-->
+  <link rel="stylesheet" href="/font-awesome.min.80bdcae2.css">
+  <!-- Place your kit's code here -->
+  <script src="https://kit.fontawesome.com/f70deb80b4.js" crossorigin="anonymous"></script>
 
-  <body>
-    <nav class="navbar" id="navigation">
-      <span class="navIcon">&#9776;</span>
+  <!-- custom css -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/AppStyle.1e9c2f84.css">
+<script src="/font-awesome.min.80bdcae2.js"></script><script src="/AppStyle.1e9c2f84.js"></script></head>
 
-      <a href="/index.html">
-        <img src="/logoFoo.5bdf6e45.png" alt="foobar logo">
-      </a>
+<body>
+  <nav class="navbar" id="navigation">
+    <span class="navIcon">&#9776;</span>
 
-      <div class="cart-btn">
-        <img src="/shopping-cart-icon.ae994739.png" alt="cart">
-        <div class="cart-items">0</div>
-      </div>
-    </nav>
+    <a href="/index.html">
+      <img class="logo" src="/logoFoo.5bdf6e45.png" alt="foobar logo">
+    </a>
 
-    <div id="statusLeft">
-      <p>Orders in line</p>
-      <p>5</p>
-      <p>Estimated waiting time</p>
-      <p>10 minutes</p>
-      <p>Today that many people got a sip of heaven</p>
-      <p>112</p>
+    <div class="cart-btn">
+      <img src="/shopping-cart-icon.ae994739.png" alt="cart">
+      <div class="cart-items">0</div>
     </div>
-    <!-- end of navbar -->
-    <!--products-->
-    <section class="products">
-      <!-- <div class="section-title"></div> -->
-      <div class="products-center"></div>
-      <aside class="side-text">
-        <p>
-          Welcome to the paradise of beer! We specialise in brewing the best
-          homemade beers and we have a wide variety of types you can choose
-          from. Have fun & stay safe!
-        </p>
-      </aside>
-    </section>
-    <!-- end of products -->
-    <footer>
-      <a href="/app.html"><button class="yellowB">Main</button></a>
-    </footer>
-    <!-- shopping cart -->
-    <div class="cart-overlay">
-      <div class="cart">
-        <span class="close-cart">
-          <i class="fas fa-window-close"></i>
-        </span>
-        <h2>your cart</h2>
-        <div class="cart-content">
-          <!--cart item-->
-          <!-- <div class="cart-item">
+  </nav>
+
+  <div id="statusLeft">
+    <p>Orders in line</p>
+    <p>5</p>
+    <p>Estimated waiting time</p>
+    <p>10 minutes</p>
+    <p>Today that many people got a sip of heaven</p>
+    <p>112</p>
+  </div>
+  <!-- end of navbar -->
+  <!--products-->
+  <section class="products">
+
+    <div class="products-center">
+
+
+      <template id="productTemplate">
+
+        <div class="product">
+          <div class="beerLabel">
+            <img class="beerLabelImg" src="/elhefe.114fb919.png" alt="">
+            <p>Read More</p>
+          </div>
+          <p class="price">DKK <span></span></p>
+          <img class="glassType" src="/goblet.2c713254.png" alt="">
+          <p class="alcLevel">abv. <span>4.5</span>%</p>
+          <img class="barrelLevel" src="/barrel_empty.426f575f.png" alt="">
+          <p class="beerName">Fairy Tale Ale</p>
+          <p class="beerType">Lager Beer</p>
+          <p class="addToCart">&#65291;</p>
+          <p class="notAvaliable"><span>Not avaliable at the moment</span></p>
+        </div>
+
+      </template>
+
+    </div>
+
+    <div class="asideContainer">
+      <p class="asideText">
+        Welcome to the paradise of beer! We specialise in brewing the best
+        homemade beers and we have a wide variety of types you can choose
+        from. Have fun!
+      </p>
+    </div>
+  </section>
+  <!-- end of products -->
+  <!-- shopping cart -->
+  <div class="cart-overlay">
+    <div class="cart">
+      <span class="close-cart">
+        <i class="fas fa-window-close"></i>
+      </span>
+      <h2>your cart</h2>
+      <div class="cart-content">
+        <!--cart item-->
+        <!-- <div class="cart-item">
        
           </div> -->
-          <!--end of cart item-->
-        </div>
-        <div class="cart-footer">
-          <h3>your total : dkk <span class="cart-total">0</span></h3>
-          <button class="clear-cart banner-btn">Clear Cart</button> <br>
-          <button class="yellowB mobile-pay">Mobile Pay</button> <br>
-          <button class="yellowB credit-card">Credit Card</button> <br>
-        </div>
+        <!--end of cart item-->
+      </div>
+      <div class="cart-footer">
+        <h3>your total : dkk <span class="cart-total">0</span></h3>
+        <button class="clear-cart banner-btn">Clear Cart</button> <br>
+        <button class="yellowB mobile-pay">Mobile Pay</button> <br>
+        <button class="yellowB credit-card">Credit Card</button> <br>
       </div>
     </div>
+  </div>
 
-    <!-- shopping cart end -->
+  <!-- shopping cart end -->
 
-    <!-- queue status-->
+  <!-- queue status-->
 
-    <script src="/app.c328ef1a.js"></script>
-  </body>
+  <script src="/app.c328ef1a.js"></script>
+</body>
+
 </html>

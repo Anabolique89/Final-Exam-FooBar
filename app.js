@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", start);
+
+function start() {
+
   const ui = new UI();
   const products = new Products();
   //setup app
@@ -17,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   navIcon();
-});
+
+}
 
 //variables
 
@@ -30,6 +34,7 @@ const cartItems = document.querySelector(".cart-items");
 const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
+const endpoint = "https://miserables.herokuapp.com/";
 
 // cart
 let cart = [];
@@ -40,7 +45,7 @@ let buttonsDOM = [];
 class Products {
   async getProducts() {
     try {
-      let result = await fetch("https://miserables.herokuapp.com/beertypes/");
+      let result = await fetch(endpoint + "beertypes");
       let data = await result.json();
       return data;
     } catch (error) {
@@ -51,32 +56,11 @@ class Products {
 //display products
 class UI {
   displayProducts(products) {
-    console.log(products);
     let result = "";
-    products.forEach((product) => {
-      result += `
-        <!--product-->
-        <article class="product" data-id=${product.id}>
-          <div class="img-container">
-
-            <img src="labels/${product.label}" alt="product" class="product-img"/>
-          
-            <button class="bag-btn" data-id=${product.id}><i class="fas fa-shopping-cart"></i>add to cart</button>
-
-            <button class="description">About</button>
-
-          </div>
-          
-          <h4 class="alc">Alc.${product.alc}%</h4>
-          <h3>${product.name}</h3>
-          <h4>${product.category}</h4>
-          <h3>dkk${product.price}</h3>
-        </article>
-        <!--end of single product -->
-        `;
-    });
-    productsDOM.innerHTML = result;
+    products.forEach(displayProducts);
+    getTapsData();
   }
+
   getBagButtons() {
     const buttons = [...document.querySelectorAll(".bag-btn")];
     buttonsDOM = buttons;
@@ -131,7 +115,6 @@ class UI {
   <i class="fas fa-chevron-down" data-id=${item.id}></i>
 </div>`;
     cartContent.appendChild(div);
-    console.log(cartContent);
   }
   showCart() {
     cartOverlay.classList.add("transparentBcg");
@@ -224,4 +207,75 @@ function navIcon() {
       navIcon.innerHTML = "&#9776;";
     }
   });
+}
+
+function displayProducts(product) {
+
+  const template = document.querySelector("#productTemplate").content;
+  const clone = template.cloneNode(true);
+
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  clone.querySelector(".beerLabelImg").src = `labels/${product.label}`;
+  clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
+
+  if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
+    clone.querySelector(".glassType").src = "glass types/pilsner.png";
+  } else if (product.category == "IPA" || product.category == "European Lager" || product.category == "California Common") {
+    clone.querySelector(".glassType").src = "glass types/pint.png";
+  } else if (product.category == "Oktoberfest") {
+    clone.querySelector(".glassType").src = "glass types/mug.png";
+  } else if (product.category == "Stout") {
+    clone.querySelector(".glassType").src = "glass types/goblet.png";
+  }
+
+  clone.querySelector(".alcLevel span").innerHTML = product.alc;
+  clone.querySelector(".beerName").innerHTML = product.name;
+  clone.querySelector(".beerType").innerHTML = product.category;
+  clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
+  clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
+
+  document.querySelector(".products-center").appendChild(clone);
+
+}
+
+async function getTapsData() {
+  fetch(endpoint)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+
+      data.taps.forEach(getTapsLevel);
+    });
+}
+
+function getTapsLevel(data) {
+  console.log(data)
+
+  const barrelLevel = document.querySelector(`.barrelLevel[data-beer="${data.beer}"]`);
+  const notAvaliable = document.querySelector(`.notAvaliable[data-beer="${data.beer}"]`);
+
+  function between(x, min, max) {
+    return x >= min && x <= max;
+  }
+
+  if (between(data.level, 2000, 2500)) {
+    barrelLevel.src = "barrel_full.png";
+    notAvaliable.classList.add("visible");
+
+  } else if (between(data.level, 1000, 1999)) {
+    barrelLevel.src = "barrel_medium.png";
+    notAvaliable.classList.add("visible");
+
+  } else if (between(data.level, 1, 999)) {
+    barrelLevel.src = "barrel_little.png";
+    notAvaliable.classList.add("visible");
+
+  } else if (data.level == 0) {
+    barrelLevel.src = "barrel_empty.png";
+  }
+
 }

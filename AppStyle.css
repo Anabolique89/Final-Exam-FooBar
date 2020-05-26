@@ -31,7 +31,7 @@ body {
 }
 /* --------------- Navbar ---------------- */
 .navbar {
-  height: 10vh;
+  height: 70px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -166,35 +166,301 @@ body {
 .products {
   display: flex;
   flex-direction: row;
+  margin-right: 3vw;
+  margin-top: 3vw;
+  margin-bottom: 3vw;
 }
 
-aside.side-text {
-
+.asideContainer{
+   width: 100%;
 }
 
-.side-text p {
+ .asideText {
+   margin-right: 3vw;
+   position: fixed;
   text-align: left;
   font-weight: 600;
   letter-spacing: var(--mainSpacing);
   font-family: "Roboto", sans-serif;
   text-shadow: 2px 2px var(--mainBlack);
+  font-size: 2vw;
 }
+
 .products-center {
-  /* margin: 0 auto;
-  max-width: 1170px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); */
-  /* grid-template-columns: repeat(4, 1fr);  */
-  /* grid-column-gap: 1.5rem;
-  grid-row-gap: 2rem;
-  padding: 2rem;
-  margin-left: 1rem; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .product{
+  margin: 1vw;
+  border-radius: 5px;
+  width: 18vw;
+  height: 18vw;
+  background-image: url(images/labels/whiteFoam.jpg);
+  background-size: cover;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  color: black;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+}
+
+.productAvaliable{
+  filter: none;
+}
+
+.product:hover .beerLabelImg{
+  filter:blur(1px);
+}
+
+.product:hover .beerLabel p{
+  opacity: 1;
+}
+
+.product p{
+  margin: 0;
+  text-align: center;
+}
+
+.notAvaliable{
+  color: var(--beerYellow);
+  position: absolute;
+  grid-column: 1/4;
+  grid-row: 1/6;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.visible{
+  display: none;
+}
+
+.beerLabel{
+  grid-column: 1/3;
+  grid-row: 1/4;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.beerLabel p{
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px black;
+  opacity: 0;
+}
+
+.beerLabelImg{
+  width: 80%;
+}
+
+.price{
+  grid-column: 3/4;
+  grid-row: 1/2;
+  font-size: 2vw;
+}
+
+.glassType{
+  grid-column: 3/4;
+  grid-row: 2/3;
+  width: 70%;
+}
+
+.alcLevel{
+  grid-column: 3/4;
+  grid-row: 3/4;
+  font-style: italic;
+  font-size: 1vw;
+}
+
+.barrelLevel{
+  grid-column: 1/2;
+  grid-row: 4/6;
+  width: 2vw;
+}
+
+.beerName{
+  grid-column: 2/3;
+  grid-row: 4/5;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+  font-size: 1.5vw;
+}
+
+.beerType{
+  grid-column: 2/3;
+  grid-row: 5/6;
+  font-style: italic;
+  font-size: 1vw;
+}
+
+.addToCart{
+  grid-column: 3/4;
+  grid-row: 4/6;
+  color: white;
+  background-color: black;
+  width: 2vw;
+  height: 2vw;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1110px) {
+
+  .products {
+    margin-right: 7vw;
+  }
+  
+  .asideContainer{
+     width: 100%;
+  }
+  
+   .asideText {
+     margin-right: 7vw;
+    font-size: 3vw;
+  }
+  
+  .product{
+    width: 24vw;
+    height: 24vw;
+  }
+
+  .notAvaliable{
+    width: 100%;
+    height: 100%;
+  }
+  
+  .beerLabel{
+    width: 100%;
+    height: 100%;
+  }
+  
+  .beerLabelImg{
+    width: 70%;
+  }
+  
+  .price{
+    font-size: 2vw;
+  }
+  
+  .glassType{
+    width: 70%;
+  }
+  
+  .alcLevel{
+    font-size: 1.5vw;
+  }
+  
+  .barrelLevel{
+    width: 3vw;
+  }
+  
+  .beerName{
+    font-size: 2vw;
+  }
+  
+  .beerType{
+    font-size: 1.5vw;
+  }
+  
+  .addToCart{
+    width: 3vw;
+    height: 3vw;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  .logo{
+    width: 160px;
+  }
+
+  .products {
+    flex-direction: column;
+    margin-right: 0;
+  }
+
+  .products-center {
+    justify-content: space-evenly;
+    order: 2;
+  }
+
+  .asideContainer{
+    order: 1;
+ }
+
+ .asideText {
+   margin-left: 6vw;
+   margin-right: 6vw;
+  position: initial;
+ font-size: 4.5vw;
+}
+
+.product{
+  width: 40vw;
+  height: 40vw;
+}
+
+.notAvaliable{
+  width: 100%;
+  height: 100%;
+}
+
+.beerLabelImg{
+  width: 80%;
+}
+
+.price{
+  font-size: 4vw;
+}
+
+.glassType{
+  width: 70%;
+}
+
+.alcLevel{
+  font-size: 2.5vw;
+}
+
+.barrelLevel{
+  width: 5.5vw;
+}
+
+.beerName{
+  font-size: 4vw;
+}
+
+.beerType{
+  font-size: 2.5vw;
+}
+
+.addToCart{
+  width: 5vw;
+  height: 5vw;
+}
+}
+
+/* .product{
   width: 20vw;
   height: 20vw;
 }
@@ -272,7 +538,7 @@ img.background {
 }
 div.background {
   height: 260px;
-}
+} */
 /* ---------------End of Products ---------------- */
 
 /* ---------------Footer---------------- */

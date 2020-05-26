@@ -189,7 +189,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./Fonts\\signation-511xg-webfont.woff2":[["signation-511xg-webfont.49178baf.woff2","Fonts/signation-511xg-webfont.woff2"],"Fonts/signation-511xg-webfont.woff2"],"./Fonts\\signation-511xg-webfont.woff":[["signation-511xg-webfont.cc64ca1e.woff","Fonts/signation-511xg-webfont.woff"],"Fonts/signation-511xg-webfont.woff"],"./images\\oak.jpg":[["oak.8bf7e3c6.jpg","images/oak.jpg"],"images/oak.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Fonts\\signation-511xg-webfont.woff2":[["signation-511xg-webfont.49178baf.woff2","Fonts/signation-511xg-webfont.woff2"],"Fonts/signation-511xg-webfont.woff2"],"./Fonts\\signation-511xg-webfont.woff":[["signation-511xg-webfont.cc64ca1e.woff","Fonts/signation-511xg-webfont.woff"],"Fonts/signation-511xg-webfont.woff"],"./images\\oak.jpg":[["oak.8bf7e3c6.jpg","images/oak.jpg"],"images/oak.jpg"],"./images\\labels\\whiteFoam.jpg":[["whiteFoam.8ff27207.jpg","images/labels/whiteFoam.jpg"],"images/labels/whiteFoam.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53861" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60204" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
