@@ -1012,7 +1012,9 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", start);
+
+function start() {
   var ui = new UI();
   var products = new Products(); //setup app
 
@@ -1027,7 +1029,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ui.cartLogic();
   });
   navIcon();
-}); //variables
+} //variables
+
 
 var cartBtn = document.querySelector(".cart-btn");
 var closeCartBtn = document.querySelector(".close-cart");
@@ -1037,7 +1040,8 @@ var cartOverlay = document.querySelector(".cart-overlay");
 var cartItems = document.querySelector(".cart-items");
 var cartTotal = document.querySelector(".cart-total");
 var cartContent = document.querySelector(".cart-content");
-var productsDOM = document.querySelector(".products-center"); // cart
+var productsDOM = document.querySelector(".products-center");
+var endpoint = "https://miserables.herokuapp.com/"; // cart
 
 var cart = []; //buttons
 
@@ -1059,7 +1063,7 @@ var Products = /*#__PURE__*/function () {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return fetch("https://miserables.herokuapp.com/beertypes/");
+                return fetch(endpoint + "beertypes");
 
               case 3:
                 result = _context.sent;
@@ -1102,12 +1106,9 @@ var UI = /*#__PURE__*/function () {
   (0, _createClass2.default)(UI, [{
     key: "displayProducts",
     value: function displayProducts(products) {
-      console.log(products);
       var result = "";
-      products.forEach(function (product) {
-        result += "\n        <!--product-->\n        <article class=\"product\" data-id=\"".concat(product.name, "\">\n          <div class=\"img-container\">\n\n            <img src=\"labels/").concat(product.label, "\" alt=\"product\" class=\"product-img\"/>\n          \n            <button class=\"bag-btn\" data-id=\"").concat(product.name, "\"><i class=\"fas fa-shopping-cart\"></i>add to cart</button>\n\n            <button class=\"description\">About</button>\n\n          </div>\n          \n          <h4 class=\"alc\">Alc.").concat(product.alc, "%</h4>\n          <h3>").concat(product.name, "</h3>\n          <h4>").concat(product.category, "</h4>\n          <h3>dkk").concat(product.price, "</h3>\n        </article>\n        <!--end of single product -->\n        ");
-      });
-      productsDOM.innerHTML = result;
+      products.forEach(_displayProducts);
+      getTapsData();
     }
   }, {
     key: "getBagButtons",
@@ -1177,7 +1178,6 @@ var UI = /*#__PURE__*/function () {
       div.classList.add("cart-item");
       div.innerHTML = "\n<img src=\"labels/".concat(item.label, "\" alt=\"product\" />\n<div class=\"cart-text\">\n  <h4>").concat(item.name, "</h4>\n  <h5>dkk").concat(item.alc, "</h5>\n  <span class=\"remove-item\" data-id=\"").concat(item.name, "\">Remove</span>\n</div>\n<div class=\"arrows\">\n  <i class=\"fas fa-chevron-up\" data-id=\"").concat(item.name, "\"></i>\n  <p class=\"item-amount\">").concat(item.amount, "</p>\n  <i class=\"fas fa-chevron-down\" data-id=\"").concat(item.name, "\"></i>\n</div>");
       cartContent.appendChild(div);
-      console.log(cartContent);
     }
   }, {
     key: "showCart",
@@ -1336,6 +1336,86 @@ function navIcon() {
     }
   });
 }
+
+function _displayProducts(product) {
+  var template = document.querySelector("#productTemplate").content;
+  var clone = template.cloneNode(true);
+
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  clone.querySelector(".beerLabelImg").src = "labels/".concat(product.label);
+  clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
+
+  if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
+    clone.querySelector(".glassType").src = "glass types/pilsner.png";
+  } else if (product.category == "IPA" || product.category == "European Lager" || product.category == "California Common") {
+    clone.querySelector(".glassType").src = "glass types/pint.png";
+  } else if (product.category == "Oktoberfest") {
+    clone.querySelector(".glassType").src = "glass types/mug.png";
+  } else if (product.category == "Stout") {
+    clone.querySelector(".glassType").src = "glass types/goblet.png";
+  }
+
+  clone.querySelector(".alcLevel span").innerHTML = product.alc;
+  clone.querySelector(".beerName").innerHTML = product.name;
+  clone.querySelector(".beerType").innerHTML = product.category;
+  clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
+  clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
+  clone.querySelector(".product").setAttribute("data-id", product.name);
+  clone.querySelector(".bag-btn").setAttribute("data-id", product.name);
+  document.querySelector(".products-center").appendChild(clone);
+}
+
+function getTapsData() {
+  return _getTapsData.apply(this, arguments);
+}
+
+function _getTapsData() {
+  _getTapsData = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+    return _regenerator.default.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            fetch(endpoint).then(function (response) {
+              return response.json();
+            }).then(function (data) {
+              data.taps.forEach(getTapsLevel);
+            });
+
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getTapsData.apply(this, arguments);
+}
+
+function getTapsLevel(data) {
+  console.log(data);
+  var barrelLevel = document.querySelector(".barrelLevel[data-beer=\"".concat(data.beer, "\"]"));
+  var notAvaliable = document.querySelector(".notAvaliable[data-beer=\"".concat(data.beer, "\"]"));
+
+  function between(x, min, max) {
+    return x >= min && x <= max;
+  }
+
+  if (between(data.level, 2000, 2500)) {
+    barrelLevel.src = "barrel_full.png";
+    notAvaliable.classList.add("visible");
+  } else if (between(data.level, 1000, 1999)) {
+    barrelLevel.src = "barrel_medium.png";
+    notAvaliable.classList.add("visible");
+  } else if (between(data.level, 1, 999)) {
+    barrelLevel.src = "barrel_little.png";
+    notAvaliable.classList.add("visible");
+  } else if (data.level == 0) {
+    barrelLevel.src = "barrel_empty.png";
+  }
+}
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1364,7 +1444,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50429" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51084" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
