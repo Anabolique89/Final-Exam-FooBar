@@ -66,16 +66,25 @@ class UI {
     buttonsDOM = buttons;
     buttons.forEach((button) => {
       let id = button.dataset.id;
-      let inCart = cart.find((item) => item.id == id);
+      console.log(id);
+      let inCart = cart.find((item) => item.name === id);
       if (inCart) {
         button.innerText = "In Cart";
         button.disabled = true;
       }
       button.addEventListener("click", (event) => {
+        // let id = event.target.dataset.id;
+        // console.log(id);
+        // let inCart = cart.find((item) => item.name === id);
+        // if (inCart) {
+        //   event.target.innerText = "In Cart";
+        //   event.target.disabled = true;
+        // }
         event.target.innerText = "In Cart";
         event.target.disabled = true;
         // get product from products
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
+
         // add product to the cart
         cart = [...cart, cartItem];
         // save the cart in local storage
@@ -103,16 +112,16 @@ class UI {
     const div = document.createElement("div");
     div.classList.add("cart-item");
     div.innerHTML = `
-<img src=${item.label} alt="product" />
+<img src="labels/${item.label}" alt="product" />
 <div class="cart-text">
   <h4>${item.name}</h4>
   <h5>dkk${item.alc}</h5>
-  <span class="remove-item" data-id=${item.id}>Remove</span>
+  <span class="remove-item" data-id="${item.name}">Remove</span>
 </div>
 <div class="arrows">
-  <i class="fas fa-chevron-up" data-id=${item.id}></i>
+  <i class="fas fa-chevron-up" data-id="${item.name}"></i>
   <p class="item-amount">${item.amount}</p>
-  <i class="fas fa-chevron-down" data-id=${item.id}></i>
+  <i class="fas fa-chevron-down" data-id="${item.name}"></i>
 </div>`;
     cartContent.appendChild(div);
   }
@@ -145,8 +154,9 @@ class UI {
       if (event.target.classList.contains("remove-item")) {
         let removeItem = event.target;
         let id = removeItem.dataset.id;
-        cartContent.removeChild(removeItem.parentElement.parentElement);
+        console.log(id);
         this.removeItem(id);
+        cartContent.removeChild(removeItem.parentElement.parentElement);
       } else if (event.target.classList.contains("fa-chevron-up")) {
         let addAmount = event.target;
         let id = addAmount.dataset.id;
@@ -166,13 +176,13 @@ class UI {
     //remove cart item if the id is not equal to this
     cart = cart.filter((item) => item.id !== id);
     this.setCartValues(cart);
-    Storage.saveCart(cart);
+    Storage.deleteCart(id);
     let button = this.getSingleButton(id);
-    button.disabled = false;
-    button.innerHTML = `<i class="fas fa-shopping-cart"></i>add to cart`;
+    //button.disabled = false;
+    //button.innerHTML = `<i class="fas fa-shopping-cart"></i>add to cart`;
   }
   getSingleButton(id) {
-    return buttonsDOM.find((button) => dataset.id === id);
+    return buttonsDOM.find((button) => button.dataset.id === id);
   }
 }
 //local storage
@@ -182,15 +192,23 @@ class Storage {
   }
   static getProduct(id) {
     let products = JSON.parse(localStorage.getItem("products"));
-    return products.find((item) => item.id === id);
+    console.log(id);
+    return products.find((item) => item.name === id);
   }
   static saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
+    console.log(cart);
   }
   static getCart() {
     return localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
+  }
+  static deleteCart(name) {
+    let carts = JSON.parse(localStorage.getItem("cart"));
+    let index = carts.findIndex((item) => item.name === name);
+    carts.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(carts));
   }
 }
 
@@ -236,6 +254,8 @@ function displayProducts(product) {
   clone.querySelector(".beerType").innerHTML = product.category;
   clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
   clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
+  clone.querySelector(".product").setAttribute("data-id", product.name);
+  clone.querySelector(".bag-btn").setAttribute("data-id", product.name);
 
   document.querySelector(".products-center").appendChild(clone);
 

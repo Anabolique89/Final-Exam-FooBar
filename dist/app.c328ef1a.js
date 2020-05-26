@@ -1119,8 +1119,9 @@ var UI = /*#__PURE__*/function () {
       buttonsDOM = buttons;
       buttons.forEach(function (button) {
         var id = button.dataset.id;
+        console.log(id);
         var inCart = cart.find(function (item) {
-          return item.id == id;
+          return item.name === id;
         });
 
         if (inCart) {
@@ -1129,6 +1130,13 @@ var UI = /*#__PURE__*/function () {
         }
 
         button.addEventListener("click", function (event) {
+          // let id = event.target.dataset.id;
+          // console.log(id);
+          // let inCart = cart.find((item) => item.name === id);
+          // if (inCart) {
+          //   event.target.innerText = "In Cart";
+          //   event.target.disabled = true;
+          // }
           event.target.innerText = "In Cart";
           event.target.disabled = true; // get product from products
 
@@ -1168,7 +1176,7 @@ var UI = /*#__PURE__*/function () {
     value: function addCartItem(item) {
       var div = document.createElement("div");
       div.classList.add("cart-item");
-      div.innerHTML = "\n<img src=".concat(item.label, " alt=\"product\" />\n<div class=\"cart-text\">\n  <h4>").concat(item.name, "</h4>\n  <h5>dkk").concat(item.alc, "</h5>\n  <span class=\"remove-item\" data-id=").concat(item.id, ">Remove</span>\n</div>\n<div class=\"arrows\">\n  <i class=\"fas fa-chevron-up\" data-id=").concat(item.id, "></i>\n  <p class=\"item-amount\">").concat(item.amount, "</p>\n  <i class=\"fas fa-chevron-down\" data-id=").concat(item.id, "></i>\n</div>");
+      div.innerHTML = "\n<img src=\"labels/".concat(item.label, "\" alt=\"product\" />\n<div class=\"cart-text\">\n  <h4>").concat(item.name, "</h4>\n  <h5>dkk").concat(item.alc, "</h5>\n  <span class=\"remove-item\" data-id=\"").concat(item.name, "\">Remove</span>\n</div>\n<div class=\"arrows\">\n  <i class=\"fas fa-chevron-up\" data-id=\"").concat(item.name, "\"></i>\n  <p class=\"item-amount\">").concat(item.amount, "</p>\n  <i class=\"fas fa-chevron-down\" data-id=\"").concat(item.name, "\"></i>\n</div>");
       cartContent.appendChild(div);
     }
   }, {
@@ -1217,9 +1225,11 @@ var UI = /*#__PURE__*/function () {
         if (event.target.classList.contains("remove-item")) {
           var removeItem = event.target;
           var id = removeItem.dataset.id;
-          cartContent.removeChild(removeItem.parentElement.parentElement);
+          console.log(id);
 
           _this3.removeItem(id);
+
+          cartContent.removeChild(removeItem.parentElement.parentElement);
         } else if (event.target.classList.contains("fa-chevron-up")) {
           var addAmount = event.target;
           var _id = addAmount.dataset.id;
@@ -1252,16 +1262,15 @@ var UI = /*#__PURE__*/function () {
         return item.id !== id;
       });
       this.setCartValues(cart);
-      Storage.saveCart(cart);
-      var button = this.getSingleButton(id);
-      button.disabled = false;
-      button.innerHTML = "<i class=\"fas fa-shopping-cart\"></i>add to cart";
+      Storage.deleteCart(id);
+      var button = this.getSingleButton(id); //button.disabled = false;
+      //button.innerHTML = `<i class="fas fa-shopping-cart"></i>add to cart`;
     }
   }, {
     key: "getSingleButton",
     value: function getSingleButton(id) {
       return buttonsDOM.find(function (button) {
-        return dataset.id === id;
+        return button.dataset.id === id;
       });
     }
   }]);
@@ -1283,19 +1292,31 @@ var Storage = /*#__PURE__*/function () {
     key: "getProduct",
     value: function getProduct(id) {
       var products = JSON.parse(localStorage.getItem("products"));
+      console.log(id);
       return products.find(function (item) {
-        return item.id === id;
+        return item.name === id;
       });
     }
   }, {
     key: "saveCart",
     value: function saveCart(cart) {
       localStorage.setItem("cart", JSON.stringify(cart));
+      console.log(cart);
     }
   }, {
     key: "getCart",
     value: function getCart() {
       return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
+    }
+  }, {
+    key: "deleteCart",
+    value: function deleteCart(name) {
+      var carts = JSON.parse(localStorage.getItem("cart"));
+      var index = carts.findIndex(function (item) {
+        return item.name === name;
+      });
+      carts.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(carts));
     }
   }]);
   return Storage;
@@ -1342,6 +1363,8 @@ function _displayProducts(product) {
   clone.querySelector(".beerType").innerHTML = product.category;
   clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
   clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
+  clone.querySelector(".product").setAttribute("data-id", product.name);
+  clone.querySelector(".bag-btn").setAttribute("data-id", product.name);
   document.querySelector(".products-center").appendChild(clone);
 }
 
@@ -1421,7 +1444,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50256" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51084" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
