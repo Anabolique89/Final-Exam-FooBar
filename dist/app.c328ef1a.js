@@ -1012,7 +1012,9 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", start);
+
+function start() {
   var ui = new UI();
   var products = new Products(); //setup app
 
@@ -1027,7 +1029,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ui.cartLogic();
   });
   navIcon();
-}); //variables
+} //variables
+
 
 var cartBtn = document.querySelector(".cart-btn");
 var closeCartBtn = document.querySelector(".close-cart");
@@ -1037,7 +1040,8 @@ var cartOverlay = document.querySelector(".cart-overlay");
 var cartItems = document.querySelector(".cart-items");
 var cartTotal = document.querySelector(".cart-total");
 var cartContent = document.querySelector(".cart-content");
-var productsDOM = document.querySelector(".products-center"); // cart
+var productsDOM = document.querySelector(".products-center");
+var endpoint = "https://miserables.herokuapp.com/"; // cart
 
 var cart = []; //buttons
 
@@ -1059,7 +1063,7 @@ var Products = /*#__PURE__*/function () {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return fetch("https://miserables.herokuapp.com/beertypes/");
+                return fetch(endpoint + "beertypes");
 
               case 3:
                 result = _context.sent;
@@ -1104,6 +1108,7 @@ var UI = /*#__PURE__*/function () {
     value: function displayProducts(products) {
       var result = "";
       products.forEach(_displayProducts);
+      getTapsData();
     }
   }, {
     key: "getBagButtons",
@@ -1165,7 +1170,6 @@ var UI = /*#__PURE__*/function () {
       div.classList.add("cart-item");
       div.innerHTML = "\n<img src=".concat(item.label, " alt=\"product\" />\n<div class=\"cart-text\">\n  <h4>").concat(item.name, "</h4>\n  <h5>dkk").concat(item.alc, "</h5>\n  <span class=\"remove-item\" data-id=").concat(item.id, ">Remove</span>\n</div>\n<div class=\"arrows\">\n  <i class=\"fas fa-chevron-up\" data-id=").concat(item.id, "></i>\n  <p class=\"item-amount\">").concat(item.amount, "</p>\n  <i class=\"fas fa-chevron-down\" data-id=").concat(item.id, "></i>\n</div>");
       cartContent.appendChild(div);
-      console.log(cartContent);
     }
   }, {
     key: "showCart",
@@ -1313,7 +1317,6 @@ function navIcon() {
 }
 
 function _displayProducts(product) {
-  console.log(product);
   var template = document.querySelector("#productTemplate").content;
   var clone = template.cloneNode(true);
 
@@ -1337,7 +1340,58 @@ function _displayProducts(product) {
   clone.querySelector(".alcLevel span").innerHTML = product.alc;
   clone.querySelector(".beerName").innerHTML = product.name;
   clone.querySelector(".beerType").innerHTML = product.category;
+  clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
+  clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
   document.querySelector(".products-center").appendChild(clone);
+}
+
+function getTapsData() {
+  return _getTapsData.apply(this, arguments);
+}
+
+function _getTapsData() {
+  _getTapsData = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+    return _regenerator.default.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            fetch(endpoint).then(function (response) {
+              return response.json();
+            }).then(function (data) {
+              data.taps.forEach(getTapsLevel);
+            });
+
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _getTapsData.apply(this, arguments);
+}
+
+function getTapsLevel(data) {
+  console.log(data);
+  var barrelLevel = document.querySelector(".barrelLevel[data-beer=\"".concat(data.beer, "\"]"));
+  var notAvaliable = document.querySelector(".notAvaliable[data-beer=\"".concat(data.beer, "\"]"));
+
+  function between(x, min, max) {
+    return x >= min && x <= max;
+  }
+
+  if (between(data.level, 2000, 2500)) {
+    barrelLevel.src = "barrel_full.png";
+    notAvaliable.classList.add("visible");
+  } else if (between(data.level, 1000, 1999)) {
+    barrelLevel.src = "barrel_medium.png";
+    notAvaliable.classList.add("visible");
+  } else if (between(data.level, 1, 999)) {
+    barrelLevel.src = "barrel_little.png";
+    notAvaliable.classList.add("visible");
+  } else if (data.level == 0) {
+    barrelLevel.src = "barrel_empty.png";
+  }
 }
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -1367,7 +1421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60204" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
