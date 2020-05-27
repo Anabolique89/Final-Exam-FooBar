@@ -459,93 +459,9 @@ body {
   height: 5vw;
 }
 }
-
-/* .product{
-  width: 20vw;
-  height: 20vw;
-}
-
-.img-container {
-  position: relative;
-  overflow: hidden;
-}
-.bag-btn {
-  background: var(--primaryColor);
-  border: none;
-  text-transform: uppercase;
-  letter-spacing: var(--mainSpacing);
-  font-weight: bold;
-  transition: var(--mainTransition);
-  cursor: pointer;
-}
-.bag-btn:hover {
-  color: var(--mainWhite);
-}
-button.description {
-  position: absolute;
-  top: 85%;
-  right: 0;
-  background: var(--primaryColor);
-  border: none;
-  text-transform: uppercase;
-  padding: 0.5rem 0.75rem;
-  letter-spacing: var(--mainSpacing);
-  font-weight: bold;
-  transition: var(--mainTransition);
-  transform: translateX(-250%);
-  cursor: pointer;
-}
-
-button.description:hover {
-  color: var(--mainWhite);
-}
-
-.fa-shopping-cart {
-  margin-right: 0.5rem;
-}
-
-.product-img {
-  display: flex;
-  width: 60%;
-
-  transition: var(--mainTransition);
-  box-shadow: 3px 3px 3px #000;
-  border-radius: 50%;
-}
-.alc {
-  display: flex;
-}
-.img-container:hover .product-img {
-  opacity: 0.5;
-}
-.product h3 {
-  text-transform: capitalize;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-  letter-spacing: var(--mainSpacing);
-  text-align: center;
-}
-.product h4 {
-  margin-top: 0.7rem;
-  letter-spacing: var(--mainSpacing);
-  color: var(--primaryColor);
-  text-align: center;
-}
-img.background {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-}
-div.background {
-  height: 260px;
-} */
 /* ---------------End of Products ---------------- */
 
-/* ---------------Footer---------------- */
-footer {
-  display: flex;
-  justify-content: center;
-}
+
 /* --------------- Cart ---------------- */
 .cart-overlay {
   position: fixed;
@@ -640,6 +556,160 @@ footer {
 }
 
 /* --------------- End of Cart ---------------- */
+
+/* ------------------ Modal ------------------------ */
+
+.closeModal{
+  position: absolute;
+  right: 50px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.closeModal:hover{
+  color: var(--beerYellow);
+}
+
+#beerDesc{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  display: none;
+}
+
+#modalContainer{
+  position: relative;
+  width: 70%;
+  height: 80%;
+  background-color: rgb(0, 0, 0, 0.7);
+  /* background-image: url(design/background.jpg); */
+  background-size: cover;
+  background-position: right;
+  display: flex;
+  flex-direction: row;
+  border: 5px solid var(--beerYellow);
+}
+
+.leftSide{
+  display: flex;
+  flex-direction: column;
+  margin: 2vw;
+  align-items: center;
+}
+
+.rightSide{
+  display: flex;
+  flex-direction: column;
+  margin: 2vw;
+  overflow: auto;
+  padding-right: 2vw;
+}
+
+.rightSide::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.rightSide::-webkit-scrollbar
+{
+  width: 10px;
+	background-color: #F5F5F5;
+}
+
+.rightSide::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+.rightSide p:nth-child(odd){
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.imageBeer{
+  width: 20vw;
+}
+
+.nameBeer{
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.categoryBeer, .alcBeer{
+  font-style: italic;
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .closeModal{
+    right: 10px;
+    font-size: 50px;
+  }
+
+  #beerDesc{
+    font-size: 4vw;
+    z-index: 2;
+  }
+
+  #modalContainer{
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    overflow: auto;
+    border: none;
+  }
+
+  #modalContainer::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#modalContainer::-webkit-scrollbar
+{
+  width: 10px;
+	background-color: #F5F5F5;
+}
+
+#modalContainer::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+  
+  .rightSide{
+    overflow: initial;
+    padding-right: 2vw;
+    padding-left: 2vw;
+  }
+  
+  .rightSide p:nth-child(odd){
+    font-size: 5vw;
+  }
+  
+  .imageBeer{
+    width: 40vw;
+  }
+  
+  .nameBeer{
+    font-size: 7vw;
+  }
+  
+  
+}
 
 
 /*# sourceMappingURL=/AppStyle.1e9c2f84.css.map */

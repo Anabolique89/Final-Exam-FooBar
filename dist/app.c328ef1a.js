@@ -1109,6 +1109,7 @@ var UI = /*#__PURE__*/function () {
       var result = "";
       products.forEach(_displayProducts);
       getTapsData();
+      products.forEach(structureModal);
     }
   }, {
     key: "getBagButtons",
@@ -1119,7 +1120,6 @@ var UI = /*#__PURE__*/function () {
       buttonsDOM = buttons;
       buttons.forEach(function (button) {
         var id = button.dataset.id;
-        console.log(id);
         var inCart = cart.find(function (item) {
           return item.name === id;
         });
@@ -1361,6 +1361,7 @@ function _displayProducts(product) {
   clone.querySelector(".alcLevel span").innerHTML = product.alc;
   clone.querySelector(".beerName").innerHTML = product.name;
   clone.querySelector(".beerType").innerHTML = product.category;
+  clone.querySelector(".beerLabel").setAttribute("data-beer", product.name);
   clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
   clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
   clone.querySelector(".product").setAttribute("data-id", product.name);
@@ -1395,7 +1396,6 @@ function _getTapsData() {
 }
 
 function getTapsLevel(data) {
-  console.log(data);
   var barrelLevel = document.querySelector(".barrelLevel[data-beer=\"".concat(data.beer, "\"]"));
   var notAvaliable = document.querySelector(".notAvaliable[data-beer=\"".concat(data.beer, "\"]"));
 
@@ -1414,6 +1414,35 @@ function getTapsLevel(data) {
     notAvaliable.classList.add("visible");
   } else if (data.level == 0) {
     barrelLevel.src = "barrel_empty.png";
+  }
+}
+
+document.querySelector(".closeModal").addEventListener("click", function () {
+  document.querySelector("#beerDesc").style.display = "none";
+});
+
+function structureModal(data) {
+  console.log(data);
+  var readMore = document.querySelector(".beerLabel[data-beer=\"".concat(data.name, "\"]"));
+  console.log(readMore);
+
+  if (data.name == readMore.dataset.beer) {
+    readMore.addEventListener("click", clickReadMore);
+  } else {
+    console.log("else");
+  }
+
+  function clickReadMore() {
+    document.querySelector("#beerDesc").style.display = "flex";
+    document.querySelector(".imageBeer").src = "labels/".concat(data.label);
+    document.querySelector(".nameBeer").innerHTML = data.name;
+    document.querySelector(".categoryBeer").innerHTML = data.category;
+    document.querySelector(".alcBeer span").innerHTML = data.alc;
+    document.querySelector(".aroma").innerHTML = data.description.aroma;
+    document.querySelector(".appearance").innerHTML = data.description.appearance;
+    document.querySelector(".flavor").innerHTML = data.description.flavor;
+    document.querySelector(".mouthfeel").innerHTML = data.description.mouthfeel;
+    document.querySelector(".overallImpression").innerHTML = data.description.overallImpression;
   }
 }
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -1444,7 +1473,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51210" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61410" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

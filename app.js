@@ -59,6 +59,7 @@ class UI {
     let result = "";
     products.forEach(displayProducts);
     getTapsData();
+    products.forEach(structureModal);
   }
 
   getBagButtons() {
@@ -66,7 +67,6 @@ class UI {
     buttonsDOM = buttons;
     buttons.forEach((button) => {
       let id = button.dataset.id;
-      console.log(id);
       let inCart = cart.find((item) => item.name === id);
       if (inCart) {
         button.innerText = "In Cart";
@@ -252,6 +252,8 @@ function displayProducts(product) {
   clone.querySelector(".alcLevel span").innerHTML = product.alc;
   clone.querySelector(".beerName").innerHTML = product.name;
   clone.querySelector(".beerType").innerHTML = product.category;
+
+  clone.querySelector(".beerLabel").setAttribute("data-beer", product.name);
   clone.querySelector(".barrelLevel").setAttribute("data-beer", product.name);
   clone.querySelector(".notAvaliable").setAttribute("data-beer", product.name);
   clone.querySelector(".product").setAttribute("data-id", product.name);
@@ -273,7 +275,6 @@ async function getTapsData() {
 }
 
 function getTapsLevel(data) {
-  console.log(data)
 
   const barrelLevel = document.querySelector(`.barrelLevel[data-beer="${data.beer}"]`);
   const notAvaliable = document.querySelector(`.notAvaliable[data-beer="${data.beer}"]`);
@@ -298,4 +299,36 @@ function getTapsLevel(data) {
     barrelLevel.src = "barrel_empty.png";
   }
 
+}
+
+document.querySelector(".closeModal").addEventListener("click", function () {
+  document.querySelector("#beerDesc").style.display = "none";
+})
+
+function structureModal(data) {
+  console.log(data)
+
+  let readMore = document.querySelector(`.beerLabel[data-beer="${data.name}"]`);
+  console.log(readMore)
+
+  if (data.name == readMore.dataset.beer) {
+    readMore.addEventListener("click", clickReadMore);
+  } else {
+    console.log("else")
+  }
+
+  function clickReadMore() {
+
+    document.querySelector("#beerDesc").style.display = "flex";
+
+    document.querySelector(".imageBeer").src = `labels/${data.label}`;
+    document.querySelector(".nameBeer").innerHTML = data.name;
+    document.querySelector(".categoryBeer").innerHTML = data.category;
+    document.querySelector(".alcBeer span").innerHTML = data.alc;
+    document.querySelector(".aroma").innerHTML = data.description.aroma;
+    document.querySelector(".appearance").innerHTML = data.description.appearance;
+    document.querySelector(".flavor").innerHTML = data.description.flavor;
+    document.querySelector(".mouthfeel").innerHTML = data.description.mouthfeel;
+    document.querySelector(".overallImpression").innerHTML = data.description.overallImpression;
+  }
 }
