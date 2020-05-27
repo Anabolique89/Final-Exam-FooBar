@@ -19,7 +19,6 @@
 }
 /*reset styles*/
 * {
-  
 }
 body {
   color: var(--mainWhite);
@@ -56,17 +55,17 @@ body {
   color: var(--mainWhite);
 }
 
-.navbar span{
+.navbar span {
   font-size: 40px;
   cursor: pointer;
   z-index: 2;
 }
 
-.navbar span:hover{
-  color: #F0A92A;
+.navbar span:hover {
+  color: #f0a92a;
 }
 
-#statusLeft{
+#statusLeft {
   top: 0;
   z-index: 1;
   position: absolute;
@@ -79,33 +78,33 @@ body {
   left: -300px;
 }
 
-.statusLeftAnim{
+.statusLeftAnim {
   animation: slideStatusLeft 1s forwards;
 }
 
-@keyframes slideStatusLeft{
-  to{
+@keyframes slideStatusLeft {
+  to {
     left: 0;
   }
 }
 
-#statusLeft p{
+#statusLeft p {
   color: var(--beerYellow);
   text-align: center;
   margin-left: 20px;
   margin-right: 20px;
 }
 
-#statusLeft p:nth-child(1){
+#statusLeft p:nth-child(1) {
   margin-top: 10vh;
 }
 
-#statusLeft p:nth-child(odd){
+#statusLeft p:nth-child(odd) {
   font-size: 26px;
   font-weight: bold;
 }
 
-#statusLeft p:nth-child(even){
+#statusLeft p:nth-child(even) {
   font-size: 40px;
   font-weight: bold;
   margin: 0;
@@ -125,10 +124,10 @@ body {
   font-size: 3.4rem;
   letter-spacing: var(--mainSpacing);
   margin-bottom: 3rem;
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
 }
 .yellowB {
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.3rem;
   text-decoration: none;
   letter-spacing: var(--mainSpacing);
   font-size: 1rem;
@@ -138,22 +137,22 @@ body {
   transition: var(--mainTransition);
   cursor: pointer;
   border-radius: 10px;
-  font-family: "Signation";
+  font-family: "Signation", sans-serif;
   font-size: 1.7rem;
 }
 .banner-btn {
-  padding: 0.5rem 1.5rem;
-  /* text-transform: uppercase; */
+  padding: 0.2rem 1rem;
+  margin-top: 1rem;
   letter-spacing: var(--mainSpacing);
   font-size: 1rem;
   background: var(--primaryColor);
   color: var(--mainBlack);
-  border: 1px solid var(--primaryColor);
+  border: 1px solid var(--beerYellow);
   transition: var(--mainTransition);
   cursor: pointer;
   border-radius: 10px;
-  font-family: "Signation";
-  font-size: 2.5rem;
+  font-family: "Signation", sans-serif;
+  font-size: 2.2rem;
 }
 .banner-btn:hover {
   background: transparent;
@@ -171,13 +170,13 @@ body {
   margin-bottom: 3vw;
 }
 
-.asideContainer{
-   width: 100%;
+.asideContainer {
+  width: 100%;
 }
 
- .asideText {
-   margin-right: 3vw;
-   position: fixed;
+.asideText {
+  margin-right: 3vw;
+  position: fixed;
   text-align: left;
   font-weight: 600;
   letter-spacing: var(--mainSpacing);
@@ -193,7 +192,7 @@ body {
   justify-content: center;
 }
 
-.product{
+.product {
   margin: 1vw;
   border-radius: 5px;
   width: 18vw;
@@ -208,25 +207,32 @@ body {
   align-items: center;
   position: relative;
 }
-
-.productAvaliable{
+span.price-span {
+  color: red;
+  font-weight: bold;
+}
+span.remove-item {
+  color: red;
+  font-weight: bold;
+}
+.productAvaliable {
   filter: none;
 }
 
-.product:hover .beerLabelImg{
-  filter:blur(1px);
+.product:hover .beerLabelImg {
+  filter: blur(1px);
 }
 
-.product:hover .beerLabel p{
+.product:hover .beerLabel p {
   opacity: 1;
 }
 
-.product p{
+.product p {
   margin: 0;
   text-align: center;
 }
 
-.notAvaliable{
+.notAvaliable {
   color: var(--beerYellow);
   position: absolute;
   grid-column: 1/4;
@@ -240,11 +246,11 @@ body {
   border-radius: 5px;
 }
 
-.visible{
+.visible {
   display: none;
 }
 
-.beerLabel{
+.beerLabel {
   grid-column: 1/3;
   grid-row: 1/4;
   width: 100%;
@@ -258,7 +264,7 @@ body {
   cursor: pointer;
 }
 
-.beerLabel p{
+.beerLabel p {
   position: absolute;
   font-weight: bold;
   color: white;
@@ -266,36 +272,36 @@ body {
   opacity: 0;
 }
 
-.beerLabelImg{
+.beerLabelImg {
   width: 80%;
 }
 
-.price{
+.price {
   grid-column: 3/4;
   grid-row: 1/2;
   font-size: 2vw;
 }
 
-.glassType{
+.glassType {
   grid-column: 3/4;
   grid-row: 2/3;
   width: 70%;
 }
 
-.alcLevel{
+.alcLevel {
   grid-column: 3/4;
   grid-row: 3/4;
   font-style: italic;
   font-size: 1vw;
 }
 
-.barrelLevel{
+.barrelLevel {
   grid-column: 1/2;
   grid-row: 4/6;
   width: 2vw;
 }
 
-.beerName{
+.beerName {
   grid-column: 2/3;
   grid-row: 4/5;
   color: white;
@@ -304,14 +310,14 @@ body {
   font-size: 1.5vw;
 }
 
-.beerType{
+.beerType {
   grid-column: 2/3;
   grid-row: 5/6;
   font-style: italic;
   font-size: 1vw;
 }
 
-.addToCart{
+.addToCart {
   grid-column: 3/4;
   grid-row: 4/6;
   color: white;
@@ -326,72 +332,70 @@ body {
 }
 
 @media only screen and (max-width: 1110px) {
-
   .products {
     margin-right: 7vw;
   }
-  
-  .asideContainer{
-     width: 100%;
+
+  .asideContainer {
+    width: 100%;
   }
-  
-   .asideText {
-     margin-right: 7vw;
+
+  .asideText {
+    margin-right: 7vw;
     font-size: 3vw;
   }
-  
-  .product{
+
+  .product {
     width: 24vw;
     height: 24vw;
   }
 
-  .notAvaliable{
+  .notAvaliable {
     width: 100%;
     height: 100%;
   }
-  
-  .beerLabel{
+
+  .beerLabel {
     width: 100%;
     height: 100%;
   }
-  
-  .beerLabelImg{
+
+  .beerLabelImg {
     width: 70%;
   }
-  
-  .price{
+
+  .price {
     font-size: 2vw;
   }
-  
-  .glassType{
+
+  .glassType {
     width: 70%;
   }
-  
-  .alcLevel{
+
+  .alcLevel {
     font-size: 1.5vw;
   }
-  
-  .barrelLevel{
+
+  .barrelLevel {
     width: 3vw;
   }
-  
-  .beerName{
+
+  .beerName {
     font-size: 2vw;
   }
-  
-  .beerType{
+
+  .beerType {
     font-size: 1.5vw;
   }
-  
-  .addToCart{
+
+  .addToCart {
     width: 3vw;
     height: 3vw;
   }
 }
 
 @media only screen and (max-width: 800px) {
-
-  .logo{
+  .logo {
     width: 160px;
   }
 
@@ -405,62 +409,61 @@ body {
     order: 2;
   }
 
-  .asideContainer{
+  .asideContainer {
     order: 1;
- }
+  }
 
- .asideText {
-   margin-left: 6vw;
-   margin-right: 6vw;
-  position: initial;
- font-size: 4.5vw;
-}
+  .asideText {
+    margin-left: 6vw;
+    margin-right: 6vw;
+    position: initial;
+    font-size: 4.5vw;
+  }
 
-.product{
-  width: 40vw;
-  height: 40vw;
-}
+  .product {
+    width: 40vw;
+    height: 40vw;
+  }
 
-.notAvaliable{
-  width: 100%;
-  height: 100%;
-}
+  .notAvaliable {
+    width: 100%;
+    height: 100%;
+  }
 
-.beerLabelImg{
-  width: 80%;
-}
+  .beerLabelImg {
+    width: 80%;
+  }
 
-.price{
-  font-size: 4vw;
-}
+  .price {
+    font-size: 4vw;
+  }
 
-.glassType{
-  width: 70%;
-}
+  .glassType {
+    width: 70%;
+  }
 
-.alcLevel{
-  font-size: 2.5vw;
-}
+  .alcLevel {
+    font-size: 2.5vw;
+  }
 
-.barrelLevel{
-  width: 5.5vw;
-}
+  .barrelLevel {
+    width: 5.5vw;
+  }
 
-.beerName{
-  font-size: 4vw;
-}
+  .beerName {
+    font-size: 4vw;
+  }
 
-.beerType{
-  font-size: 2.5vw;
-}
+  .beerType {
+    font-size: 2.5vw;
+  }
 
-.addToCart{
-  width: 5vw;
-  height: 5vw;
-}
+  .addToCart {
+    width: 5vw;
+    height: 5vw;
+  }
 }
 /* ---------------End of Products ---------------- */
-
 
 /* --------------- Cart ---------------- */
 .cart-overlay {
@@ -482,7 +485,7 @@ body {
   height: 100%;
   overflow: scroll;
   z-index: 3;
-  background: rgb(231, 226, 221);
+  background: rgba(0, 0, 0, 0.7);
   padding: 1.5rem;
   transition: var(--mainTransition);
   transform: translateX(100%);
@@ -504,8 +507,10 @@ body {
   font-size: 1.7rem;
   cursor: pointer;
 }
-.cart h2 {
-  text-transform: capitalize;
+h2.heading-cart {
+  font-size: 2.5rem;
+  color: var(--primaryColor);
+  font-family: "Signation";
   text-align: center;
   letter-spacing: var(--mainSpacing);
   margin-bottom: 2rem;
@@ -559,18 +564,18 @@ body {
 
 /* ------------------ Modal ------------------------ */
 
-.closeModal{
+.closeModal {
   position: absolute;
   right: 50px;
   font-size: 30px;
   cursor: pointer;
 }
 
-.closeModal:hover{
+.closeModal:hover {
   color: var(--beerYellow);
 }
 
-#beerDesc{
+#beerDesc {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -585,7 +590,7 @@ body {
   display: none;
 }
 
-#modalContainer{
+#modalContainer {
   position: relative;
   width: 70%;
   height: 80%;
@@ -598,14 +603,14 @@ body {
   border: 5px solid var(--beerYellow);
 }
 
-.leftSide{
+.leftSide {
   display: flex;
   flex-direction: column;
   margin: 2vw;
   align-items: center;
 }
 
-.rightSide{
+.rightSide {
   display: flex;
   flex-direction: column;
   margin: 2vw;
@@ -613,58 +618,55 @@ body {
   padding-right: 2vw;
 }
 
-.rightSide::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.rightSide::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-.rightSide::-webkit-scrollbar
-{
+.rightSide::-webkit-scrollbar {
   width: 10px;
-	background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
-.rightSide::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
+.rightSide::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 2px solid #555555;
 }
 
-.rightSide p:nth-child(odd){
+.rightSide p:nth-child(odd) {
   font-size: 20px;
   font-weight: bold;
   margin: 0;
 }
 
-.imageBeer{
+.imageBeer {
   width: 20vw;
 }
 
-.nameBeer{
+.nameBeer {
   font-size: 40px;
   font-weight: bold;
   text-align: center;
 }
 
-.categoryBeer, .alcBeer{
+.categoryBeer,
+.alcBeer {
   font-style: italic;
   margin-top: 5px;
 }
 
 @media only screen and (max-width: 800px) {
-
-  .closeModal{
+  .closeModal {
     right: 10px;
     font-size: 50px;
   }
 
-  #beerDesc{
+  #beerDesc {
     font-size: 4vw;
     z-index: 2;
   }
 
-  #modalContainer{
+  #modalContainer {
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -672,41 +674,36 @@ body {
     border: none;
   }
 
-  #modalContainer::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
+  #modalContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+  }
 
-#modalContainer::-webkit-scrollbar
-{
-  width: 10px;
-	background-color: #F5F5F5;
-}
+  #modalContainer::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+  }
 
-#modalContainer::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
-}
-  
-  .rightSide{
+  #modalContainer::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 2px solid #555555;
+  }
+
+  .rightSide {
     overflow: initial;
     padding-right: 2vw;
     padding-left: 2vw;
   }
-  
-  .rightSide p:nth-child(odd){
+
+  .rightSide p:nth-child(odd) {
     font-size: 5vw;
   }
-  
-  .imageBeer{
+
+  .imageBeer {
     width: 40vw;
   }
-  
-  .nameBeer{
+
+  .nameBeer {
     font-size: 7vw;
   }
-  
-  
 }

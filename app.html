@@ -56,7 +56,7 @@
               <img class="beerLabelImg" src="images/labels/elhefe.png" alt="" />
               <p>Read More</p>
             </div>
-            <p class="price">DKK <span></span></p>
+            <p class="price">DKK <span class="price-span"></span></p>
             <img class="glassType" src="glass types/goblet.png" alt="" />
             <p class="alcLevel">abv. <span>4.5</span>%</p>
             <img
@@ -87,7 +87,7 @@
         <span class="close-cart">
           <i class="fas fa-window-close"></i>
         </span>
-        <h2>your cart</h2>
+        <h2 class="heading-cart">Your Orders</h2>
         <div class="cart-content">
           <!--cart item-->
           <!-- <div class="cart-item">
@@ -99,9 +99,9 @@
           <h3>your total : dkk <span class="cart-total">0</span></h3>
           <button class="clear-cart banner-btn">Clear Cart</button> <br />
           <button id="popup" class="banner-btn">
-            Credit Card
-          </button>
-          <button class="yellowB mobile-pay banner-btn">Mobile Pay</button>
+            Credit Card</button
+          ><br />
+          <button class="mobile-pay banner-btn">Mobile Pay</button>
           <br />
         </div>
       </div>
@@ -166,19 +166,47 @@
     <div id="abc">
       <div id="popupContact">
         <!-- contact us form -->
-        <form action="#" method="post" id="form">
+        <form class="payment" action="#" method="post" id="form">
           <img src="images/3.png" id="close" onclick="div_hide()" />
-          <h2>Contact Us</h2>
-          <hr />
-          <input type="text" name="name" id="name" placeholder="Name" />
+          <h2 class="payment-h2">Payment Details</h2>
 
-          <input type="text" name="email" id="email" placeholder="Email" />
+          <label for="cardNumber">CARD NUMBER</label>
+          <input
+            type="text"
+            name="cardNumber"
+            id="name"
+            placeholder="Valid Card Number"
+            required
+            autofocus
+          />
 
-          <textarea name="message" placeholder="Message" id="msg"></textarea>
+          <input
+            type="text"
+            name="cardExpiry"
+            id="email"
+            name="cardExpiry"
+            placeholder="MM / YY"
+            required
+          />
+          <span class="input-group-addon"
+            ><i class="fa fa-credit-card"></i
+          ></span>
+          <label for="cardExpir">EXPIRATION DATE</label><br />
 
-          <a id="submit" href="javascript: check_empty()">Send</a>
-
-          <p></p>
+          <label for="cardCVC">CV CODE</label>
+          <br />
+          <input
+            type="text"
+            size="3"
+            class="form-control"
+            name="cardCVC"
+            placeholder="CVC"
+            autocomplete="cc-csc"
+            required
+          />
+          <button class="yellowB" style="float: right;" type="submit">
+            Confirm Payment
+          </button>
         </form>
       </div>
     </div>
