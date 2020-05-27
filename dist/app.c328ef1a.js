@@ -1106,9 +1106,9 @@ var UI = /*#__PURE__*/function () {
   (0, _createClass2.default)(UI, [{
     key: "displayProducts",
     value: function displayProducts(products) {
-      var result = "";
       products.forEach(_displayProducts);
       getTapsData();
+      setInterval(getTapsData, 5000);
       products.forEach(structureModal);
     }
   }, {
@@ -1120,25 +1120,10 @@ var UI = /*#__PURE__*/function () {
       buttonsDOM = buttons;
       buttons.forEach(function (button) {
         var id = button.dataset.id;
-        var inCart = cart.find(function (item) {
-          return item.name === id;
-        });
-
-        if (inCart) {
-          button.innerText = "In Cart";
-          button.disabled = true;
-        }
-
         button.addEventListener("click", function (event) {
-          // let id = event.target.dataset.id;
-          // console.log(id);
-          // let inCart = cart.find((item) => item.name === id);
-          // if (inCart) {
-          //   event.target.innerText = "In Cart";
-          //   event.target.disabled = true;
-          // }
-          event.target.innerText = "In Cart";
-          event.target.disabled = true; // get product from products
+          event.target.innerHTML = "<i class=\"fas fa-check\"></i> BUY";
+          event.target.disabled = true;
+          event.target.classList.add("inCart"); // get product from products
 
           var cartItem = _objectSpread(_objectSpread({}, Storage.getProduct(id)), {}, {
             amount: 1
@@ -1383,6 +1368,7 @@ function _getTapsData() {
               return response.json();
             }).then(function (data) {
               data.taps.forEach(getTapsLevel);
+              queueInfo(data);
             });
 
           case 1:
@@ -1445,6 +1431,12 @@ function structureModal(data) {
     document.querySelector(".overallImpression").innerHTML = data.description.overallImpression;
   }
 }
+
+function queueInfo(data) {
+  var orders = document.querySelector(".ordersInLine").innerHTML = data.queue.length + data.serving.length;
+  document.querySelector(".waitingTime span").innerHTML = Math.round(orders * 4 / data.bartenders.length);
+  document.querySelector(".totalSips").innerHTML = data.serving[0].id;
+}
 },{"@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"node_modules/@babel/runtime/helpers/asyncToGenerator.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1473,7 +1465,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52737" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53914" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

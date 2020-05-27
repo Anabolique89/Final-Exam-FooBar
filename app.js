@@ -55,9 +55,9 @@ class Products {
 
 class UI {
   displayProducts(products) {
-    let result = "";
     products.forEach(displayProducts);
     getTapsData();
+    setInterval(getTapsData, 5000);
     products.forEach(structureModal);
   }
 
@@ -65,22 +65,15 @@ class UI {
     const buttons = [...document.querySelectorAll(".bag-btn")];
     buttonsDOM = buttons;
     buttons.forEach((button) => {
+
       let id = button.dataset.id;
-      let inCart = cart.find((item) => item.name === id);
-      if (inCart) {
-        button.innerText = "In Cart";
-        button.disabled = true;
-      }
+
       button.addEventListener("click", (event) => {
-        // let id = event.target.dataset.id;
-        // console.log(id);
-        // let inCart = cart.find((item) => item.name === id);
-        // if (inCart) {
-        //   event.target.innerText = "In Cart";
-        //   event.target.disabled = true;
-        // }
-        event.target.innerText = "In Cart";
+
+        event.target.innerHTML = `<i class="fas fa-check"></i> BUY`;
         event.target.disabled = true;
+        event.target.classList.add("inCart");
+
         // get product from products
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
 
@@ -274,6 +267,7 @@ async function getTapsData() {
     })
     .then((data) => {
       data.taps.forEach(getTapsLevel);
+      queueInfo(data);
     });
 }
 
@@ -334,4 +328,10 @@ function structureModal(data) {
     document.querySelector(".overallImpression").innerHTML =
       data.description.overallImpression;
   }
+}
+
+function queueInfo(data) {
+  const orders = document.querySelector(".ordersInLine").innerHTML = data.queue.length + data.serving.length;
+  document.querySelector(".waitingTime span").innerHTML = Math.round(orders * 4 / data.bartenders.length);
+  document.querySelector(".totalSips").innerHTML = data.serving[0].id;
 }

@@ -41,7 +41,6 @@ form {
 }
 
 h2.payment-h2 {
-  /* background-color: #feffed; */
   padding: 20px 35px;
   margin: -10px -50px;
   text-align: center;
@@ -69,7 +68,7 @@ input#email {
 input.form-control {
   width: 20%;
 }
-
+/*
 #submit {
   text-decoration: none;
   width: 100%;
@@ -83,7 +82,7 @@ input.form-control {
   cursor: pointer;
   border-radius: 5px;
 }
-
+*/
 span.input-group-addon {
   color: red;
   font-weight: bold;
