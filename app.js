@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", start);
 
 function start() {
-
   const ui = new UI();
   const products = new Products();
   //setup app
@@ -20,7 +19,6 @@ function start() {
     });
 
   navIcon();
-
 }
 
 //variables
@@ -54,6 +52,7 @@ class Products {
   }
 }
 //display products
+
 class UI {
   displayProducts(products) {
     let result = "";
@@ -228,7 +227,6 @@ function navIcon() {
 }
 
 function displayProducts(product) {
-
   const template = document.querySelector("#productTemplate").content;
   const clone = template.cloneNode(true);
 
@@ -239,9 +237,16 @@ function displayProducts(product) {
   clone.querySelector(".beerLabelImg").src = `labels/${product.label}`;
   clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
 
-  if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
+  if (
+    product.category == "Hefeweizen" ||
+    product.category == "Belgian Specialty Ale"
+  ) {
     clone.querySelector(".glassType").src = "glass types/pilsner.png";
-  } else if (product.category == "IPA" || product.category == "European Lager" || product.category == "California Common") {
+  } else if (
+    product.category == "IPA" ||
+    product.category == "European Lager" ||
+    product.category == "California Common"
+  ) {
     clone.querySelector(".glassType").src = "glass types/pint.png";
   } else if (product.category == "Oktoberfest") {
     clone.querySelector(".glassType").src = "glass types/mug.png";
@@ -260,7 +265,6 @@ function displayProducts(product) {
   clone.querySelector(".bag-btn").setAttribute("data-id", product.name);
 
   document.querySelector(".products-center").appendChild(clone);
-
 }
 
 async function getTapsData() {
@@ -269,15 +273,17 @@ async function getTapsData() {
       return response.json();
     })
     .then((data) => {
-
       data.taps.forEach(getTapsLevel);
     });
 }
 
 function getTapsLevel(data) {
-
-  const barrelLevel = document.querySelector(`.barrelLevel[data-beer="${data.beer}"]`);
-  const notAvaliable = document.querySelector(`.notAvaliable[data-beer="${data.beer}"]`);
+  const barrelLevel = document.querySelector(
+    `.barrelLevel[data-beer="${data.beer}"]`
+  );
+  const notAvaliable = document.querySelector(
+    `.notAvaliable[data-beer="${data.beer}"]`
+  );
 
   function between(x, min, max) {
     return x >= min && x <= max;
@@ -286,39 +292,34 @@ function getTapsLevel(data) {
   if (between(data.level, 2000, 2500)) {
     barrelLevel.src = "barrel_full.png";
     notAvaliable.classList.add("visible");
-
   } else if (between(data.level, 1000, 1999)) {
     barrelLevel.src = "barrel_medium.png";
     notAvaliable.classList.add("visible");
-
   } else if (between(data.level, 1, 999)) {
     barrelLevel.src = "barrel_little.png";
     notAvaliable.classList.add("visible");
-
   } else if (data.level == 0) {
     barrelLevel.src = "barrel_empty.png";
   }
-
 }
 
 document.querySelector(".closeModal").addEventListener("click", function () {
   document.querySelector("#beerDesc").style.display = "none";
-})
+});
 
 function structureModal(data) {
-  console.log(data)
+  console.log(data);
 
   let readMore = document.querySelector(`.beerLabel[data-beer="${data.name}"]`);
-  console.log(readMore)
+  console.log(readMore);
 
   if (data.name == readMore.dataset.beer) {
     readMore.addEventListener("click", clickReadMore);
   } else {
-    console.log("else")
+    console.log("else");
   }
 
   function clickReadMore() {
-
     document.querySelector("#beerDesc").style.display = "flex";
 
     document.querySelector(".imageBeer").src = `labels/${data.label}`;
@@ -326,9 +327,11 @@ function structureModal(data) {
     document.querySelector(".categoryBeer").innerHTML = data.category;
     document.querySelector(".alcBeer span").innerHTML = data.alc;
     document.querySelector(".aroma").innerHTML = data.description.aroma;
-    document.querySelector(".appearance").innerHTML = data.description.appearance;
+    document.querySelector(".appearance").innerHTML =
+      data.description.appearance;
     document.querySelector(".flavor").innerHTML = data.description.flavor;
     document.querySelector(".mouthfeel").innerHTML = data.description.mouthfeel;
-    document.querySelector(".overallImpression").innerHTML = data.description.overallImpression;
+    document.querySelector(".overallImpression").innerHTML =
+      data.description.overallImpression;
   }
 }

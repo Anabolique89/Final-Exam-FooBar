@@ -1,146 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foobar App</title>
+    <!--font awesome-->
+    <link
+      rel="stylesheet"
+      href="./font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Place your kit's code here -->
+    <script
+      src="https://kit.fontawesome.com/f70deb80b4.js"
+      crossorigin="anonymous"
+    ></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foobar App</title>
-  <!--font awesome-->
-  <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css" />
-  <!-- Place your kit's code here -->
-  <script src="https://kit.fontawesome.com/f70deb80b4.js" crossorigin="anonymous"></script>
+    <!-- custom css -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="AppStyle.css" />
+    <link rel="stylesheet" href="elements.css" />
+  </head>
 
-  <!-- custom css -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="AppStyle.css" />
-</head>
+  <body>
+    <nav class="navbar" id="navigation">
+      <span class="navIcon">&#9776;</span>
 
-<body>
-  <nav class="navbar" id="navigation">
-    <span class="navIcon">&#9776;</span>
+      <a href="index.html">
+        <img class="logo" src="./images/logoFoo.png" alt="foobar logo" />
+      </a>
 
-    <a href="index.html">
-      <img class="logo" src="./images/logoFoo.png" alt="foobar logo" />
-    </a>
+      <div class="cart-btn">
+        <img src="./images/shopping-cart-icon.png" alt="cart" />
+        <div class="cart-items">0</div>
+      </div>
+    </nav>
 
-    <div class="cart-btn">
-      <img src="./images/shopping-cart-icon.png" alt="cart" />
-      <div class="cart-items">0</div>
+    <div id="statusLeft">
+      <p>Orders in line</p>
+      <p>5</p>
+      <p>Estimated waiting time</p>
+      <p>10 minutes</p>
+      <p>Today that many people got a sip of heaven</p>
+      <p>112</p>
     </div>
-  </nav>
-
-  <div id="statusLeft">
-    <p>Orders in line</p>
-    <p>5</p>
-    <p>Estimated waiting time</p>
-    <p>10 minutes</p>
-    <p>Today that many people got a sip of heaven</p>
-    <p>112</p>
-  </div>
-  <!-- end of navbar -->
-  <!--products-->
-  <section class="products">
-
-    <div class="products-center">
-
-
-      <template id="productTemplate">
-
-        <div class="product">
-          <div class="beerLabel">
-            <img class="beerLabelImg" src="images/labels/elhefe.png" alt="">
-            <p>Read More</p>
+    <!-- end of navbar -->
+    <!--products-->
+    <section class="products">
+      <div class="products-center">
+        <template id="productTemplate">
+          <div class="product">
+            <div class="beerLabel">
+              <img class="beerLabelImg" src="images/labels/elhefe.png" alt="" />
+              <p>Read More</p>
+            </div>
+            <p class="price">DKK <span></span></p>
+            <img class="glassType" src="glass types/goblet.png" alt="" />
+            <p class="alcLevel">abv. <span>4.5</span>%</p>
+            <img
+              class="barrelLevel"
+              src="design/barrel/barrel_empty.png"
+              alt=""
+            />
+            <p class="beerName">Fairy Tale Ale</p>
+            <p class="beerType">Lager Beer</p>
+            <p class="addToCart bag-btn">&#65291;</p>
+            <p class="notAvaliable"><span>Not avaliable at the moment</span></p>
           </div>
-          <p class="price">DKK <span></span></p>
-          <img class="glassType" src="glass types/goblet.png" alt="">
-          <p class="alcLevel">abv. <span>4.5</span>%</p>
-          <img class="barrelLevel" src="design/barrel/barrel_empty.png" alt="">
-          <p class="beerName">Fairy Tale Ale</p>
-          <p class="beerType">Lager Beer</p>
-          <p class="addToCart bag-btn">&#65291;</p>
-          <p class="notAvaliable"><span>Not avaliable at the moment</span></p>
-        </div>
+        </template>
+      </div>
 
-      </template>
-
-    </div>
-
-    <div class="asideContainer">
-      <p class="asideText">
-        Welcome to the paradise of beer! We specialise in brewing the best
-        homemade beers and we have a wide variety of types you can choose
-        from. Have fun!
-      </p>
-    </div>
-  </section>
-  <!-- end of products -->
-  <!-- shopping cart -->
-  <div class="cart-overlay">
-    <div class="cart">
-      <span class="close-cart">
-        <i class="fas fa-window-close"></i>
-      </span>
-      <h2>your cart</h2>
-      <div class="cart-content">
-        <!--cart item-->
-        <!-- <div class="cart-item">
+      <div class="asideContainer">
+        <p class="asideText">
+          Welcome to the paradise of beer! We specialise in brewing the best
+          homemade beers and we have a wide variety of types you can choose
+          from. Have fun!
+        </p>
+      </div>
+    </section>
+    <!-- end of products -->
+    <!-- shopping cart -->
+    <div class="cart-overlay">
+      <div class="cart" id="bdy" style="overflow: hidden;">
+        <span class="close-cart">
+          <i class="fas fa-window-close"></i>
+        </span>
+        <h2>your cart</h2>
+        <div class="cart-content">
+          <!--cart item-->
+          <!-- <div class="cart-item">
        
           </div> -->
-        <!--end of cart item-->
-      </div>
-      <div class="cart-footer">
-        <h3>your total : dkk <span class="cart-total">0</span></h3>
-        <button class="clear-cart banner-btn">Clear Cart</button> <br />
-        <button class="yellowB mobile-pay">Mobile Pay</button> <br />
-        <button class="yellowB credit-card">Credit Card</button> <br />
+          <!--end of cart item-->
+        </div>
+        <div class="cart-footer">
+          <h3>your total : dkk <span class="cart-total">0</span></h3>
+          <button class="clear-cart banner-btn">Clear Cart</button> <br />
+          <button id="popup" class="banner-btn">
+            Credit Card
+          </button>
+          <button class="yellowB mobile-pay banner-btn">Mobile Pay</button>
+          <br />
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="beerDesc">
-    <div id="modalContainer">
+    <div id="beerDesc">
+      <div id="modalContainer">
+        <span class="closeModal">&times;</span>
 
-      <span class="closeModal">&times;</span>
+        <div class="leftSide">
+          <img class="imageBeer" src="images/labels/elhefe.png" alt="" />
+          <p class="nameBeer">El Hefe</p>
+          <p class="categoryBeer">Hefeweizen</p>
+          <p class="alcBeer">abv. <span>5.4</span>%</p>
+        </div>
 
-      <div class="leftSide">
-        <img class="imageBeer" src="images/labels/elhefe.png" alt="">
-        <p class="nameBeer">El Hefe</p>
-        <p class="categoryBeer">Hefeweizen</p>
-        <p class="alcBeer">abv. <span>5.4</span>%</p>
+        <div class="rightSide">
+          <p>Aroma</p>
+          <p class="aroma">
+            Low to moderate grainy wheat or rye character. Some malty sweetness
+            is acceptable. Esters can be moderate to none, although should
+            reflect American yeast strains. The clove and banana aromas common
+            to German hefeweizens are inappropriate. Hop aroma may be low to
+            moderate, and can have either a citrusy American or a spicy or
+            floral noble hop character. Slight crisp sharpness is optional. No
+            diacetyl.
+          </p>
+          <p>Appearance</p>
+          <p class="appearance">
+            Usually pale yellow to gold. Clarity may range from brilliant to
+            hazy with yeast approximating the German hefeweizen style of beer.
+            Big, long-lasting white head.
+          </p>
+          <p>Flavor</p>
+          <p class="flavor">
+            Light to moderately strong grainy wheat or rye flavor, which can
+            linger into the finish. Rye versions are richer and spicier than
+            wheat. May have a moderate malty sweetness or finish quite dry. Low
+            to moderate hop bitterness, which sometimes lasts into the finish.
+            Low to moderate hop flavor (citrusy American or spicy/floral noble).
+            Esters can be moderate to none, but should not take on a German
+            Weizen character (banana). No clove phenols, although a light
+            spiciness from wheat or rye is acceptable. May have a slightly crisp
+            or sharp finish. No diacetyl.
+          </p>
+          <p>Mouthfeel</p>
+          <p class="mouthfeel">
+            Medium-light to medium body. Medium-high to high carbonation. May
+            have a light alcohol warmth in stronger examples.
+          </p>
+          <p>Overall impression</p>
+          <p class="overallImpression">
+            Refreshing wheat or rye beers that can display more hop character
+            and less yeast character than their German cousins.
+          </p>
+        </div>
       </div>
-
-      <div class="rightSide">
-        <p>Aroma</p>
-        <p class="aroma">Low to moderate grainy wheat or rye character. Some malty sweetness is acceptable. Esters can
-          be moderate to none, although should reflect American yeast strains. The clove and banana aromas common to
-          German hefeweizens are inappropriate. Hop aroma may be low to moderate, and can have either a citrusy American
-          or a spicy or floral noble hop character. Slight crisp sharpness is optional. No diacetyl.</p>
-        <p>Appearance</p>
-        <p class="appearance">Usually pale yellow to gold. Clarity may range from brilliant to hazy with yeast
-          approximating the German hefeweizen style of beer. Big, long-lasting white head.</p>
-        <p>Flavor</p>
-        <p class="flavor">Light to moderately strong grainy wheat or rye flavor, which can linger into the finish. Rye
-          versions are richer and spicier than wheat. May have a moderate malty sweetness or finish quite dry. Low to
-          moderate hop bitterness, which sometimes lasts into the finish. Low to moderate hop flavor (citrusy American
-          or spicy/floral noble). Esters can be moderate to none, but should not take on a German Weizen character
-          (banana). No clove phenols, although a light spiciness from wheat or rye is acceptable. May have a slightly
-          crisp or sharp finish. No diacetyl.</p>
-        <p>Mouthfeel</p>
-        <p class="mouthfeel">Medium-light to medium body. Medium-high to high carbonation. May have a light alcohol
-          warmth in stronger examples.</p>
-        <p>Overall impression</p>
-        <p class="overallImpression">Refreshing wheat or rye beers that can display more hop character and less yeast
-          character than their German cousins.</p>
-      </div>
-
     </div>
-  </div>
 
-  <!-- shopping cart end -->
+    <!-- modal end  -->
+    <!-- Popup div starts here -->
+    <div id="abc">
+      <div id="popupContact">
+        <!-- contact us form -->
+        <form action="#" method="post" id="form">
+          <img src="images/3.png" id="close" onclick="div_hide()" />
+          <h2>Contact Us</h2>
+          <hr />
+          <input type="text" name="name" id="name" placeholder="Name" />
 
-  <!-- queue status-->
+          <input type="text" name="email" id="email" placeholder="Email" />
 
-  <script src="app.js"></script>
-</body>
+          <textarea name="message" placeholder="Message" id="msg"></textarea>
 
+          <a id="submit" href="javascript: check_empty()">Send</a>
+
+          <p></p>
+        </form>
+      </div>
+    </div>
+    <!-- Popup div ends here -->
+
+    <!-- queue status-->
+    <script src="app.js"></script>
+    <script src="my_js.js"></script>
+  </body>
 </html>

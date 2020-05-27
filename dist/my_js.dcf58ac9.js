@@ -117,79 +117,67 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
+})({"my_js.js":[function(require,module,exports) {
+//function to validate empty field
+function check_empty() {
+  if (document.getElementById("name").value == "" || document.getElementById("email").value == "" || document.getElementById("msg").value == "") {
+    alert("Fill All Fields !");
+  } else {
+    document.getElementById("form").submit();
+    alert("Form submitted successfully...");
   }
-
-  return bundleURL;
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+var credit = document.querySelector("#popup");
+credit.addEventListener("click", function () {
+  div_show();
+});
+var closeCart = document.querySelectorAll(".banner-btn");
+var closeForm = document.querySelector("#close"); // if else
+// while / do while
+// for loop
+// map, forEach, filter, sort, reduce
 
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
+for (var i = 0; i < closeCart.length; i++) {//   closeCart[i].addEventListener("click", function () {
+  //     hideCart();
+  //   });
+  // if(i === 1){
+  // 	// asdasd
+  // }
 }
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+closeCart.forEach(function (item) {
+  item.addEventListener("click", function () {
+    hideCart();
+  });
+});
+var cartDOM = document.querySelector(".cart");
+var cartOverlay = document.querySelector(".cart-overlay");
+
+function hideCart() {
+  cartOverlay.classList.remove("transparentBcg");
+  cartDOM.classList.remove("showCart");
 }
 
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
+closeForm.addEventListener("click", function () {
+  document.getElementById("abc").style.display = "none";
+}); // function div_show(){
+// 	this
+// }
+// const div_show = () => {
+// 	this
+// }
+//function to display Popup
 
-function updateLink(link) {
-  var newLink = link.cloneNode();
+function div_show() {
+  document.getElementById("abc").style.display = "block";
+} //function to hide Popup
 
-  newLink.onload = function () {
-    link.remove();
-  };
 
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
+function div_hide() {
+  document.getElementById("abc").style.display = "none";
 }
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"AppStyle.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./Fonts\\signation-511xg-webfont.woff2":[["signation-511xg-webfont.49178baf.woff2","Fonts/signation-511xg-webfont.woff2"],"Fonts/signation-511xg-webfont.woff2"],"./Fonts\\signation-511xg-webfont.woff":[["signation-511xg-webfont.cc64ca1e.woff","Fonts/signation-511xg-webfont.woff"],"Fonts/signation-511xg-webfont.woff"],"./images\\oak.jpg":[["oak.8bf7e3c6.jpg","images/oak.jpg"],"images/oak.jpg"],"./images\\labels\\whiteFoam.jpg":[["whiteFoam.8ff27207.jpg","images/labels/whiteFoam.jpg"],"images/labels/whiteFoam.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -393,5 +381,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/AppStyle.1e9c2f84.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","my_js.js"], null)
+//# sourceMappingURL=/my_js.dcf58ac9.js.map

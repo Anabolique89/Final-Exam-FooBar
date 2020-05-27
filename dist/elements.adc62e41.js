@@ -184,12 +184,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"AppStyle.css":[function(require,module,exports) {
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"elements.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./Fonts\\signation-511xg-webfont.woff2":[["signation-511xg-webfont.49178baf.woff2","Fonts/signation-511xg-webfont.woff2"],"Fonts/signation-511xg-webfont.woff2"],"./Fonts\\signation-511xg-webfont.woff":[["signation-511xg-webfont.cc64ca1e.woff","Fonts/signation-511xg-webfont.woff"],"Fonts/signation-511xg-webfont.woff"],"./images\\oak.jpg":[["oak.8bf7e3c6.jpg","images/oak.jpg"],"images/oak.jpg"],"./images\\labels\\whiteFoam.jpg":[["whiteFoam.8ff27207.jpg","images/labels/whiteFoam.jpg"],"images/labels/whiteFoam.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -394,4 +394,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/AppStyle.1e9c2f84.js.map
+//# sourceMappingURL=/elements.adc62e41.js.map
