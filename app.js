@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", start);
 
 function start() {
+
+  localStorage.clear();
+
   const ui = new UI();
   const products = new Products();
   //setup app
@@ -23,6 +26,7 @@ function start() {
 
 //variables
 
+let TotalPrice = 0;
 const cartBtn = document.querySelector(".cart-btn");
 const closeCartBtn = document.querySelector(".close-cart");
 const clearCartBtn = document.querySelector(".clear-cart");
@@ -54,6 +58,7 @@ class Products {
 //display products
 
 class UI {
+
   displayProducts(products) {
     products.forEach(displayProducts);
     getTapsData();
@@ -84,7 +89,7 @@ class UI {
         // set cart values
         this.setCartValues(cart);
         // display cart item
-        this.addCartItem(cartItem);
+        addCartItem(cartItem);
         // show the cart
         this.showCart();
       });
@@ -100,23 +105,10 @@ class UI {
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     cartItems.innerText = itemsTotal;
   }
-  addCartItem(item) {
-    const div = document.createElement("div");
-    div.classList.add("cart-item");
-    div.innerHTML = `
-<img src="labels/${item.label}" alt="product" />
-<div class="cart-text">
-  <h4>${item.name}</h4>
-  <h5>dkk${item.alc}</h5>
-  <span class="remove-item" data-id="${item.name}">Remove</span>
-</div>
-<div class="arrows">
-  <i class="fas fa-chevron-up" data-id="${item.name}"></i>
-  <p class="item-amount">${item.amount}</p>
-  <i class="fas fa-chevron-down" data-id="${item.name}"></i>
-</div>`;
-    cartContent.appendChild(div);
-  }
+
+
+
+
   showCart() {
     cartOverlay.classList.add("transparentBcg");
     cartDOM.classList.add("showCart");
@@ -129,7 +121,7 @@ class UI {
     closeCartBtn.addEventListener("click", this.hideCart);
   }
   populateCart(cart) {
-    cart.forEach((item) => this.addCartItem(item));
+    cart.forEach((item) => addCartItem(item));
   }
   hideCart() {
     cartOverlay.classList.remove("transparentBcg");
@@ -204,6 +196,35 @@ class Storage {
   }
 }
 
+function addCartItem(item) {
+
+  const template = document.querySelector("#cartItemTemplate").content;
+  const clone = template.cloneNode(true);
+
+  clone.querySelector(".itemImage").src = `labels/${item.label}`;
+  clone.querySelector(".itemName").innerHTML = item.name;
+  clone.querySelector(".remove-item").setAttribute("data-id", item.name);
+  clone.querySelector(".fa-chevron-up").setAttribute("data-id", item.name);
+  clone.querySelector(".item-amount").innerHTML = item.amount;
+  clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name);
+
+  if (item.name == document.querySelector(`.price span[data-beer="${item.name}"]`).dataset.beer) {
+    clone.querySelector(".itemInTheCartPrice span").innerHTML = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML
+
+
+  }
+
+
+
+  cartContent.appendChild(clone);
+
+  /* document.querySelectorAll(".itemInTheCartPrice span").innerHTML.forEach(el => {
+    TotalPrice + el;
+    document.querySelector(".cart-total").innerHTML = TotalPrice;
+  }) */
+
+}
+
 function navIcon() {
   const navIcon = document.querySelector(".navIcon");
   navIcon.addEventListener("click", function () {
@@ -229,6 +250,7 @@ function displayProducts(product) {
 
   clone.querySelector(".beerLabelImg").src = `labels/${product.label}`;
   clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
+  clone.querySelector(".price span").setAttribute("data-beer", product.name);
 
   if (
     product.category == "Hefeweizen" ||
@@ -302,10 +324,8 @@ document.querySelector(".closeModal").addEventListener("click", function () {
 });
 
 function structureModal(data) {
-  console.log(data);
 
   let readMore = document.querySelector(`.beerLabel[data-beer="${data.name}"]`);
-  console.log(readMore);
 
   if (data.name == readMore.dataset.beer) {
     readMore.addEventListener("click", clickReadMore);

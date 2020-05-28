@@ -75,28 +75,54 @@
     </div>
   </section>
   <!-- end of products -->
+
   <!-- shopping cart -->
   <div class="cart-overlay">
-    <div class="cart" id="bdy" style="overflow: hidden;">
+
+    <div class="cart" id="bdy">
       <span class="close-cart">
         <i class="fas fa-window-close"></i>
       </span>
       <h2 class="heading-cart">Your Orders</h2>
       <div class="cart-content">
-        <!--cart item-->
-        <!-- <div class="cart-item">
-       
-          </div> -->
-        <!--end of cart item-->
+
+        <template id="cartItemTemplate">
+
+          <div class="cart-item">
+
+            <img class="itemImage" src="" alt="product">
+            <div class="cart-text">
+              <h4 class="itemName"></h4>
+              <h5 class="itemInTheCartPrice">DKK <span></span></h5>
+              <span class="remove-item">Remove</span>
+            </div>
+            <div class="arrows">
+              <i class="fas fa-chevron-up"></i>
+              <p class="item-amount"></p>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+
+          </div>
+
+        </template>
+
+
       </div>
+
       <div class="cart-footer">
-        <h3>your total : dkk <span class="cart-total">0</span></h3>
-        <button class="clear-cart banner-btn">Clear Cart</button> <br>
+        <h3>Your Total : DKK <span class="cart-total">0</span></h3>
+        <button class="clear-cart banner-btn">Clear Cart</button>
+
         <button id="popup" class="banner-btn">
-          Credit Card</button><br>
-        <button class="mobile-pay banner-btn">Mobile Pay</button>
-        <br>
+          <img src="/dankort.694d5bf6.png" alt="">
+          Credit Card
+        </button>
+        <button class="mobile-pay banner-btn">
+          <img src="/mobilePay.8a92242a.png" alt="">
+        </button>
+
       </div>
+
     </div>
   </div>
 
@@ -114,41 +140,23 @@
       <div class="rightSide">
         <p>Aroma</p>
         <p class="aroma">
-          Low to moderate grainy wheat or rye character. Some malty sweetness
-          is acceptable. Esters can be moderate to none, although should
-          reflect American yeast strains. The clove and banana aromas common
-          to German hefeweizens are inappropriate. Hop aroma may be low to
-          moderate, and can have either a citrusy American or a spicy or
-          floral noble hop character. Slight crisp sharpness is optional. No
-          diacetyl.
+
         </p>
         <p>Appearance</p>
         <p class="appearance">
-          Usually pale yellow to gold. Clarity may range from brilliant to
-          hazy with yeast approximating the German hefeweizen style of beer.
-          Big, long-lasting white head.
+
         </p>
         <p>Flavor</p>
         <p class="flavor">
-          Light to moderately strong grainy wheat or rye flavor, which can
-          linger into the finish. Rye versions are richer and spicier than
-          wheat. May have a moderate malty sweetness or finish quite dry. Low
-          to moderate hop bitterness, which sometimes lasts into the finish.
-          Low to moderate hop flavor (citrusy American or spicy/floral noble).
-          Esters can be moderate to none, but should not take on a German
-          Weizen character (banana). No clove phenols, although a light
-          spiciness from wheat or rye is acceptable. May have a slightly crisp
-          or sharp finish. No diacetyl.
+
         </p>
         <p>Mouthfeel</p>
         <p class="mouthfeel">
-          Medium-light to medium body. Medium-high to high carbonation. May
-          have a light alcohol warmth in stronger examples.
+
         </p>
         <p>Overall impression</p>
         <p class="overallImpression">
-          Refreshing wheat or rye beers that can display more hop character
-          and less yeast character than their German cousins.
+
         </p>
       </div>
     </div>

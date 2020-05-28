@@ -120,6 +120,7 @@ body {
   padding: 2rem;
   border-radius: 10px;
 }
+
 .banner-title {
   font-size: 3.4rem;
   letter-spacing: var(--mainSpacing);
@@ -153,11 +154,26 @@ body {
   border-radius: 10px;
   font-family: "Signation", sans-serif;
   font-size: 2.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
 }
 .banner-btn:hover {
   background: transparent;
   color: var(--primaryColor);
 }
+
+.banner-btn img{
+  width: 30%;
+}
+
+.mobile-pay img{
+  width: 60%;
+}
+
+
 
 /* --------------- End of Hero ---------------- */
 /* --------------- Products ---------------- */
@@ -477,32 +493,26 @@ span.remove-item {
   position: fixed;
   top: 0;
   right: 0;
-  width: 100%;
+  width: 300px;
   height: 100%;
-  overflow: scroll;
-  z-index: 3;
+  overflow: auto;
   background: rgba(0, 0, 0, 0.7);
   padding: 1.5rem;
-  transition: var(--mainTransition);
-  transform: translateX(100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
-.showCart {
-  transform: translateX(0);
-}
+
 .transparentBcg {
   visibility: visible;
-}
-@media screen and (min-width: 768px) {
-  .cart {
-    width: 30vw;
-    min-width: 450px;
-  }
 }
 
 .close-cart {
   font-size: 1.7rem;
   cursor: pointer;
+  align-self: flex-end;
 }
+
 h2.heading-cart {
   font-size: 2.5rem;
   color: var(--primaryColor);
@@ -511,6 +521,28 @@ h2.heading-cart {
   letter-spacing: var(--mainSpacing);
   margin-bottom: 2rem;
 }
+
+@media only screen and (max-width: 800px){
+  .cart{
+    position: absolute;
+    width: 100%;
+    padding: 0;
+  }
+
+  .cart-content{
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+
+  .banner-btn{
+    width: 250px;
+  }
+
+  .close-cart{
+    margin: 20px;
+  }
+}
+
 /*---------- Cart Item -------------------- */
 .cart-item {
   display: grid;
@@ -548,12 +580,22 @@ h2.heading-cart {
 
 .cart-footer {
   margin-top: 2rem;
+  margin-bottom: 4rem;
   letter-spacing: var(--mainSpacing);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 .cart-footer h3 {
   text-transform: capitalize;
   margin-bottom: 1rem;
+}
+
+.cartFooterForm{
+  all: initial;
+  display: flex;
+  flex-direction: column;
 }
 
 /* --------------- End of Cart ---------------- */

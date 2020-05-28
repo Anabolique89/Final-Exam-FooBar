@@ -1015,6 +1015,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 document.addEventListener("DOMContentLoaded", start);
 
 function start() {
+  localStorage.clear();
   var ui = new UI();
   var products = new Products(); //setup app
 
@@ -1032,6 +1033,7 @@ function start() {
 } //variables
 
 
+var TotalPrice = 0;
 var cartBtn = document.querySelector(".cart-btn");
 var closeCartBtn = document.querySelector(".close-cart");
 var clearCartBtn = document.querySelector(".clear-cart");
@@ -1137,8 +1139,7 @@ var UI = /*#__PURE__*/function () {
           _this.setCartValues(cart); // display cart item
 
 
-          _this.addCartItem(cartItem); // show the cart
-
+          addCartItem(cartItem); // show the cart
 
           _this.showCart();
         });
@@ -1155,14 +1156,6 @@ var UI = /*#__PURE__*/function () {
       });
       cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
       cartItems.innerText = itemsTotal;
-    }
-  }, {
-    key: "addCartItem",
-    value: function addCartItem(item) {
-      var div = document.createElement("div");
-      div.classList.add("cart-item");
-      div.innerHTML = "\n<img src=\"labels/".concat(item.label, "\" alt=\"product\" />\n<div class=\"cart-text\">\n  <h4>").concat(item.name, "</h4>\n  <h5>dkk").concat(item.alc, "</h5>\n  <span class=\"remove-item\" data-id=\"").concat(item.name, "\">Remove</span>\n</div>\n<div class=\"arrows\">\n  <i class=\"fas fa-chevron-up\" data-id=\"").concat(item.name, "\"></i>\n  <p class=\"item-amount\">").concat(item.amount, "</p>\n  <i class=\"fas fa-chevron-down\" data-id=\"").concat(item.name, "\"></i>\n</div>");
-      cartContent.appendChild(div);
     }
   }, {
     key: "showCart",
@@ -1182,10 +1175,8 @@ var UI = /*#__PURE__*/function () {
   }, {
     key: "populateCart",
     value: function populateCart(cart) {
-      var _this2 = this;
-
       cart.forEach(function (item) {
-        return _this2.addCartItem(item);
+        return addCartItem(item);
       });
     }
   }, {
@@ -1197,11 +1188,11 @@ var UI = /*#__PURE__*/function () {
   }, {
     key: "cartLogic",
     value: function cartLogic() {
-      var _this3 = this;
+      var _this2 = this;
 
       // clear cart button
       clearCartBtn.addEventListener("click", function () {
-        _this3.clearCart();
+        _this2.clearCart();
       }); //cart functionality Delete
 
       cartContent.addEventListener("click", function (event) {
@@ -1212,7 +1203,7 @@ var UI = /*#__PURE__*/function () {
           var id = removeItem.dataset.id;
           console.log(id);
 
-          _this3.removeItem(id);
+          _this2.removeItem(id);
 
           cartContent.removeChild(removeItem.parentElement.parentElement);
         } else if (event.target.classList.contains("fa-chevron-up")) {
@@ -1224,13 +1215,13 @@ var UI = /*#__PURE__*/function () {
   }, {
     key: "clearCart",
     value: function clearCart() {
-      var _this4 = this;
+      var _this3 = this;
 
       var cartItems = cart.map(function (item) {
         return item.id;
       });
       cartItems.forEach(function (id) {
-        return _this4.removeItem(id);
+        return _this3.removeItem(id);
       });
 
       while (cartContent.children.length > 0) {
@@ -1307,6 +1298,27 @@ var Storage = /*#__PURE__*/function () {
   return Storage;
 }();
 
+function addCartItem(item) {
+  var template = document.querySelector("#cartItemTemplate").content;
+  var clone = template.cloneNode(true);
+  clone.querySelector(".itemImage").src = "labels/".concat(item.label);
+  clone.querySelector(".itemName").innerHTML = item.name;
+  clone.querySelector(".remove-item").setAttribute("data-id", item.name);
+  clone.querySelector(".fa-chevron-up").setAttribute("data-id", item.name);
+  clone.querySelector(".item-amount").innerHTML = item.amount;
+  clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name);
+
+  if (item.name == document.querySelector(".price span[data-beer=\"".concat(item.name, "\"]")).dataset.beer) {
+    clone.querySelector(".itemInTheCartPrice span").innerHTML = document.querySelector(".price span[data-beer=\"".concat(item.name, "\"]")).innerHTML;
+  }
+
+  cartContent.appendChild(clone);
+  /* document.querySelectorAll(".itemInTheCartPrice span").innerHTML.forEach(el => {
+    TotalPrice + el;
+    document.querySelector(".cart-total").innerHTML = TotalPrice;
+  }) */
+}
+
 function navIcon() {
   var navIcon = document.querySelector(".navIcon");
   navIcon.addEventListener("click", function () {
@@ -1332,6 +1344,7 @@ function _displayProducts(product) {
 
   clone.querySelector(".beerLabelImg").src = "labels/".concat(product.label);
   clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
+  clone.querySelector(".price span").setAttribute("data-beer", product.name);
 
   if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
     clone.querySelector(".glassType").src = "glass types/pilsner.png";
@@ -1408,9 +1421,7 @@ document.querySelector(".closeModal").addEventListener("click", function () {
 });
 
 function structureModal(data) {
-  console.log(data);
   var readMore = document.querySelector(".beerLabel[data-beer=\"".concat(data.name, "\"]"));
-  console.log(readMore);
 
   if (data.name == readMore.dataset.beer) {
     readMore.addEventListener("click", clickReadMore);
@@ -1465,7 +1476,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64703" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
