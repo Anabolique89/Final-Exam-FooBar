@@ -26,7 +26,7 @@ function start() {
 
 //variables
 
-let TotalPrice = 0;
+let totalPrice = 0;
 const cartBtn = document.querySelector(".cart-btn");
 const closeCartBtn = document.querySelector(".close-cart");
 const clearCartBtn = document.querySelector(".clear-cart");
@@ -91,7 +91,7 @@ class UI {
         // display cart item
         addCartItem(cartItem);
         // show the cart
-        this.showCart();
+        /* this.showCart(); */
       });
     });
   }
@@ -106,12 +106,14 @@ class UI {
     cartItems.innerText = itemsTotal;
   }
 
-
-
-
   showCart() {
     cartOverlay.classList.add("transparentBcg");
     cartDOM.classList.add("showCart");
+    document.querySelector(".cart").classList.add("cartSlideIn");
+
+    document.querySelector(".fa-window-close").addEventListener("click", function () {
+      document.querySelector(".cart").classList.remove("cartSlideIn");
+    })
   }
   setupApp() {
     cart = Storage.getCart();
@@ -176,12 +178,10 @@ class Storage {
   }
   static getProduct(id) {
     let products = JSON.parse(localStorage.getItem("products"));
-    console.log(id);
     return products.find((item) => item.name === id);
   }
   static saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
-    console.log(cart);
   }
   static getCart() {
     return localStorage.getItem("cart")
@@ -209,19 +209,14 @@ function addCartItem(item) {
   clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name);
 
   if (item.name == document.querySelector(`.price span[data-beer="${item.name}"]`).dataset.beer) {
-    clone.querySelector(".itemInTheCartPrice span").innerHTML = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML
+    const oneItemPrice = clone.querySelector(".itemInTheCartPrice span").innerHTML = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML
 
-
+    var oneItemPricetoNumber = parseInt(oneItemPrice, 10);
+    totalPrice += oneItemPricetoNumber;
+    document.querySelector(".cart-total").innerHTML = totalPrice;
   }
 
-
-
   cartContent.appendChild(clone);
-
-  /* document.querySelectorAll(".itemInTheCartPrice span").innerHTML.forEach(el => {
-    TotalPrice + el;
-    document.querySelector(".cart-total").innerHTML = TotalPrice;
-  }) */
 
 }
 

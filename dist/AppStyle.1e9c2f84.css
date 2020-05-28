@@ -110,6 +110,34 @@ body {
   margin: 0;
 }
 
+@media only screen and (max-width: 800px) {
+
+  #statusLeft {
+    width: 100%;
+    left: -100%;
+  }
+  
+  .statusLeftAnim {
+    animation: slideStatusLeft 1s forwards;
+  }
+  
+  @keyframes slideStatusLeft {
+    to {
+      left: 0;
+    }
+  }
+  
+  #statusLeft p:nth-child(odd) {
+    font-size: 5vw;
+  }
+  
+  #statusLeft p:nth-child(even) {
+    font-size: 8vw;
+  }
+}
+
+
+
 /* --------------- End of Navbar ---------------- */
 /* --------------- Hero ---------------- */
 
@@ -492,7 +520,7 @@ span.remove-item {
 .cart {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -350px;
   width: 300px;
   height: 100%;
   overflow: auto;
@@ -501,6 +529,16 @@ span.remove-item {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.cartSlideIn{
+  animation: cartSlideIn 1s forwards;
+}
+
+@keyframes cartSlideIn{
+  to{
+    right: 0;
+  }
 }
 
 .transparentBcg {
