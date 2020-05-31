@@ -132,7 +132,14 @@ class UI {
   cartLogic() {
     // clear cart button
     clearCartBtn.addEventListener("click", () => {
+
       this.clearCart();
+
+      document.querySelectorAll(".addToCart").forEach(el => {
+        el.disabled = false;
+        el.classList.remove("inCart");
+        el.innerHTML = "BUY";
+      })
     });
     //cart functionality Delete
     cartContent.addEventListener("click", (event) => {
@@ -150,13 +157,14 @@ class UI {
     });
   }
   clearCart() {
+
     let cartItems = cart.map((item) => item.id);
     cartItems.forEach((id) => this.removeItem(id));
 
     while (cartContent.children.length > 0) {
       cartContent.removeChild(cartContent.children[0]);
     }
-    this.hideCart();
+
   }
   removeItem(id) {
     //remove cart item if the id is not equal to this

@@ -1197,6 +1197,12 @@ var UI = /*#__PURE__*/function () {
       // clear cart button
       clearCartBtn.addEventListener("click", function () {
         _this2.clearCart();
+
+        document.querySelectorAll(".addToCart").forEach(function (el) {
+          el.disabled = false;
+          el.classList.remove("inCart");
+          el.innerHTML = "BUY";
+        });
       }); //cart functionality Delete
 
       cartContent.addEventListener("click", function (event) {
@@ -1231,8 +1237,6 @@ var UI = /*#__PURE__*/function () {
       while (cartContent.children.length > 0) {
         cartContent.removeChild(cartContent.children[0]);
       }
-
-      this.hideCart();
     }
   }, {
     key: "removeItem",
@@ -1477,7 +1481,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56860" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50443" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
