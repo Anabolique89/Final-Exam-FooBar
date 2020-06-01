@@ -515,8 +515,13 @@ span.remove-item {
   transition: var(--mainTransition);
   background: rgb(0, 0, 0, 0.5);
   z-index: 2;
-  visibility: hidden;
+  display: none;
 }
+
+.visibleCart{
+  display: block;
+}
+
 .cart {
   position: fixed;
   top: 0;
@@ -783,6 +788,10 @@ h2.heading-cart {
     font-size: 7vw;
   }
 }
+
+/* ------------------ Credit Card ------------------------ */
+
+
 
 
 /*# sourceMappingURL=/AppStyle.1e9c2f84.css.map */

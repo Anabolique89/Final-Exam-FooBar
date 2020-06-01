@@ -118,19 +118,55 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"my_js.js":[function(require,module,exports) {
-//function to validate empty field
-function check_empty() {
-  if (document.getElementById("name").value == "" || document.getElementById("email").value == "" || document.getElementById("msg").value == "") {
-    alert("Fill All Fields !");
-  } else {
-    document.getElementById("form").submit();
-    alert("Form submitted successfully...");
-  }
-}
-
 var credit = document.querySelector("#popup");
 credit.addEventListener("click", function () {
-  div_show();
+  document.querySelector("#abc").style.display = "flex";
+  setupForm();
+  var card = new Card({
+    // a selector or DOM element for the form where users will
+    // be entering their information
+    form: 'form',
+    // *required*
+    // a selector or DOM element for the container
+    // where you want the card to appear
+    container: '.card-wrapper',
+    // *required*
+    formSelectors: {
+      numberInput: 'input#number',
+      // optional — default input[name="number"]
+      expiryInput: 'input#expiry',
+      // optional — default input[name="expiry"]
+      cvcInput: 'input#cvc',
+      // optional — default input[name="cvc"]
+      nameInput: 'input#name' // optional - defaults input[name="name"]
+
+    },
+    width: 200,
+    // optional — default 350px
+    formatting: true,
+    // optional - default true
+    // Strings for translation - optional
+    messages: {
+      validDate: 'valid\ndate',
+      // optional - default 'valid\nthru'
+      monthYear: 'mm/yyyy' // optional - default 'month/year'
+
+    },
+    // Default placeholders for rendered fields - optional
+    placeholders: {
+      number: '•••• •••• •••• ••••',
+      name: 'Full Name',
+      expiry: '••/••',
+      cvc: '•••'
+    },
+    masks: {
+      cardNumber: '•' // optional - mask card number
+
+    },
+    // if true, will log helpful messages for setting up Card
+    debug: true // optional - default false
+
+  });
 });
 var closeCart = document.querySelectorAll(".banner-btn");
 var closeForm = document.querySelector("#close"); // if else
@@ -155,8 +191,8 @@ var cartDOM = document.querySelector(".cart");
 var cartOverlay = document.querySelector(".cart-overlay");
 
 function hideCart() {
-  cartOverlay.classList.remove("transparentBcg");
-  cartDOM.classList.remove("showCart");
+  cartOverlay.classList.remove("visibleCart");
+  cartDOM.classList.remove("cartSlideIn");
 }
 
 closeForm.addEventListener("click", function () {
@@ -177,6 +213,40 @@ function div_show() {
 function div_hide() {
   document.getElementById("abc").style.display = "none";
 }
+
+function setupForm() {
+  var form = document.querySelector(".payment");
+  window.form = form;
+  var elements = form.elements;
+  window.elements = elements;
+  form.setAttribute("novalidate", true);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var validForm = true;
+    var formElements = form.querySelectorAll("input");
+    formElements.forEach(function (el) {
+      el.classList.remove("invalid");
+    });
+
+    if (form.checkValidity() && validForm) {
+      document.querySelector(".payment").style.display = "none";
+      document.querySelector(".thanks").style.display = "block";
+      document.querySelector(".thanks > button").addEventListener("click", function () {
+        window.location.href = "app.html";
+      });
+      console.log("yeyyyy");
+    } else {
+      // !awesome
+      formElements.forEach(function (el) {
+        if (!el.checkValidity()) {
+          el.classList.add("invalid");
+        }
+      });
+    }
+  });
+}
+
+;
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -205,7 +275,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50443" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52535" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

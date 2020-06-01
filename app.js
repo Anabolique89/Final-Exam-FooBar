@@ -1,3 +1,10 @@
+var $ = require("jquery");
+// The current card.js code does not explicitly require jQuery, but instead uses the global, so this line is needed.
+window.jQuery = $;
+var card = require("card");
+
+
+
 document.addEventListener("DOMContentLoaded", start);
 
 function start() {
@@ -22,10 +29,12 @@ function start() {
     });
 
   navIcon();
+
+
 }
 
 //variables
-
+let itemsTotal = 0;
 let totalPrice = 0;
 const cartBtn = document.querySelector(".cart-btn");
 const closeCartBtn = document.querySelector(".close-cart");
@@ -87,7 +96,7 @@ class UI {
         // save the cart in local storage
         Storage.saveCart(cart);
         // set cart values
-        this.setCartValues(cart);
+        //this.setCartValues(cart);
         // display cart item
         addCartItem(cartItem);
         // show the cart
@@ -95,19 +104,9 @@ class UI {
       });
     });
   }
-  setCartValues(cart) {
-    let tempTotal = 0;
-    let itemsTotal = 0;
-    cart.map((item) => {
-      tempTotal += item.price * item.amount;
-      itemsTotal += item.amount;
-    });
-    cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
-    cartItems.innerText = itemsTotal;
-  }
 
   showCart() {
-    cartOverlay.classList.add("transparentBcg");
+    cartOverlay.classList.add("visibleCart");
     cartDOM.classList.add("showCart");
     document.querySelector(".cart").classList.add("cartSlideIn");
 
@@ -117,7 +116,7 @@ class UI {
   }
   setupApp() {
     cart = Storage.getCart();
-    this.setCartValues(cart);
+    //this.setCartValues(cart);
     this.populateCart(cart);
     cartBtn.addEventListener("click", this.showCart);
     closeCartBtn.addEventListener("click", this.hideCart);
@@ -126,7 +125,7 @@ class UI {
     cart.forEach((item) => addCartItem(item));
   }
   hideCart() {
-    cartOverlay.classList.remove("transparentBcg");
+    cartOverlay.classList.remove("visibleCart");
     cartDOM.classList.remove("showCart");
   }
   cartLogic() {
@@ -150,30 +149,63 @@ class UI {
         console.log(id);
         this.removeItem(id);
         cartContent.removeChild(removeItem.parentElement.parentElement);
-      } else if (event.target.classList.contains("fa-chevron-up")) {
+      } /* else if (event.target.classList.contains("fa-chevron-up")) {
         let addAmount = event.target;
         let id = addAmount.dataset.id;
-      }
+      } */
     });
   }
   clearCart() {
 
     let cartItems = cart.map((item) => item.id);
-    cartItems.forEach((id) => this.removeItem(id));
+    cartItems.forEach((id) => this.removeItemForClear(id));
 
     while (cartContent.children.length > 0) {
       cartContent.removeChild(cartContent.children[0]);
     }
 
+    totalPrice = 0;
+    document.querySelector(".cart-total").innerHTML = totalPrice;
+
   }
   removeItem(id) {
-    //remove cart item if the id is not equal to this
-    cart = cart.filter((item) => item.id !== id);
-    this.setCartValues(cart);
+    console.log(id)
+
+    //remove cart item if the id is equal to this
+
+    cart = cart.filter((item) => item.id == id);
     Storage.deleteCart(id);
     let button = this.getSingleButton(id);
-    //button.disabled = false;
-    //button.innerHTML = `<i class="fas fa-shopping-cart"></i>add to cart`;
+    button.disabled = false;
+    button.innerHTML = "BUY";
+    button.classList.remove("inCart");
+
+
+    // checks one beer price and takes away from total price
+    const beerPrice = document.querySelector(`.price span[data-beer="${id}"]`).innerHTML;
+    var beerPricetoNumber = parseInt(beerPrice, 10);
+
+    const beerAmount = document.querySelector(`.item-amount[data-id="${id}"]`).innerHTML;
+    var beerAmounttoNumber = parseInt(beerAmount, 10);
+
+    const checkAmountOfBeers = beerPricetoNumber * beerAmounttoNumber;
+    totalPrice -= checkAmountOfBeers;
+    document.querySelector(".cart-total").innerHTML = totalPrice;
+
+    // takes away 1 item from total items
+    itemsTotal -= 1;
+    cartItems.innerHTML = itemsTotal;
+  }
+  removeItemForClear(id) {
+
+    //remove cart item if the id is not equal to this
+
+    cart = cart.filter((item) => item.id !== id);
+    Storage.deleteCart(id);
+
+    itemsTotal = 0;
+    cartItems.innerHTML = itemsTotal;
+
   }
   getSingleButton(id) {
     return buttonsDOM.find((button) => button.dataset.id === id);
@@ -208,13 +240,38 @@ function addCartItem(item) {
 
   const template = document.querySelector("#cartItemTemplate").content;
   const clone = template.cloneNode(true);
+  let currentAmount = item.amount;
 
   clone.querySelector(".itemImage").src = `labels/${item.label}`;
   clone.querySelector(".itemName").innerHTML = item.name;
   clone.querySelector(".remove-item").setAttribute("data-id", item.name);
   clone.querySelector(".fa-chevron-up").setAttribute("data-id", item.name);
   clone.querySelector(".item-amount").innerHTML = item.amount;
+  clone.querySelector(".item-amount").setAttribute("data-id", item.name);
   clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name);
+
+  clone.querySelector(".fa-chevron-up").addEventListener("click", function () {
+    currentAmount += 1;
+    document.querySelector(`.item-amount[data-id="${item.name}"]`).innerHTML = currentAmount;
+
+    const beerPrice = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML;
+    var beerPricetoNumber = parseInt(beerPrice, 10);
+    totalPrice += beerPricetoNumber;
+    document.querySelector(".cart-total").innerHTML = totalPrice;
+  })
+
+  clone.querySelector(".fa-chevron-down").addEventListener("click", function () {
+    if (currentAmount >= 2) {
+      currentAmount -= 1;
+      document.querySelector(`.item-amount[data-id="${item.name}"]`).innerHTML = currentAmount;
+
+      const beerPrice = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML;
+      var beerPricetoNumber = parseInt(beerPrice, 10);
+      totalPrice -= beerPricetoNumber;
+      document.querySelector(".cart-total").innerHTML = totalPrice;
+    }
+  })
+
 
   if (item.name == document.querySelector(`.price span[data-beer="${item.name}"]`).dataset.beer) {
     const oneItemPrice = clone.querySelector(".itemInTheCartPrice span").innerHTML = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML
@@ -223,6 +280,10 @@ function addCartItem(item) {
     totalPrice += oneItemPricetoNumber;
     document.querySelector(".cart-total").innerHTML = totalPrice;
   }
+
+  itemsTotal += 1;
+  cartItems.innerHTML = itemsTotal;
+
 
   cartContent.appendChild(clone);
 
@@ -358,3 +419,4 @@ function queueInfo(data) {
   document.querySelector(".waitingTime span").innerHTML = Math.round(orders * 4 / data.bartenders.length);
   document.querySelector(".totalSips").innerHTML = data.serving[0].id;
 }
+

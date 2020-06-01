@@ -117,79 +117,137 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"form.js":[function(require,module,exports) {
+var credit = document.querySelector("#popup");
+credit.addEventListener("click", function () {
+  document.querySelector("#abc").style.display = "flex";
+  setupForm();
+  var card = new Card({
+    // a selector or DOM element for the form where users will
+    // be entering their information
+    form: 'form',
+    // *required*
+    // a selector or DOM element for the container
+    // where you want the card to appear
+    container: '.card-wrapper',
+    // *required*
+    formSelectors: {
+      numberInput: 'input#number',
+      // optional — default input[name="number"]
+      expiryInput: 'input#expiry',
+      // optional — default input[name="expiry"]
+      cvcInput: 'input#cvc',
+      // optional — default input[name="cvc"]
+      nameInput: 'input#name' // optional - defaults input[name="name"]
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
+    },
+    width: 200,
+    // optional — default 350px
+    formatting: true,
+    // optional - default true
+    // Strings for translation - optional
+    messages: {
+      validDate: 'valid\ndate',
+      // optional - default 'valid\nthru'
+      monthYear: 'mm/yyyy' // optional - default 'month/year'
 
-  return bundleURL;
+    },
+    // Default placeholders for rendered fields - optional
+    placeholders: {
+      number: '•••• •••• •••• ••••',
+      name: 'Full Name',
+      expiry: '••/••',
+      cvc: '•••'
+    },
+    masks: {
+      cardNumber: '•' // optional - mask card number
+
+    },
+    // if true, will log helpful messages for setting up Card
+    debug: true // optional - default false
+
+  });
+});
+var closeCart = document.querySelectorAll(".banner-btn");
+var closeForm = document.querySelector("#close"); // if else
+// while / do while
+// for loop
+// map, forEach, filter, sort, reduce
+
+for (var i = 0; i < closeCart.length; i++) {//   closeCart[i].addEventListener("click", function () {
+  //     hideCart();
+  //   });
+  // if(i === 1){
+  // 	// asdasd
+  // }
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+closeCart.forEach(function (item) {
+  item.addEventListener("click", function () {
+    hideCart();
+  });
+});
+var cartDOM = document.querySelector(".cart");
+var cartOverlay = document.querySelector(".cart-overlay");
 
-    if (matches) {
-      return getBaseURL(matches[0]);
+function hideCart() {
+  cartOverlay.classList.remove("visibleCart");
+  cartDOM.classList.remove("cartSlideIn");
+}
+
+closeForm.addEventListener("click", function () {
+  document.getElementById("abc").style.display = "none";
+}); // function div_show(){
+// 	this
+// }
+// const div_show = () => {
+// 	this
+// }
+//function to display Popup
+
+function div_show() {
+  document.getElementById("abc").style.display = "block";
+} //function to hide Popup
+
+
+function div_hide() {
+  document.getElementById("abc").style.display = "none";
+}
+
+function setupForm() {
+  var form = document.querySelector(".payment");
+  window.form = form;
+  var elements = form.elements;
+  window.elements = elements;
+  form.setAttribute("novalidate", true);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var validForm = true;
+    var formElements = form.querySelectorAll("input");
+    formElements.forEach(function (el) {
+      el.classList.remove("invalid");
+    });
+
+    if (form.checkValidity() && validForm) {
+      document.querySelector(".payment").style.display = "none";
+      document.querySelector(".thanks").style.display = "block";
+      document.querySelector(".thanks > button").addEventListener("click", function () {
+        window.location.href = "app.html";
+      });
+      console.log("yeyyyy");
+    } else {
+      // !awesome
+      formElements.forEach(function (el) {
+        if (!el.checkValidity()) {
+          el.classList.add("invalid");
+        }
+      });
     }
-  }
-
-  return '/';
+  });
 }
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"AppStyle.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./Fonts\\signation-511xg-webfont.woff2":[["signation-511xg-webfont.49178baf.woff2","Fonts/signation-511xg-webfont.woff2"],"Fonts/signation-511xg-webfont.woff2"],"./Fonts\\signation-511xg-webfont.woff":[["signation-511xg-webfont.cc64ca1e.woff","Fonts/signation-511xg-webfont.woff"],"Fonts/signation-511xg-webfont.woff"],"./images\\oak.jpg":[["oak.8bf7e3c6.jpg","images/oak.jpg"],"images/oak.jpg"],"./images\\labels\\whiteFoam.jpg":[["whiteFoam.8ff27207.jpg","images/labels/whiteFoam.jpg"],"images/labels/whiteFoam.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+;
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -393,5 +451,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/AppStyle.1e9c2f84.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","form.js"], null)
+//# sourceMappingURL=/form.d01534eb.js.map

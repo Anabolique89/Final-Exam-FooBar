@@ -13,8 +13,8 @@
   <!-- custom css -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/AppStyle.1e9c2f84.css">
-  <link rel="stylesheet" href="/elements.adc62e41.css">
-<script src="/font-awesome.min.80bdcae2.js"></script><script src="/AppStyle.1e9c2f84.js"></script><script src="/elements.adc62e41.js"></script></head>
+  <link rel="stylesheet" href="/form.4fcb22c8.css">
+<script src="/font-awesome.min.80bdcae2.js"></script><script src="/AppStyle.1e9c2f84.js"></script><script src="/form.4fcb22c8.js"></script><link rel="stylesheet" href="/app.c328ef1a.css"></head>
 
 <body>
   <nav class="navbar" id="navigation">
@@ -165,26 +165,46 @@
   <!-- modal end  -->
   <!-- Popup div starts here -->
   <div id="abc">
+
     <div id="popupContact">
-      <!-- contact us form -->
-      <form class="payment" action="#" method="post" id="form">
+
+
+
+      <form class="payment" id="form">
+
+        <div class="card-wrapper"></div>
         <img src="/3.f46dd042.png" id="close" onclick="div_hide()">
         <h2 class="payment-h2">Payment Details</h2>
 
-        <label for="cardNumber">CARD NUMBER</label>
-        <input type="text" name="cardNumber" id="name" placeholder="Valid Card Number" required="" autofocus="">
+        <label for="number">CARD NUMBER</label>
+        <input type="tel" name="number" id="number" placeholder="Card Number" required="" minlength="16">
+        <p>Please enter the card number</p>
 
-        <input type="text" name="cardExpiry" id="email" placeholder="MM / YY" required="">
-        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-        <label for="cardExpir">EXPIRATION DATE</label><br>
+        <label for="name">FULL NAME</label>
+        <input type="text" name="name" id="name" placeholder="Full Name" required="">
+        <p>Please enter your full name</p>
 
-        <label for="cardCVC">CV CODE</label>
-        <br>
-        <input type="text" size="3" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required="">
-        <button class="yellowB" style="float: right;" type="submit">
+        <label for="expiry">EXPIRATION DATE</label>
+        <input type="tel" name="expiry" id="expiry" placeholder="MM / YYYY" required="" minlength="9">
+        <p>Please enter expiration date <br>of the card</p>
+
+        <label for="cvc" class="labelcvc">CVC</label>
+        <input type="tel" id="cvc" maxlength="3" name="cvc" placeholder="CVC" required="" minlength="3">
+        <p>Please enter CVC of the card</p>
+        <button class="yellowB" type="submit">
           Confirm Payment
         </button>
       </form>
+
+      <div class="thanks">
+        <p>Payment successful!</p>
+        <button class="yellowB">
+          Okay!
+        </button>
+      </div>
+
+
+
     </div>
   </div>
   <!-- Popup div ends here -->
@@ -192,7 +212,7 @@
   <!-- Mobile Pay static end -->
 
   <script src="/app.c328ef1a.js"></script>
-  <script src="/my_js.dcf58ac9.js"></script>
+  <script src="/form.d01534eb.js"></script>
 </body>
 
 </html>

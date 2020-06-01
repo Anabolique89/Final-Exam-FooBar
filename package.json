@@ -17,7 +17,9 @@
     "parcel-plugin-static-files-copy": "^2.3.1"
   },
   "dependencies": {
-    "gsap": "^3.2.6"
+    "card": "^2.4.0",
+    "gsap": "^3.2.6",
+    "jquery": "^3.5.1"
   },
   "repository": {
     "type": "git",
