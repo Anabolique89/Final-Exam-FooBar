@@ -1,4 +1,6 @@
-
+var $ = require("jquery");
+window.jQuery = $;
+var card = require("card");
 
 const credit = document.querySelector("#popup");
 credit.addEventListener("click", () => {

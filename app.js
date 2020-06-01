@@ -1,10 +1,3 @@
-var $ = require("jquery");
-// The current card.js code does not explicitly require jQuery, but instead uses the global, so this line is needed.
-window.jQuery = $;
-var card = require("card");
-
-
-
 document.addEventListener("DOMContentLoaded", start);
 
 function start() {
@@ -30,7 +23,7 @@ function start() {
 
   navIcon();
 
-
+  mobilePay();
 }
 
 //variables
@@ -418,5 +411,19 @@ function queueInfo(data) {
   const orders = document.querySelector(".ordersInLine").innerHTML = data.queue.length + data.serving.length;
   document.querySelector(".waitingTime span").innerHTML = Math.round(orders * 4 / data.bartenders.length);
   document.querySelector(".totalSips").innerHTML = data.serving[0].id;
+}
+
+function mobilePay() {
+
+  document.querySelector(".mobile-pay").addEventListener("click", function () {
+    cartOverlay.classList.remove("visibleCart");
+    cartDOM.classList.remove("cartSlideIn");
+    document.querySelector("#mobilePayOverlay").style.display = "flex";
+  })
+
+  document.querySelector("#mobilePayModal > .close").addEventListener("click", function () {
+    document.querySelector("#mobilePayOverlay").style.display = "none";
+  })
+
 }
 

@@ -789,6 +789,36 @@ h2.heading-cart {
   }
 }
 
-/* ------------------ Credit Card ------------------------ */
+/* ------------------ Mobile Pay ------------------------ */
 
+#mobilePayOverlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
 
+#mobilePayModal{
+  max-width: 400px;
+  max-height: 400px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobilePayModal img:nth-child(1){
+  width: 100%;
+}
+
+#mobilePayModal .close{
+  position: absolute;
+  right: -14px;
+  top: -14px;
+  cursor: pointer;
+}
