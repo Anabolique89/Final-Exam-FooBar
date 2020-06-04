@@ -116,6 +116,7 @@ body {
 @media only screen and (max-width: 800px) {
 
   #statusLeft {
+    position: fixed;
     width: 100%;
     left: -100%;
   }
@@ -806,6 +807,7 @@ h2.heading-cart {
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 #mobilePayModal{
@@ -825,4 +827,14 @@ h2.heading-cart {
   right: -14px;
   top: -14px;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+  #mobilePayModal{
+    width: 70vw;
+    height: 70vw;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
 }

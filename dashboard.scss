@@ -241,7 +241,7 @@ main > p{
     }
 
     #beerLevelSection{
-        position: absolute;
+        position: fixed;
         top: 0;
         left: -270px;
         width: 250px;
@@ -335,7 +335,7 @@ main > p{
 
     #beerLevelSection{
         left: -510px;
-        width: 100%;
+        width: 100vw;
         height: auto;
         z-index: 1;
         padding-top: 6vh;
@@ -360,7 +360,7 @@ main > p{
     @keyframes navIconMove{
         to{
             position: fixed;
-            left: 90%;
+            left: 85%;
         }
     }
 }

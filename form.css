@@ -14,6 +14,7 @@ css settings for HTML div exactCenter
   overflow: auto;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 img#close {
@@ -182,5 +183,16 @@ button[type=submit]{
   font-size: 2.5rem;
   letter-spacing: var(--mainSpacing);
   color: var(--beerYellow);
+}
+
+@media only screen and (max-width: 600px) {
+
+  #popupContact{
+    width: 80%;
+  }
+
+  form{
+    width: 80%;
+}
 }
 
