@@ -163,7 +163,7 @@
 }
 
 body {
-  background-image: url(/background.4a130ea9.jpg);
+  background-image: url(background.4a130ea9.jpg);
   margin: 0;
   background-size: cover;
   background-attachment: fixed;
@@ -275,7 +275,7 @@ main > p {
 .square {
   width: 24vw;
   height: 24vw;
-  background-image: url(/whiteFoam.c7f4bba1.jpg);
+  background-image: url(whiteFoam.c7f4bba1.jpg);
   background-size: cover;
   border-radius: 10px;
   display: flex;
@@ -349,7 +349,7 @@ main > p {
 .beerDrop {
   width: 60px;
   height: 60px;
-  background-image: url("/beerDropBck.018a613e.jpg");
+  background-image: url("beerDropBck.018a613e.jpg");
   background-position: center;
   clip-path: circle(50%);
   display: flex;
@@ -402,7 +402,7 @@ main > p {
   .square {
     width: 28vw;
     height: 28vw;
-    background-image: url(/whiteFoam.c7f4bba1.jpg);
+    background-image: url(whiteFoam.c7f4bba1.jpg);
     background-size: cover;
     border-radius: 10px;
     display: flex;
@@ -516,15 +516,15 @@ main > p {
 }
 
 #bartender1 {
-  background-image: url(/peter.452b64e1.jpg);
+  background-image: url(peter.452b64e1.jpg);
 }
 
 #bartender2 {
-  background-image: url(/jonas.17c6abcf.jpg);
+  background-image: url(jonas.17c6abcf.jpg);
 }
 
 #bartender3 {
-  background-image: url(/dannie.8c98be7a.jpg);
+  background-image: url(dannie.8c98be7a.jpg);
 }
 
 #bartenderPics {
@@ -725,4 +725,4 @@ tr:last-child > td {
   }
 }
 
-/*# sourceMappingURL=/dashboard.984c5b85.css.map */
+/*# sourceMappingURL=dashboard.984c5b85.css.map */

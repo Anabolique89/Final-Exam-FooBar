@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap");
 @font-face {
   font-family: "Signation";
-  src: url("/signation-511xg-webfont.49178baf.woff2") format("woff2"),
-    url("/signation-511xg-webfont.cc64ca1e.woff") format("woff");
+  src: url("signation-511xg-webfont.49178baf.woff2") format("woff2"),
+    url("signation-511xg-webfont.cc64ca1e.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -21,7 +21,7 @@
 
 body {
   color: var(--mainWhite);
-  background: url("/oak.8bf7e3c6.jpg");
+  background: url("oak.8bf7e3c6.jpg");
   background-size: cover;
   font-family: "Roboto", sans-serif;
   text-shadow: 2px 2 px var(--mainBlack);
@@ -245,7 +245,7 @@ body {
   border-radius: 5px;
   width: 18vw;
   height: 18vw;
-  background-image: url(/whiteFoam.8ff27207.jpg);
+  background-image: url(whiteFoam.8ff27207.jpg);
   background-size: cover;
   display: grid;
   grid-template-columns: auto auto auto;
@@ -840,4 +840,4 @@ h2.heading-cart {
 }
 
 
-/*# sourceMappingURL=/AppStyle.1e9c2f84.css.map */
+/*# sourceMappingURL=AppStyle.1e9c2f84.css.map */
