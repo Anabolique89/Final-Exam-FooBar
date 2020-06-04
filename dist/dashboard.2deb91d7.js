@@ -8721,8 +8721,7 @@ window.addEventListener("DOMContentLoaded", start);
 
 function start() {
   navIcon();
-  getBeerData(); //setInterval(animateDataChange, 4800);
-
+  getBeerData();
   setInterval(getBeerData, 5000);
   setInterval(checkDropDataForAnimation, 5000);
   getSVG();
@@ -8756,6 +8755,7 @@ function _getBeerData() {
             fetch(endpoint).then(function (response) {
               return response.json();
             }).then(function (data) {
+              // remove current information from divs, so it doesn't overlay when new information is pushed
               document.querySelector("#beerName").innerHTML = "";
               document.querySelector("#beerLevel").innerHTML = "";
               document.querySelector("#beerLeftTaps").innerHTML = "";
@@ -8784,7 +8784,7 @@ function beersLevel(data) {
   beerName.classList.add("beerName");
   beerName.innerHTML = data.beer;
   document.querySelector("#beerName").appendChild(beerName);
-  var barrelLevel = document.createElement("img");
+  var barrelLevel = document.createElement("img"); // checks how much is left in each tap and then displays needed barrel image
 
   function between(x, min, max) {
     return x >= min && x <= max;
@@ -8811,6 +8811,7 @@ function beersLevel(data) {
 }
 
 function squareInfo(data) {
+  // info for three of the squares on top, for the people served today just takes first number from serving now array
   var orders = document.querySelector("#ordersInLine").innerHTML = data.queue.length + data.serving.length;
   document.querySelector("#estimatedTime").innerHTML = Math.round(orders * 4 / data.bartenders.length);
   document.querySelector("#peopleAll").innerHTML = data.serving[0].id;
@@ -8819,6 +8820,7 @@ function squareInfo(data) {
 function bartenderInfo(data) {
   var template = document.querySelector("#bartenderTemplate").content;
   var clone = template.cloneNode(true); // bartenders section
+  // counter made, so that we can use nth-child repeatedly and it doesn't go over the number of childs in the table
 
   counter++;
 
@@ -8855,11 +8857,12 @@ function beerDrops(data) {
   var template = document.querySelector("#beerDropTemplate").content;
   var clone = template.cloneNode(true);
   clone.querySelector(".beerDrop").innerHTML = data.id;
-  clone.querySelector(".beerDrop").setAttribute("data-id", data.id);
+  clone.querySelector(".beerDrop").setAttribute("data-id", data.id); // global objects made as arrays which stores the ids of orders and compares them, so that the same circle is not made
 
   function checkLine(number) {
     return number == data.id;
-  }
+  } // if the new order number doesn't exist yet, then make a new circle
+
 
   if (queue.some(checkLine) == false) {
     document.querySelector(".beerDrops").appendChild(clone);
@@ -8874,7 +8877,8 @@ function checkDropDataForAnimation() {
   document.querySelectorAll(".beerDrop").forEach(function (el) {
     function checkQueue(number) {
       return number == el.dataset.id;
-    }
+    } // if the order number is not inside the serving state yet, do nothing, otherwise move it to the glass of beer and remove afterwards
+
 
     if (queueCurrent.some(checkQueue) == false) {
       _gsap.gsap.to(el, {
@@ -8955,7 +8959,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50567" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57124" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

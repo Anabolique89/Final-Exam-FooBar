@@ -22,10 +22,12 @@
 body {
   color: var(--mainWhite);
   background: url("/oak.8bf7e3c6.jpg");
-  background-size: contain;
+  background-size: cover;
   font-family: "Roboto", sans-serif;
   text-shadow: 2px 2 px var(--mainBlack);
   margin: 0;
+  background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 /* --------------- Navbar ---------------- */

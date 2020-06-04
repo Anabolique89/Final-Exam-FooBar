@@ -9,7 +9,9 @@
 body{
     background-image: url(design/background.jpg);
     margin: 0;
-    background-size: contain;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 #dashboard{
