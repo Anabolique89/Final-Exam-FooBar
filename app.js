@@ -6,9 +6,13 @@ function start() {
 
   const ui = new UI();
   const products = new Products();
+
   //setup app
+
   ui.setupApp();
+
   //get all products
+
   products
     .getProducts()
     .then((products) => {
@@ -16,7 +20,6 @@ function start() {
       Storage.saveProducts(products);
     })
     .then(() => {
-      // setTimeout(ui.getBagButtons, 1000);
       ui.getBagButtons();
       ui.cartLogic();
     });
@@ -26,7 +29,8 @@ function start() {
   mobilePay();
 }
 
-//variables
+// global variables
+
 let itemsTotal = 0;
 let totalPrice = 0;
 const cartBtn = document.querySelector(".cart-btn");
@@ -41,13 +45,19 @@ const productsDOM = document.querySelector(".products-center");
 const endpoint = "https://miserables.herokuapp.com/";
 
 // cart
+
 let cart = [];
 
 //buttons
+
 let buttonsDOM = [];
+
 //getting the products
+
 class Products {
+
   async getProducts() {
+
     try {
       let result = await fetch(endpoint + "beertypes");
       let data = await result.json();
@@ -57,6 +67,7 @@ class Products {
     }
   }
 }
+
 //display products
 
 class UI {
@@ -77,28 +88,34 @@ class UI {
 
       button.addEventListener("click", (event) => {
 
+        // when buy button clicked, changes it's text content, so the user has a feeling something happened
+        // adds the selected product to the cart
+
         event.target.innerHTML = `<i class="fas fa-check"></i> BUY`;
         event.target.disabled = true;
         event.target.classList.add("inCart");
 
         // get product from products
+
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
 
         // add product to the cart
+
         cart = [...cart, cartItem];
+
         // save the cart in local storage
+
         Storage.saveCart(cart);
-        // set cart values
-        //this.setCartValues(cart);
+
         // display cart item
+
         addCartItem(cartItem);
-        // show the cart
-        /* this.showCart(); */
       });
     });
   }
 
   showCart() {
+
     cartOverlay.classList.add("visibleCart");
     cartDOM.classList.add("showCart");
     document.querySelector(".cart").classList.add("cartSlideIn");
@@ -107,22 +124,29 @@ class UI {
       document.querySelector(".cart").classList.remove("cartSlideIn");
     })
   }
+
   setupApp() {
+
     cart = Storage.getCart();
-    //this.setCartValues(cart);
     this.populateCart(cart);
     cartBtn.addEventListener("click", this.showCart);
     closeCartBtn.addEventListener("click", this.hideCart);
   }
+
   populateCart(cart) {
     cart.forEach((item) => addCartItem(item));
   }
+
   hideCart() {
     cartOverlay.classList.remove("visibleCart");
     cartDOM.classList.remove("showCart");
   }
+
   cartLogic() {
+
     // clear cart button
+    // removes the item from a cart and gives the possibility to click on buy button for prevoiusly selected items
+
     clearCartBtn.addEventListener("click", () => {
 
       this.clearCart();
@@ -133,7 +157,9 @@ class UI {
         el.innerHTML = "BUY";
       })
     });
+
     //cart functionality Delete
+
     cartContent.addEventListener("click", (event) => {
       console.log(event.target);
       if (event.target.classList.contains("remove-item")) {
@@ -142,12 +168,10 @@ class UI {
         console.log(id);
         this.removeItem(id);
         cartContent.removeChild(removeItem.parentElement.parentElement);
-      } /* else if (event.target.classList.contains("fa-chevron-up")) {
-        let addAmount = event.target;
-        let id = addAmount.dataset.id;
-      } */
+      }
     });
   }
+
   clearCart() {
 
     let cartItems = cart.map((item) => item.id);
@@ -161,6 +185,7 @@ class UI {
     document.querySelector(".cart-total").innerHTML = totalPrice;
 
   }
+
   removeItem(id) {
     console.log(id)
 
@@ -175,6 +200,7 @@ class UI {
 
 
     // checks one beer price and takes away from total price
+
     const beerPrice = document.querySelector(`.price span[data-beer="${id}"]`).innerHTML;
     var beerPricetoNumber = parseInt(beerPrice, 10);
 
@@ -186,12 +212,14 @@ class UI {
     document.querySelector(".cart-total").innerHTML = totalPrice;
 
     // takes away 1 item from total items
+
     itemsTotal -= 1;
     cartItems.innerHTML = itemsTotal;
   }
+
   removeItemForClear(id) {
 
-    //remove cart item if the id is not equal to this
+    // remove cart item if the id is not equal to this
 
     cart = cart.filter((item) => item.id !== id);
     Storage.deleteCart(id);
@@ -200,11 +228,14 @@ class UI {
     cartItems.innerHTML = itemsTotal;
 
   }
+
   getSingleButton(id) {
     return buttonsDOM.find((button) => button.dataset.id === id);
   }
 }
-//local storage
+
+// local storage
+
 class Storage {
   static saveProducts(products) {
     localStorage.setItem("products", JSON.stringify(products));
@@ -243,9 +274,13 @@ function addCartItem(item) {
   clone.querySelector(".item-amount").setAttribute("data-id", item.name);
   clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name);
 
+  // populates the item when arrow up clicked
+
   clone.querySelector(".fa-chevron-up").addEventListener("click", function () {
     currentAmount += 1;
     document.querySelector(`.item-amount[data-id="${item.name}"]`).innerHTML = currentAmount;
+
+    // gets the price from the product element and converts text into a number, so that total amount can be calculated
 
     const beerPrice = document.querySelector(`.price span[data-beer="${item.name}"]`).innerHTML;
     var beerPricetoNumber = parseInt(beerPrice, 10);
@@ -253,7 +288,12 @@ function addCartItem(item) {
     document.querySelector(".cart-total").innerHTML = totalPrice;
   })
 
+  // the same function as before, just by reducing the amount
+
   clone.querySelector(".fa-chevron-down").addEventListener("click", function () {
+
+    // doesn't let the item count go under 1, so the user uses the remove button
+
     if (currentAmount >= 2) {
       currentAmount -= 1;
       document.querySelector(`.item-amount[data-id="${item.name}"]`).innerHTML = currentAmount;
@@ -301,6 +341,8 @@ function displayProducts(product) {
   const template = document.querySelector("#productTemplate").content;
   const clone = template.cloneNode(true);
 
+  // makes up a random price between 50 and 100 for each beer
+
   function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -308,6 +350,8 @@ function displayProducts(product) {
   clone.querySelector(".beerLabelImg").src = `labels/${product.label}`;
   clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
   clone.querySelector(".price span").setAttribute("data-beer", product.name);
+
+  // showing the user how beer looks visually
 
   if (
     product.category == "Hefeweizen" ||
@@ -361,6 +405,8 @@ function getTapsLevel(data) {
   function between(x, min, max) {
     return x >= min && x <= max;
   }
+
+  // showing with the barrel image how much beer is left in the tap
 
   if (between(data.level, 2000, 2500)) {
     barrelLevel.src = "barrel_full.png";

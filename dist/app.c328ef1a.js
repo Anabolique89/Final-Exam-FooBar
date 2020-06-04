@@ -1025,13 +1025,12 @@ function start() {
     ui.displayProducts(products);
     Storage.saveProducts(products);
   }).then(function () {
-    // setTimeout(ui.getBagButtons, 1000);
     ui.getBagButtons();
     ui.cartLogic();
   });
   navIcon();
   mobilePay();
-} //variables
+} // global variables
 
 
 var itemsTotal = 0;
@@ -1123,6 +1122,8 @@ var UI = /*#__PURE__*/function () {
       buttons.forEach(function (button) {
         var id = button.dataset.id;
         button.addEventListener("click", function (event) {
+          // when buy button clicked, changes it's text content, so the user has a feeling something happened
+          // adds the selected product to the cart
           event.target.innerHTML = "<i class=\"fas fa-check\"></i> BUY";
           event.target.disabled = true;
           event.target.classList.add("inCart"); // get product from products
@@ -1134,13 +1135,9 @@ var UI = /*#__PURE__*/function () {
 
           cart = [].concat((0, _toConsumableArray2.default)(cart), [cartItem]); // save the cart in local storage
 
-          Storage.saveCart(cart); // set cart values
-          //this.setCartValues(cart);
-          // display cart item
+          Storage.saveCart(cart); // display cart item
 
-          addCartItem(cartItem); // show the cart
-
-          /* this.showCart(); */
+          addCartItem(cartItem);
         });
       });
     }
@@ -1157,8 +1154,7 @@ var UI = /*#__PURE__*/function () {
   }, {
     key: "setupApp",
     value: function setupApp() {
-      cart = Storage.getCart(); //this.setCartValues(cart);
-
+      cart = Storage.getCart();
       this.populateCart(cart);
       cartBtn.addEventListener("click", this.showCart);
       closeCartBtn.addEventListener("click", this.hideCart);
@@ -1182,6 +1178,7 @@ var UI = /*#__PURE__*/function () {
       var _this = this;
 
       // clear cart button
+      // removes the item from a cart and gives the possibility to click on buy button for prevoiusly selected items
       clearCartBtn.addEventListener("click", function () {
         _this.clearCart();
 
@@ -1204,11 +1201,6 @@ var UI = /*#__PURE__*/function () {
 
           cartContent.removeChild(removeItem.parentElement.parentElement);
         }
-        /* else if (event.target.classList.contains("fa-chevron-up")) {
-        let addAmount = event.target;
-        let id = addAmount.dataset.id;
-        } */
-
       });
     }
   }, {
@@ -1258,7 +1250,7 @@ var UI = /*#__PURE__*/function () {
   }, {
     key: "removeItemForClear",
     value: function removeItemForClear(id) {
-      //remove cart item if the id is not equal to this
+      // remove cart item if the id is not equal to this
       cart = cart.filter(function (item) {
         return item.id !== id;
       });
@@ -1275,7 +1267,7 @@ var UI = /*#__PURE__*/function () {
     }
   }]);
   return UI;
-}(); //local storage
+}(); // local storage
 
 
 var Storage = /*#__PURE__*/function () {
@@ -1330,16 +1322,20 @@ function addCartItem(item) {
   clone.querySelector(".fa-chevron-up").setAttribute("data-id", item.name);
   clone.querySelector(".item-amount").innerHTML = item.amount;
   clone.querySelector(".item-amount").setAttribute("data-id", item.name);
-  clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name);
+  clone.querySelector(".fa-chevron-down").setAttribute("data-id", item.name); // populates the item when arrow up clicked
+
   clone.querySelector(".fa-chevron-up").addEventListener("click", function () {
     currentAmount += 1;
-    document.querySelector(".item-amount[data-id=\"".concat(item.name, "\"]")).innerHTML = currentAmount;
+    document.querySelector(".item-amount[data-id=\"".concat(item.name, "\"]")).innerHTML = currentAmount; // gets the price from the product element and converts text into a number, so that total amount can be calculated
+
     var beerPrice = document.querySelector(".price span[data-beer=\"".concat(item.name, "\"]")).innerHTML;
     var beerPricetoNumber = parseInt(beerPrice, 10);
     totalPrice += beerPricetoNumber;
     document.querySelector(".cart-total").innerHTML = totalPrice;
-  });
+  }); // the same function as before, just by reducing the amount
+
   clone.querySelector(".fa-chevron-down").addEventListener("click", function () {
+    // doesn't let the item count go under 1, so the user uses the remove button
     if (currentAmount >= 2) {
       currentAmount -= 1;
       document.querySelector(".item-amount[data-id=\"".concat(item.name, "\"]")).innerHTML = currentAmount;
@@ -1379,7 +1375,7 @@ function navIcon() {
 
 function _displayProducts(product) {
   var template = document.querySelector("#productTemplate").content;
-  var clone = template.cloneNode(true);
+  var clone = template.cloneNode(true); // makes up a random price between 50 and 100 for each beer
 
   function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -1387,7 +1383,7 @@ function _displayProducts(product) {
 
   clone.querySelector(".beerLabelImg").src = "labels/".concat(product.label);
   clone.querySelector(".price span").innerHTML = getRndInteger(50, 100);
-  clone.querySelector(".price span").setAttribute("data-beer", product.name);
+  clone.querySelector(".price span").setAttribute("data-beer", product.name); // showing the user how beer looks visually
 
   if (product.category == "Hefeweizen" || product.category == "Belgian Specialty Ale") {
     clone.querySelector(".glassType").src = "glass types/pilsner.png";
@@ -1443,7 +1439,8 @@ function getTapsLevel(data) {
 
   function between(x, min, max) {
     return x >= min && x <= max;
-  }
+  } // showing with the barrel image how much beer is left in the tap
+
 
   if (between(data.level, 2000, 2500)) {
     barrelLevel.src = "barrel_full.png";
@@ -1530,7 +1527,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55218" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60777" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

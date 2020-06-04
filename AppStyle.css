@@ -8,6 +8,7 @@
 }
 
 /*variables */
+
 :root {
   --primaryColor: #ffdd43;
   --mainWhite: #fff;
@@ -17,9 +18,7 @@
   --mainTransition: all 0.3s linear;
   --beerYellow: #eaad1d;
 }
-/*reset styles*/
-* {
-}
+
 body {
   color: var(--mainWhite);
   background: url("./images/oak.jpg");
@@ -28,7 +27,9 @@ body {
   text-shadow: 2px 2 px var(--mainBlack);
   margin: 0;
 }
+
 /* --------------- Navbar ---------------- */
+
 .navbar {
   height: 70px;
   display: flex;
@@ -587,6 +588,7 @@ h2.heading-cart {
 }
 
 /*---------- Cart Item -------------------- */
+
 .cart-item {
   display: grid;
   align-items: center;

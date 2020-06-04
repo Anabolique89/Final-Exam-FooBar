@@ -8743,19 +8743,6 @@ function navIcon() {
   });
 }
 
-function animateDataChange() {
-  _gsap.gsap.to("#beerLevel, #beerLeftTaps", 1, {
-    opacity: 0,
-    y: 10
-  });
-
-  _gsap.gsap.to("#beerLevel, #beerLeftTaps", 1, {
-    opacity: 1,
-    delay: 0.5,
-    y: 0
-  });
-}
-
 function getBeerData() {
   return _getBeerData.apply(this, arguments);
 }
@@ -8968,7 +8955,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51779" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50567" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

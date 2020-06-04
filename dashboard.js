@@ -12,7 +12,6 @@ window.addEventListener("DOMContentLoaded", start);
 function start() {
     navIcon();
     getBeerData();
-    //setInterval(animateDataChange, 4800);
     setInterval(getBeerData, 5000);
     setInterval(checkDropDataForAnimation, 5000);
     getSVG();
@@ -36,19 +35,6 @@ function navIcon() {
     })
 }
 
-function animateDataChange() {
-    gsap.to("#beerLevel, #beerLeftTaps", 1, {
-        opacity: 0,
-        y: 10
-    })
-
-    gsap.to("#beerLevel, #beerLeftTaps", 1, {
-        opacity: 1,
-        delay: 0.5,
-        y: 0
-    })
-}
-
 async function getBeerData() {
     fetch(endpoint)
         .then((response) => {
@@ -56,7 +42,7 @@ async function getBeerData() {
         })
         .then((data) => {
 
-
+            // remove current information from divs, so it doesn't overlay when new information is pushed
 
             document.querySelector("#beerName").innerHTML = "";
             document.querySelector("#beerLevel").innerHTML = "";
@@ -75,10 +61,6 @@ async function getBeerData() {
 
 function beersLevel(data) {
 
-
-
-
-
     // first section
 
     const beerName = document.createElement("p");
@@ -88,6 +70,8 @@ function beersLevel(data) {
     document.querySelector("#beerName").appendChild(beerName);
 
     const barrelLevel = document.createElement("img");
+
+    // checks how much is left in each tap and then displays needed barrel image
 
     function between(x, min, max) {
         return x >= min && x <= max;
@@ -124,6 +108,9 @@ function beersLevel(data) {
 }
 
 function squareInfo(data) {
+
+    // info for three of the squares on top, for the people served today just takes first number from serving now array
+
     const orders = document.querySelector("#ordersInLine").innerHTML = data.queue.length + data.serving.length;
     document.querySelector("#estimatedTime").innerHTML = Math.round(orders * 4 / data.bartenders.length);
     document.querySelector("#peopleAll").innerHTML = data.serving[0].id;
@@ -135,6 +122,7 @@ function bartenderInfo(data) {
     const clone = template.cloneNode(true);
 
     // bartenders section
+    // counter made, so that we can use nth-child repeatedly and it doesn't go over the number of childs in the table
 
     counter++;
 
@@ -186,9 +174,13 @@ function beerDrops(data) {
     clone.querySelector(".beerDrop").innerHTML = data.id;
     clone.querySelector(".beerDrop").setAttribute("data-id", data.id);
 
+    // global objects made as arrays which stores the ids of orders and compares them, so that the same circle is not made
+
     function checkLine(number) {
         return number == data.id;
     }
+
+    // if the new order number doesn't exist yet, then make a new circle
 
     if (queue.some(checkLine) == false) {
         document.querySelector(".beerDrops").appendChild(clone);
@@ -208,6 +200,8 @@ function checkDropDataForAnimation() {
         function checkQueue(number) {
             return number == el.dataset.id;
         }
+
+        // if the order number is not inside the serving state yet, do nothing, otherwise move it to the glass of beer and remove afterwards
 
         if (queueCurrent.some(checkQueue) == false) {
 
