@@ -98,7 +98,7 @@ body {
   }
   body {
     background: url(preview.3cb370b5.jpg);
-    background-size: cover;
+    background-size: cover no-repeat;
   }
 }
 /* --------------- End of Hero ---------------- */
