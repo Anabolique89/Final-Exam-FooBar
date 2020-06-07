@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dashboard.js",
   "scripts": {
-    "start": "parcel *.html --public-url ./",
+    "start": "parcel index.html --open",
     "build": "parcel build *.html  --public-url ./"
   },
   "keywords": [],
