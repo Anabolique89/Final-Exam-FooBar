@@ -73,6 +73,18 @@ body {
   background: transparent;
   color: var(--primaryColor);
 }
+.logo {
+  animation: pulse 1s infinite;
+  animation-direction: alternate;
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 /*---------video---*/
 #videoBG {
   position: fixed;
