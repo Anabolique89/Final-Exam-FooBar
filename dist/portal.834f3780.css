@@ -73,8 +73,9 @@ body {
   background: transparent;
   color: var(--primaryColor);
 }
+
 .logo {
-  animation: pulse 1s infinite;
+  animation: pulse 3s infinite;
   animation-direction: alternate;
 }
 @keyframes pulse {
