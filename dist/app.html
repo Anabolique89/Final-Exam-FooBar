@@ -1,224 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foobar App</title>
+    <!--font awesome-->
+    <link rel="stylesheet" href="/font-awesome.min.80bdcae2.css">
+    <!-- Place your kit's code here -->
+    <script src="https://kit.fontawesome.com/f70deb80b4.js" crossorigin="anonymous"></script>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foobar App</title>
-  <!--font awesome-->
-  <link rel="stylesheet" href="/font-awesome.min.80bdcae2.css">
-  <!-- Place your kit's code here -->
-  <script src="https://kit.fontawesome.com/f70deb80b4.js" crossorigin="anonymous"></script>
+    <!-- custom css -->
+    <link rel="stylesheet" href="/AppStyle.1e9c2f84.css">
+    <link rel="stylesheet" href="/form.4fcb22c8.css">
+  <script src="/font-awesome.min.80bdcae2.js"></script><script src="/AppStyle.1e9c2f84.js"></script><script src="/form.4fcb22c8.js"></script><link rel="stylesheet" href="/form.d01534eb.css"></head>
 
-  <!-- custom css -->
-  <link rel="stylesheet" href="/AppStyle.1e9c2f84.css">
-  <link rel="stylesheet" href="/form.4fcb22c8.css">
-<script src="/font-awesome.min.80bdcae2.js"></script><script src="/AppStyle.1e9c2f84.js"></script><script src="/form.4fcb22c8.js"></script><link rel="stylesheet" href="/form.d01534eb.css"></head>
+  <body>
+    <nav class="navbar" id="navigation">
+      <span class="navIcon">&#9776;</span>
 
-<body>
-  <nav class="navbar" id="navigation">
-    <span class="navIcon">&#9776;</span>
+      <a href="/index.html">
+        <img class="logo" src="/logoFoo.5bdf6e45.png" alt="foobar logo">
+      </a>
 
-    <a href="/index.html">
-      <img class="logo" src="/logoFoo.5bdf6e45.png" alt="foobar logo">
-    </a>
+      <div class="cart-btn">
+        <img src="/shopping-cart-icon.ae994739.png" alt="cart">
+        <div class="cart-items">0</div>
+      </div>
+    </nav>
 
-    <div class="cart-btn">
-      <img src="/shopping-cart-icon.ae994739.png" alt="cart">
-      <div class="cart-items">0</div>
+    <div id="statusLeft">
+      <p>Orders in line</p>
+      <p class="ordersInLine">5</p>
+      <p>Estimated waiting time</p>
+      <p class="waitingTime"><span>10</span> minutes</p>
+      <p>Today that many people got a sip of heaven</p>
+      <p class="totalSips">112</p>
     </div>
-  </nav>
-
-  <div id="statusLeft">
-    <p>Orders in line</p>
-    <p class="ordersInLine">5</p>
-    <p>Estimated waiting time</p>
-    <p class="waitingTime"><span>10</span> minutes</p>
-    <p>Today that many people got a sip of heaven</p>
-    <p class="totalSips">112</p>
-  </div>
-  <!-- end of navbar -->
-  <!--products-->
-  <section class="products">
-
-    <div class="products-center">
-
-
-      <template id="productTemplate">
-
-        <div class="product">
-          <div class="beerLabel">
-            <img class="beerLabelImg" src="/elhefe.114fb919.png" alt="">
-            <p>Read More</p>
+    <!-- end of navbar -->
+    <!--products-->
+    <section class="products">
+      <div class="products-center">
+        <template id="productTemplate">
+          <div class="product">
+            <div class="beerLabel">
+              <img class="beerLabelImg" src="/elhefe.114fb919.png" alt="">
+              <p>Read More</p>
+            </div>
+            <p class="price">DKK <span></span></p>
+            <img class="glassType" src="/goblet.2c713254.png" alt="">
+            <p class="alcLevel">abv. <span>4.5</span>%</p>
+            <img class="barrelLevel" src="/barrel_empty.426f575f.png" alt="">
+            <p class="beerName">Fairy Tale Ale</p>
+            <p class="beerType">Lager Beer</p>
+            <button class="addToCart bag-btn">BUY</button>
+            <p class="notAvaliable"><span>Not avaliable at the moment</span></p>
           </div>
-          <p class="price">DKK <span></span></p>
-          <img class="glassType" src="/goblet.2c713254.png" alt="">
-          <p class="alcLevel">abv. <span>4.5</span>%</p>
-          <img class="barrelLevel" src="/barrel_empty.426f575f.png" alt="">
-          <p class="beerName">Fairy Tale Ale</p>
-          <p class="beerType">Lager Beer</p>
-          <button class="addToCart bag-btn">BUY</button>
-          <p class="notAvaliable"><span>Not avaliable at the moment</span></p>
+        </template>
+      </div>
+
+      <div class="asideContainer">
+        <p class="asideText">
+          Welcome to the paradise of beer! We specialise in brewing the best
+          homemade beers and we have a wide variety of types you can choose
+          from. Have fun!
+        </p>
+      </div>
+    </section>
+    <!-- end of products -->
+
+    <!-- shopping cart -->
+    <div class="cart-overlay">
+      <div class="cart" id="bdy">
+        <span class="close-cart">
+          <i class="fas fa-window-close"></i>
+        </span>
+        <h2 class="heading-cart">Your Orders</h2>
+
+        <template id="cartItemTemplate">
+          <div class="cart-item">
+            <img class="itemImage" src="" alt="product">
+            <div class="cart-text">
+              <h4 class="itemName"></h4>
+              <h5 class="itemInTheCartPrice">DKK <span></span></h5>
+              <span class="remove-item">Remove</span>
+            </div>
+            <div class="arrows">
+              <i class="fas fa-chevron-up"></i>
+              <p class="item-amount"></p>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+        </template>
+
+        <div class="cart-content"></div>
+
+        <div class="cart-footer">
+          <h3>Your Total : DKK <span class="cart-total">0</span></h3>
+          <button class="clear-cart banner-btn">Clear Cart</button>
+
+          <button id="popup" class="banner-btn">
+            <img src="/dankort.694d5bf6.png" alt="">
+            Credit Card
+          </button>
+          <button class="mobile-pay banner-btn">
+            <img src="/mobilePay.8a92242a.png" alt="">
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="beerDesc">
+      <div id="modalContainer">
+        <span class="closeModal">&times;</span>
+
+        <div class="leftSide">
+          <img class="imageBeer" src="/elhefe.114fb919.png" alt="">
+          <p class="nameBeer">El Hefe</p>
+          <p class="categoryBeer">Hefeweizen</p>
+          <p class="alcBeer">abv. <span>5.4</span>%</p>
         </div>
 
-      </template>
-
-    </div>
-
-    <div class="asideContainer">
-      <p class="asideText">
-        Welcome to the paradise of beer! We specialise in brewing the best
-        homemade beers and we have a wide variety of types you can choose
-        from. Have fun!
-      </p>
-    </div>
-  </section>
-  <!-- end of products -->
-
-  <!-- shopping cart -->
-  <div class="cart-overlay">
-
-    <div class="cart" id="bdy">
-      <span class="close-cart">
-        <i class="fas fa-window-close"></i>
-      </span>
-      <h2 class="heading-cart">Your Orders</h2>
-
-      <template id="cartItemTemplate">
-
-        <div class="cart-item">
-
-          <img class="itemImage" src="" alt="product">
-          <div class="cart-text">
-            <h4 class="itemName"></h4>
-            <h5 class="itemInTheCartPrice">DKK <span></span></h5>
-            <span class="remove-item">Remove</span>
-          </div>
-          <div class="arrows">
-            <i class="fas fa-chevron-up"></i>
-            <p class="item-amount"></p>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-
+        <div class="rightSide">
+          <p>Aroma</p>
+          <p class="aroma"></p>
+          <p>Appearance</p>
+          <p class="appearance"></p>
+          <p>Flavor</p>
+          <p class="flavor"></p>
+          <p>Mouthfeel</p>
+          <p class="mouthfeel"></p>
+          <p>Overall impression</p>
+          <p class="overallImpression"></p>
         </div>
-
-      </template>
-
-      <div class="cart-content">
-
-      </div>
-
-      <div class="cart-footer">
-        <h3>Your Total : DKK <span class="cart-total">0</span></h3>
-        <button class="clear-cart banner-btn">Clear Cart</button>
-
-        <button id="popup" class="banner-btn">
-          <img src="/dankort.694d5bf6.png" alt="">
-          Credit Card
-        </button>
-        <button class="mobile-pay banner-btn">
-          <img src="/mobilePay.8a92242a.png" alt="">
-        </button>
-
-      </div>
-
-    </div>
-  </div>
-
-  <div id="beerDesc">
-    <div id="modalContainer">
-      <span class="closeModal">&times;</span>
-
-      <div class="leftSide">
-        <img class="imageBeer" src="/elhefe.114fb919.png" alt="">
-        <p class="nameBeer">El Hefe</p>
-        <p class="categoryBeer">Hefeweizen</p>
-        <p class="alcBeer">abv. <span>5.4</span>%</p>
-      </div>
-
-      <div class="rightSide">
-        <p>Aroma</p>
-        <p class="aroma">
-
-        </p>
-        <p>Appearance</p>
-        <p class="appearance">
-
-        </p>
-        <p>Flavor</p>
-        <p class="flavor">
-
-        </p>
-        <p>Mouthfeel</p>
-        <p class="mouthfeel">
-
-        </p>
-        <p>Overall impression</p>
-        <p class="overallImpression">
-
-        </p>
       </div>
     </div>
-  </div>
 
-  <!-- modal end  -->
-  <!-- Popup div starts here -->
-  <div id="abc">
+    <!-- modal end  -->
+    <!-- Popup div starts here -->
+    <div id="abc">
+      <div id="popupContact">
+        <form class="payment" id="form">
+          <div class="card-wrapper"></div>
+          <img src="/3.f46dd042.png" id="close" onclick="div_hide()">
+          <h2 class="payment-h2">Payment Details</h2>
 
-    <div id="popupContact">
+          <label for="number">CARD NUMBER</label>
+          <input type="tel" name="number" id="number" placeholder="Card Number" required="" minlength="16">
+          <p>Please enter the card number</p>
 
+          <label for="name">FULL NAME</label>
+          <input type="text" name="name" id="name" placeholder="Full Name" required="">
+          <p>Please enter your full name</p>
 
+          <label for="expiry">EXPIRATION DATE</label>
+          <input type="tel" name="expiry" id="expiry" placeholder="MM / YYYY" required="" minlength="9">
+          <p>Please enter expiration date <br>of the card</p>
 
-      <form class="payment" id="form">
+          <label for="cvc" class="labelcvc">CVC</label>
+          <input type="tel" id="cvc" maxlength="3" name="cvc" placeholder="CVC" required="" minlength="3">
+          <p>Please enter CVC of the card</p>
+          <button class="yellowB" type="submit">
+            Confirm Payment
+          </button>
+        </form>
 
-        <div class="card-wrapper"></div>
-        <img src="/3.f46dd042.png" id="close" onclick="div_hide()">
-        <h2 class="payment-h2">Payment Details</h2>
-
-        <label for="number">CARD NUMBER</label>
-        <input type="tel" name="number" id="number" placeholder="Card Number" required="" minlength="16">
-        <p>Please enter the card number</p>
-
-        <label for="name">FULL NAME</label>
-        <input type="text" name="name" id="name" placeholder="Full Name" required="">
-        <p>Please enter your full name</p>
-
-        <label for="expiry">EXPIRATION DATE</label>
-        <input type="tel" name="expiry" id="expiry" placeholder="MM / YYYY" required="" minlength="9">
-        <p>Please enter expiration date <br>of the card</p>
-
-        <label for="cvc" class="labelcvc">CVC</label>
-        <input type="tel" id="cvc" maxlength="3" name="cvc" placeholder="CVC" required="" minlength="3">
-        <p>Please enter CVC of the card</p>
-        <button class="yellowB" type="submit">
-          Confirm Payment
-        </button>
-      </form>
-
-      <div class="thanks">
-        <p>Payment successful!</p>
-        <button class="yellowB">
-          Okay!
-        </button>
+        <div class="thanks">
+          <p>Payment successful!</p>
+          <button class="yellowB">
+            Okay!
+          </button>
+        </div>
       </div>
-
-
-
     </div>
-  </div>
 
-  <div id="mobilePayOverlay">
-    <div id="mobilePayModal">
-      <img src="/myshopqr-kode-mobilepay.e7a25678.png" alt="">
-      <img src="/3.f46dd042.png" class="close">
+    <div id="mobilePayOverlay">
+      <div id="mobilePayModal">
+        <img src="/myshopqr-kode-mobilepay.e7a25678.png" alt="">
+        <img src="/3.f46dd042.png" class="close">
+      </div>
     </div>
-  </div>
-  <!-- Popup div ends here -->
-  <!-- Mobile Pay static start -->
-  <!-- Mobile Pay static end -->
+    <footer class="navbar"></footer>
 
-  <script src="/app.c328ef1a.js"></script>
-  <script src="/form.d01534eb.js"></script>
-</body>
-
+    <script src="/app.c328ef1a.js"></script>
+    <script src="/form.d01534eb.js"></script>
+  </body>
 </html>
