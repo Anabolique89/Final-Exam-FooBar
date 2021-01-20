@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "card": "^2.4.0",
-    "gsap": "^3.2.6",
+    "gsap": "^3.6.0",
     "jquery": "^3.5.1"
   },
   "repository": {
